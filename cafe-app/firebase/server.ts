@@ -4,7 +4,7 @@ import { getStorage } from 'firebase/storage';
 if(!getApps()?.length) {
     initializeApp({
         credential: cert(
-            JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string)
+            JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string)
         ),
     });
 }
