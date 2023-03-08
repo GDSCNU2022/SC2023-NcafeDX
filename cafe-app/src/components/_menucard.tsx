@@ -1,10 +1,12 @@
-import { MenuProps } from './menucard';
+import { MenuProps } from './get-firebase';
 import { ReactNode, DetailedHTMLProps, LiHTMLAttributes } from 'react';
 
 function _MenuCard(props: any) {
-    console.log(props.menuObject)
+    console.log("in");
+    console.log(props);
+    console.log(props.menuObject);
     const menuProps: any = props.menuObject
-
+    // ここでメニューカードのレイアウト変更
     return (
         <div>
             {props ? (

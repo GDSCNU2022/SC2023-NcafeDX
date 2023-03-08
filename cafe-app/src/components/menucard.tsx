@@ -1,24 +1,13 @@
 import { useState, useEffect } from 'react';
 import { db, storage } from '../../firebase/client';
-import { doc, collection, getDoc } from 'firebase/firestore';
 import _MenuCard from './_menucard';
+import { getMenu, MenuProps } from './get-firebase';
+
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
 
-type Menus = {
-    category: string
-};
-
-export type MenuProps = {
-    name: string;
-    category: string;
-    nutrition: any;
-    price: number;
-    stars : number;
-    imageURL?: string;
-}
-
+// テスト用オブジェクト
 const menuTestProps: MenuProps = {
     name: "demo taro",
     category: "noodle",
@@ -38,26 +27,13 @@ const MenuCard = () => {
         imageURL: ""
     }
     const [menus, setMenus] = useState<MenuProps>(initMenuProps);
-    const targetRestaurant = 'DaVinch'
+    const dataPath: string = "DaVinch/shiru-nashi-tantan";
     
-    // TODO:複数クエリに対応させる
+    // ignite when mounted
     useEffect(() => {
-        const get = async() => {
-            const docRef = doc(db, targetRestaurant, 'rBj68cXpZ8ZkgepqrbT6');
-            const docSnap = await getDoc(docRef);
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-                const newData = docSnap.data()
-                // setMenus((menus) => docSnap.data() as MenuProps);
-                setMenus(newData as MenuProps);
-            } else {
-                console.log("No such document.");
-            }
-        }
-        get();
+        getMenu(db, dataPath).then((value: any) => setMenus(value));
     }, []);
     return (<_MenuCard menuObject={menus}></_MenuCard>);
-    
 };
 
 export default MenuCard;

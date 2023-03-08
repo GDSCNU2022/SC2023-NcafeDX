@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/image-upload.tsx", "src/components/menucard.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/image-upload.tsx", "src/components/get-firebase.tsx"],
   "exclude": ["node_modules"]
 }
