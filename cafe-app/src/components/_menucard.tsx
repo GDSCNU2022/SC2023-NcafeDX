@@ -1,11 +1,19 @@
 import { MenuProps } from './get-firebase';
-import { ReactNode, DetailedHTMLProps, LiHTMLAttributes } from 'react';
+import { useState, ReactNode, DetailedHTMLProps, LiHTMLAttributes } from 'react';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../firebase/client';
+import Image from 'next/image';
 
 function _MenuCard(props: any) {
-    console.log("in");
-    console.log(props);
-    console.log(props.menuObject);
     const menuProps: any = props.menuObject
+    const [url, setImage] = useState("");
+    if (menuProps.imageURL !== "") {
+    const gsRef = ref(storage, menuProps.imageURL);
+    getDownloadURL(gsRef)
+    .then((url) => {
+        setImage(url);
+    }).catch((err) => console.log(err));
+}   
     // ここでメニューカードのレイアウト変更
     return (
         <div>
@@ -13,6 +21,7 @@ function _MenuCard(props: any) {
                 <ul>
                     <li>name {menuProps.name}</li>
                     <li>price {menuProps.price}</li>
+                    <Image src={url} width={64} height={64} alt=""></Image>
                     <li>stars {menuProps.stars}</li>
                     <li>kcal {menuProps.nutrition[0]}</li>
                     <li>P {menuProps.nutrition[1]}</li>

@@ -43,9 +43,17 @@ const UploadImage: React.FC = () => {
     const handleUpload = (acceptedImg: any) => {
         try{
             // upload process
-            const imageRef = ref(storage, '/images/${myFiles[0].name}');
+            const imageRef = ref(storage, `/images/${myFiles[0].name}`);
             const uploadTask: any = uploadBytesResumable(imageRef, acceptedImg);
+            const updateMenuData: any = () => {
+                getDownloadURL(uploadTask.snapshot.ref)
+                .then((downloadURL: string) => {
 
+                    // TODO: 管理フォームを作った時はここに処理を追記
+                    console.log("ダウンロードしたURL" + downloadURL);
+                    
+                });
+            }
             // uploadTask.on(ignite condition, ignite func, failed, succeed)
             uploadTask.on(
                 'state_changed',
