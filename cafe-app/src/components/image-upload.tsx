@@ -13,7 +13,7 @@ export type firebaseOnLoadProp = {
 
 };
 
-const Upload: React.FC = () => {
+const UploadImage: React.FC = () => {
     const [myFiles, setMyFiles] = useState<File[]>([]);
     const [clickable, setClickable] = useState(false);
     const [src, setSrc] = useState('');
@@ -136,7 +136,7 @@ const Upload: React.FC = () => {
                 {/* この中をタップすれば画像を選択できる */}
                 <input {...getInputProps()} />
                 {myFiles.length === 0 ? (
-                <p className="py-4">画像を選択またはドラッグ＆ドロップ</p>
+                <p className="py-4">画像を選択またはドラッグ＆ドロップ(この文字をクリックするとウィンドウが開きます)</p>
                 ) : (
                 <div>
                     {myFiles.map((file: File) => (
@@ -159,3 +159,5 @@ const Upload: React.FC = () => {
     </div>
     );
 }
+
+export default UploadImage;

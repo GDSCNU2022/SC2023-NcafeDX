@@ -37,7 +37,8 @@ export const getMenu: any = async (db: any, targetPath: string) => {
 // Collection{DaVinch}/Doc{Menus}/Field{MenuProps}
 export const getMenusInCategory: any = async (db: any,setFunc: Function, targetPath: string) => {
     // Usage
-    // getMenusInCategory(db, myFunc(doc), 'Restaurant/Category').then().catch().finally()
+    // getMenusInCategory(db, myFunc(doc), 'Restaurant/Category')
+    // process: exec myFunc with argument in each document
     
     const path: string = targetPath;
     const pathArr: string[] = path.split('/');
@@ -56,4 +57,5 @@ export const getMenusInCategory: any = async (db: any,setFunc: Function, targetP
         } 
     })
 }
+
 
