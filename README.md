@@ -10,6 +10,6 @@ CafeDX(for now)
 
 ## Product purpose
 
-## How to contribute it
+## How to contribute SDGs
 
 ## Extensibility
