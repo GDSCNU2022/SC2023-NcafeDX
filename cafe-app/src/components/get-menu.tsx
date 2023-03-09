@@ -1,4 +1,4 @@
-import { where, collection, query, getDocs } from 'firebase/firestore';
+import { updateDoc, doc, addDoc, where, collection, query, getDocs, setDoc } from 'firebase/firestore';
 import _MenuCard from './_menucard';
 
 export type MenuProps = {
@@ -30,8 +30,6 @@ export const getMenu: any = async (db: any, targetPath: string) => {
             console.log("No such document.");
         } 
     })
-    console.log("newData");
-    console.log(newData);
     return newData;
 }
 // Collection{DaVinch}/Doc{Menus}/Field{MenuProps}
@@ -52,6 +50,40 @@ export const getMenusInCategory: any = async (db: any,setFunc: Function, targetP
         if (doc.exists()) {
             console.log("Document data:", doc.data());
             setFunc(doc);
+        } else {
+            console.log("No such document.");
+        } 
+    })
+}
+
+export const newMenu = async (db: any, targetRestaurant: string, saveMenu: MenuProps) => {
+    /* Usage
+    newMenu(db, restaurantName, menuObject)
+    */
+    const collRef = collection(db, targetRestaurant)
+    await addDoc(collRef, saveMenu);
+    console.log(`Document uploaded at ${collRef.id}`)
+}
+
+export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuProps) => {
+    /* Usage
+    updateMenu(db, 'DaVinch/shiru-nashi-tantan', {stars: 4.5});
+    */
+    
+    const path: string = targetPath;
+    const pathArr: string[] = path.split('/');
+    const lenArr: number = pathArr.length;
+    const collRef = collection(db, pathArr[0]);
+    const q = query(collRef, where('name', '==', pathArr[1]));
+    const docSnap = await getDocs(q);
+    let newData: any;
+
+    // docSnap は要素1, 条件検索のためqueryを使用
+    docSnap.forEach((d) => {
+        if (d.exists()) {
+            const docRef = doc(db, pathArr[0], d.id);
+            updateDoc(docRef, newMenuProps);
+            console.log("Document data:", d.data());
         } else {
             console.log("No such document.");
         } 

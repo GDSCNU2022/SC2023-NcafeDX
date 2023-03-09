@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import MenuCard from '../components/menucard';
 import UploadImage from '../components/image-upload';
+import ShowUser from '../components/Users';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -11,6 +12,8 @@ export default function Home() {
     <div>
       <MenuCard></MenuCard>
       <UploadImage></UploadImage>
+      <span></span>
+      <ShowUser></ShowUser>
     </div>
     );
 }

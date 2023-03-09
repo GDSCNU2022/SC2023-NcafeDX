@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { db, storage } from '../../firebase/client';
 import _MenuCard from './_menucard';
-import { getMenu, MenuProps } from './get-firebase';
+import { getMenu, MenuProps } from './get-menu';
 
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
@@ -11,7 +11,7 @@ import { getMenu, MenuProps } from './get-firebase';
 const menuTestProps: MenuProps = {
     name: "demo taro",
     category: "noodle",
-    nutrition: [980, 50, 50, 30],
+    nutrition: {kcal:980, P:50, F:50, C:30},
     price: 430,
     stars: 4.5,
     imageURL: "Image/Path/To/Storage"
@@ -23,7 +23,7 @@ const MenuCard = () => {
         category: "",
         price: 0,
         stars: 0,
-        nutrition:[],
+        nutrition:{},
         imageURL: ""
     }
     const [menus, setMenus] = useState<MenuProps>(initMenuProps);

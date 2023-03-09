@@ -1,4 +1,4 @@
-import { MenuProps } from './get-firebase';
+import { MenuProps } from './get-menu';
 import { useState, ReactNode, DetailedHTMLProps, LiHTMLAttributes } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase/client';
@@ -17,17 +17,19 @@ function _MenuCard(props: any) {
     // ここでメニューカードのレイアウト変更
     return (
         <div>
+            登録済みのメニュー情報は以下です
             {props ? (
                 <ul>
-                    <li>name {menuProps.name}</li>
-                    <li>price {menuProps.price}</li>
+                    <li>name: {menuProps.name}</li>
+                    <li>category: {menuProps.category}</li>
+                    <li>price: {menuProps.price}</li>
                     <Image src={url} width={64} height={64} alt=""></Image>
-                    <li>stars {menuProps.stars}</li>
-                    <li>kcal {menuProps.nutrition[0]}</li>
-                    <li>P {menuProps.nutrition[1]}</li>
-                    <li>F {menuProps.nutrition[2]}</li>
-                    <li>C {menuProps.nutrition[3]}</li>
-                    <li>imageURL {menuProps.imageURl}</li>
+                    <li>stars: {menuProps.stars}</li>
+                    <li>kcal: {menuProps.nutrition.kcal}</li>
+                    <li>P: {menuProps.nutrition.P}</li>
+                    <li>F: {menuProps.nutrition.F}</li>
+                    <li>C: {menuProps.nutrition.C}</li>
+                    <li>imageURL: {menuProps.imageURL}</li>
                 </ul>)
                 : (<div>No Props</div>)}
         </div>
