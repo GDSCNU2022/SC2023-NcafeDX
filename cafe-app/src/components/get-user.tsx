@@ -1,4 +1,6 @@
-import { doc, updateDoc, addDoc, where, collection, query, getDocs } from 'firebase/firestore'
+import { doc, updateDoc, addDoc, where, collection, query, getDocs } from 'firebase/firestore';
+
+
 type BoolDay = {
     morning: boolean;
     day: boolean;
@@ -27,6 +29,7 @@ export const getUser: any = async(db: any, targetPath: string) => {
     const pathArr: string[] = path.split('/');
     const lenArr: number = pathArr.length;
     const collRef = collection(db, 'Users');
+    try {
     const q = query(collRef, where('mail', '==', pathArr[0]));
     const docSnap = await getDocs(q);
     let newData: any;
@@ -41,38 +44,43 @@ export const getUser: any = async(db: any, targetPath: string) => {
         } 
     })
     return newData;
+    } catch (error) {
+        console.log("That User doesn't exist.");
+    }
 }
 
-export const newUser = async (db: any, targetRestaurant: string, saveMenu: MenuProps) => {
+export const newUser = async (db: any, saveUser: UserProps) => {
     /* Usage
-    newMenu(db, restaurantName, menuObject)
+    newMenu(db, userObject)
     */
-    const collRef = collection(db, targetRestaurant)
-    await addDoc(collRef, saveMenu);
+    const collRef = collection(db, 'Users')
+    await addDoc(collRef, saveUser);
     console.log(`Document uploaded at ${collRef.id}`)
 }
 
-export const updateUser = async(db: any, targetPath: string, newMenuProps: MenuProps) => {
+export const updateUser = async(db: any, userMail: string, newUserProps: UserProps) => {
     /* Usage
-    updateMenu(db, 'DaVinch/shiru-nashi-tantan', {stars: 4.5});
+    updateMenu(db, user{stars: 4.5});
     */
-    
-    const path: string = targetPath;
-    const pathArr: string[] = path.split('/');
-    const lenArr: number = pathArr.length;
-    const collRef = collection(db, pathArr[0]);
-    const q = query(collRef, where('name', '==', pathArr[1]));
+    const newUser = newUserProps
+    const collRef = collection(db, 'Users');
+    try{
+    const q = query(collRef, where('mail', '==', userMail));
     const docSnap = await getDocs(q);
-    let newData: any;
 
     // docSnap は要素1, 条件検索のためqueryを使用
     docSnap.forEach((d) => {
         if (d.exists()) {
-            const docRef = doc(db, pathArr[0], d.id);
-            updateDoc(docRef, newMenuProps);
+            const docRef = doc(db, 'User', d.id);
+            updateDoc(docRef, newUser);
             console.log("Document data:", d.data());
         } else {
             console.log("No such document.");
         } 
     })
+
+    } catch (error) {
+        console.log("That User doesn't exist.");
+    }
+
 }

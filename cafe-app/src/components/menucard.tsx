@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { db, storage } from '../../firebase/client';
 import _MenuCard from './_menucard';
 import { getMenu, MenuProps } from './get-menu';
-
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
