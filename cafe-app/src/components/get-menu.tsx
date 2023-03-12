@@ -10,6 +10,8 @@ export type MenuProps = {
     imageURL?: string;
 }
 
+export type RestaurantType = "DaVinch" | "Faraday" | "Pascal";
+
 export const getMenu: any = async (db: any, targetPath: string) => {
     // Usage
     // getMenu(db, 'Restaurant/Menu').then((value) => {your processing}).catch().finally()
@@ -32,10 +34,29 @@ export const getMenu: any = async (db: any, targetPath: string) => {
     })
     return newData;
 }
+
+export const getAllMenus: any = async (db: any,setFunc: Function, restaurantName: string) => {
+    // Usage
+    // getMenusInCategory(db, myFunc, 'Restaurant')
+    // process: exec myFunc with argument in each document
+
+    const collRef = collection(db, restaurantName);
+    const querySnapshot = await getDocs(collRef);
+    
+    querySnapshot.forEach((doc) => {
+        if (doc.exists()) {
+            console.log("Document data:", doc.data());
+            setFunc(doc);
+        } else {
+            console.log("No such document.");
+        } 
+    })
+}
+
 // Collection{DaVinch}/Doc{Menus}/Field{MenuProps}
 export const getMenusInCategory: any = async (db: any,setFunc: Function, targetPath: string) => {
     // Usage
-    // getMenusInCategory(db, myFunc(doc), 'Restaurant/Category')
+    // getMenusInCategory(db, myFunc, 'Restaurant/Category')
     // process: exec myFunc with argument in each document
     
     const path: string = targetPath;
