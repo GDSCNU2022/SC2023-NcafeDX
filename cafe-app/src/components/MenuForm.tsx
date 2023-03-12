@@ -5,14 +5,12 @@ import { newMenu } from './get-menu';
 import UploadImage from './image-upload';
 import { db } from '../../firebase/client';
 
-type RestaurantType = "DaVinch" | "Faraday" | "Pascal";
-
 const JobForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
     const onSubmit = async (data: any) => {
         console.log(data);
         // firebaseへ入力データをアップロード
-        // newMenu(db, props.props, data);
+        newMenu(db, props.props, data);
         reset();
     };
     const gender = [
@@ -25,11 +23,18 @@ const JobForm = (props: any) => {
         <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col w-64 mx-auto">
             <label  htmlFor="dropdown" className="text-sm font-bold">メニュー名</label>
-        <input {...register('name',{required: true, maxLength: 20,
-        pattern: {value: /^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠0-9a-zA-Z]*$/, message: '文字形式が不正です'}})} 
+        <input {...register('name',{required: true, maxLength: 20})} 
         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
         <ErrorMessage errors={errors} name="name" />
+        </div>
+
+        <div className="flex flex-col w-64 mx-auto">
+            <label  htmlFor="dropdown" className="text-sm font-bold">価格</label>
+        <input {...register('price',{required: true, maxLength: 20})} 
+        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
+        <ErrorMessage errors={errors} name="price" />
         </div>
 
         <div className="flex flex-col w-64 mx-auto">
@@ -79,7 +84,6 @@ const JobForm = (props: any) => {
         <ErrorMessage errors={errors} name="C" />
         </div>
         
-        <UploadImage/>
         <button type="submit"
         className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
