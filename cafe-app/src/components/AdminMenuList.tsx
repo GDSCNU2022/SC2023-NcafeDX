@@ -1,25 +1,30 @@
 
 import { useEffect, useState } from 'react';
-import { MenuProps, getAllMenus, RestaurantType } from './get-menu';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType } from './get-menu';
 import { db } from '../../firebase/client';
+
 
 type Props = {
     props: RestaurantType;
 }
 
 const AdminMenuList = (props: Props) => {
-    const [list, setList] = useState<Array<any>>([]);
+    // get init data
+    const voidFunc = () => {};
+
+    const [list, setList] = useState<Array<any>>([, , ,]);
     let newList: any[] = [];
     const updateList = (doc: any) => {
         newList.push(doc.data());
         setList(newList);
     };
     console.log(list);
+    const unsubscribe = listenMenus(db, updateList, props.props);
 
     useEffect(() => {
         // strictModeのせいでマウント時に2回レンダリングされる
-        newList = []
-        getAllMenus(db, updateList, props.props);
+        newList = [];
+        unsubscribe();
         console.log("call useEffect");
 
     }, [])

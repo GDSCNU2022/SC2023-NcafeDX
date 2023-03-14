@@ -1,4 +1,5 @@
-import { updateDoc, doc, addDoc, where, collection, query, getDocs, setDoc } from 'firebase/firestore';
+import { updateDoc, doc, addDoc, where, collection,
+    query, getDocs, setDoc, onSnapshot } from 'firebase/firestore';
 import _MenuCard from './_menucard';
 
 export type MenuProps = {
@@ -35,7 +36,7 @@ export const getMenu: any = async (db: any, targetPath: string) => {
     return newData;
 }
 
-export const getAllMenus: any = async (db: any,setFunc: Function, restaurantName: string) => {
+export const getAllMenus: any = async (db: any, setFunc: Function, restaurantName: string) => {
     // Usage
     // getMenusInCategory(db, myFunc, 'Restaurant')
     // process: exec myFunc with argument in each document
@@ -54,7 +55,7 @@ export const getAllMenus: any = async (db: any,setFunc: Function, restaurantName
 }
 
 // Collection{DaVinch}/Doc{Menus}/Field{MenuProps}
-export const getMenusInCategory: any = async (db: any,setFunc: Function, targetPath: string) => {
+export const getMenusInCategory: any = async (db: any, setFunc: Function, targetPath: string) => {
     // Usage
     // getMenusInCategory(db, myFunc, 'Restaurant/Category')
     // process: exec myFunc with argument in each document
@@ -81,9 +82,9 @@ export const newMenu = async (db: any, targetRestaurant: string, saveMenu: MenuP
     /* Usage
     newMenu(db, restaurantName, menuObject)
     */
-    const collRef = collection(db, targetRestaurant)
+    const collRef = collection(db, targetRestaurant);
     await addDoc(collRef, saveMenu);
-    console.log(`Document uploaded at ${collRef.id}`)
+    console.log(`Document uploaded at ${collRef.id}`);
 }
 
 export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuProps) => {
@@ -111,4 +112,46 @@ export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuP
     })
 }
 
+export const listenMenus = (db: any, setFunc: Function,targetRestaurant: string) => {
+    const q = query(collection(db, targetRestaurant));
+    // インスタンスの保持が必要
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            setFunc(doc);
+        })
+        console.log(`Current Document in ${targetRestaurant} Called`);
+    }, (error) => { console.log(`Errors founded: ${error}`)})
+    
+    return unsubscribe;
+}
+
+export const listenMenusChange = (db: any, targetRestaurant: string) => {
+    const q = query(collection(db, targetRestaurant));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                console.log("New Data: ", change.doc.data());
+            }
+            if (change.type === "modified") {
+                console.log("Modified Data: ", change.doc.data());
+            }
+            if (change.type === "removed") {
+                console.log("Removed Data: ", change.doc.data());
+            }
+        });
+        console.log(`Current Document in ${targetRestaurant} Called`);
+    }, (error) => { console.log(`Errors founded: ${error}`)});
+
+    return unsubscribe;
+}
+
+export const detachMenu = (db: any, targetRestaurant: string) => {
+    const unsubscribe = onSnapshot(collection(db, targetRestaurant), () => {
+        // Respond to data
+        // ...
+    })
+    console.log(`Detached Menus in ${targetRestaurant}`);
+
+    return unsubscribe;
+}
 
