@@ -1,21 +1,27 @@
 import { updateDoc, doc, addDoc, where, collection,
-    query, getDocs, setDoc, onSnapshot } from 'firebase/firestore';
-import _MenuCard from './_menucard';
+    query, getDocs, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
+import _MenuCard from '../../components/_menucard';
 
+type Nutrition = {
+    kcal: number;
+    P: number;
+    F: number;
+    C: number;
+}
 export type MenuProps = {
     name: string;
     category: string;
-    nutrition: any;
+    nutrition: Nutrition;
     price: number;
-    stars : number;
-    imageURL?: string;
+    stars : number | null;
+    imageURL?: string | null;
 }
 
 export type RestaurantType = "DaVinch" | "Faraday" | "Pascal";
 
 export const getMenu: any = async (db: any, targetPath: string) => {
     // Usage
-    // getMenu(db, 'Restaurant/Menu').then((value) => {your processing}).catch().finally()
+    // getMenu(db, 'Restaurant/MenuName').then((value) => {your processing}).catch().finally()
     // return Promise type
     const path: string = targetPath;
     const pathArr: string[] = path.split('/');
@@ -38,20 +44,22 @@ export const getMenu: any = async (db: any, targetPath: string) => {
 
 export const getAllMenus: any = async (db: any, setFunc: Function, restaurantName: string) => {
     // Usage
-    // getMenusInCategory(db, myFunc, 'Restaurant')
+    // getMenus(db, myFunc, 'Restaurant')
     // process: exec myFunc with argument in each document
 
     const collRef = collection(db, restaurantName);
     const querySnapshot = await getDocs(collRef);
-    
     querySnapshot.forEach((doc) => {
         if (doc.exists()) {
             console.log("Document data:", doc.data());
             setFunc(doc);
+
         } else {
             console.log("No such document.");
         } 
     })
+
+
 }
 
 // Collection{DaVinch}/Doc{Menus}/Field{MenuProps}
@@ -110,6 +118,12 @@ export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuP
             console.log("No such document.");
         } 
     })
+}
+
+export const deleteMenu = async (db: any, targetRestaurant: string, docID: any) => {
+    const docRef = doc(db, targetRestaurant, docID);
+    deleteDoc(docRef);
+    
 }
 
 export const listenMenus = (db: any, setFunc: Function,targetRestaurant: string) => {

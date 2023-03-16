@@ -5,7 +5,7 @@ import { newMenu } from '../pages/api/get-menu';
 import UploadImage from './UploadImage';
 import { db } from '../../firebase/client';
 
-const MenuForm = (props: any) => {
+const NewsForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
     const setList = props.parentProps;
     const onSubmit = async (data: any) => {
@@ -106,4 +106,4 @@ const MenuForm = (props: any) => {
     );
 };
 
-export default MenuForm;
+export default NewsForm;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { db, storage } from '../../firebase/client';
-import { getMenu, MenuProps } from './get-menu';
+import { getMenu, MenuProps } from '../pages/api/get-menu';
 import { UserProps, getUser } from './get-user';
 const userTestProps: UserProps ={
     name: "test taro",

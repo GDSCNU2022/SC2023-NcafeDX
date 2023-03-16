@@ -1,4 +1,4 @@
-import { MenuProps } from './get-menu';
+import { MenuProps } from '../pages/api/get-menu';
 import { useState, ReactNode, DetailedHTMLProps, LiHTMLAttributes } from 'react';
 import { ref, getDownloadURL } from 'firebase/storage';
 import { storage } from '../../firebase/client';
