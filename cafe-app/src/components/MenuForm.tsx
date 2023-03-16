@@ -103,22 +103,21 @@ const MenuForm = (props: any) => {
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                 <ErrorMessage errors={errors} name="C" />
                 </div>
-        
-                <button type="submit"
-                className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
-        hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
-        focus:ring-offset-2">Submit</button>
 
                 <div className="flex flex-col w-64 mx-auto py-2">
                     <label  htmlFor="dropdown" className="text-sm font-bold">画像保存先</label>
                 <input disabled {...register('imageURL')} 
-                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
+                className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-200 rounded-md shadow-sm
                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                 <ErrorMessage errors={errors} name="imageURL" />
                 </div>
 
             </form>
             <UploadImage props={setValue}></UploadImage>
+            <button type="submit"
+            className="mt-4 py-2 px-4 m-2 bg-blue-500 text-white rounded-md shadow-sm 
+        hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
+        focus:ring-offset-2">Submit</button>
         </div>
     );
 };

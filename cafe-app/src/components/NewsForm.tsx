@@ -5,6 +5,7 @@ import { newNews } from '../pages/api/get-news';
 import UploadImage from './UploadImage';
 import { db } from '../../firebase/client';
 import { Timestamp } from 'firebase/firestore';
+import { Textarea } from '@material-tailwind/react';
 
 const NewsForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -32,11 +33,11 @@ const NewsForm = (props: any) => {
         <ErrorMessage errors={errors} name="title"/>
         </div>
 
-        <div className="flex flex-col w-3/5 h-2/5 mx-auto py-2">
-            <label  htmlFor="dropdown" className="text-sm font-bold">本文</label>
-        <input {...register('content',{required: true})} 
+        <div className="flex flex-col w-3/5 mx-auto py-2">
+        <label  htmlFor="dropdown" className="text-sm font-bold">本文</label>
+        <Textarea {...register('content',{required: true})} 
         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
-        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></Textarea>
         <ErrorMessage errors={errors} name="content"/>
         </div>
 

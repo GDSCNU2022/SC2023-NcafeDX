@@ -17,15 +17,7 @@ const menuTestProps: MenuProps = {
 }
 
 const MenuCard = () => {
-    const initMenuProps: MenuProps = {
-        name: "",
-        category: "",
-        price: 0,
-        stars: 0,
-        nutrition:{},
-        imageURL: ""
-    }
-    const [menus, setMenus] = useState<MenuProps>(initMenuProps);
+    const [menus, setMenus] = useState<any>({});
     const dataPath: string = "DaVinch/shiru-nashi-tantan";
     
     // ignite when mounted

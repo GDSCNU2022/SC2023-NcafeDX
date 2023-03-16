@@ -43,6 +43,13 @@ const AdminMenuList = (props: Props) => {
         setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
       })
     }
+
+    const handleCategory = (category: string) => {
+      if(category === "teishoku") return "定食";
+      if(category === "don") return "丼";
+      if(category === "noodle") return "麺類";
+      if(category === "curry") return "カレー";
+    }
     useEffect(() => {
         // strictModeのせいでマウント時に2回レンダリングされる
         getAllMenus(db, updateList, props.restaurant)
@@ -52,6 +59,7 @@ const AdminMenuList = (props: Props) => {
 
     }, [])
     return (
+<div>
 <div className="overflow-scroll h-128">
   <div className="p-12">
     <div className="flex flex-col">
@@ -71,7 +79,9 @@ const AdminMenuList = (props: Props) => {
                   <th scope="col" className="px-6 py-4">C</th>
                   <th scope="col" className="px-6 py-4">Image URL</th>
                   <th scope="col" className="px-6 py-4">
-                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={handleDelete} className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+        hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
+        focus:ring-offset-2">Delete</button>
                   </th>
                 </tr>
               </thead>
@@ -81,7 +91,7 @@ const AdminMenuList = (props: Props) => {
                     (<tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
                       <td scope="col" className="px-6 py-4">{data.name}</td>
                       <td scope="col" className="px-6 py-4">{data.price}</td>
-                      <td scope="col" className="px-6 py-4">{data.category}</td>
+                      <td scope="col" className="px-6 py-4">{handleCategory(data.category)}</td>
                       <td scope="col" className="px-6 py-4">{data.nutrition?.kcal}</td>
                       <td scope="col" className="px-6 py-4">{data.nutrition?.P}</td>
                       <td scope="col" className="px-6 py-4">{data.nutrition?.F}</td>
@@ -100,6 +110,7 @@ const AdminMenuList = (props: Props) => {
       </div>
     </div>
   </div>
+</div>
   <MenuForm props={props.restaurant} parentProps={setList}></MenuForm>
 </div>
 )

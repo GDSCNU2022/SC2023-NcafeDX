@@ -8,7 +8,7 @@ import UploadImage from '../components/UploadImage';
 import ShowUser from '../components/users';
 import JobForm from '../components/MenuForm';
 import AdminMenuList from '../components/AdminMenuList';
-import AdminForm from '../components/AdminForm';
+import AdminForm from '../components/AdminMenuForm';
 const inter = Inter({ subsets: ['latin'] })
 
 const testProps = {
