@@ -8,6 +8,7 @@ import ShowUser from './users';
 import MenuForm from './MenuForm';
 import AdminMenuList from './AdminMenuList';
 import AdminNewsList from './AdminNewsList';
+import NewsForm from './NewsForm';
 const inter = Inter({ subsets: ['latin'] })
 
 const testProps = {
@@ -22,6 +23,7 @@ const AdminForm = () => {
             <AdminMenuList restaurant="DaVinch"></AdminMenuList>
         </div>
         <AdminNewsList props="DaVinch_News"></AdminNewsList>
+        <br></br>
     </div>
     );
 }

@@ -1,6 +1,6 @@
 
 import { useEffect, useState, useRef } from 'react';
-import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenu } from '../pages/api/get-menu';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName } from '../pages/api/get-menu';
 import { db } from '../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
@@ -24,7 +24,7 @@ type NewProps = {
 
 const AdminMenuList = (props: Props) => {
     const [list, setList] = useState<Array<any>>([]);
-    const [checkedData, setCheckedData] = useState<Array<boolean>>([]);
+    const [checkedData, setCheckedData] = useState<Array<string>>([]);
     const updateList = (doc: any) => {
         const docData = doc.data();
         const newObj = {
@@ -35,10 +35,12 @@ const AdminMenuList = (props: Props) => {
           return [...list, newObj];
         });
     };
+    // フォームから追加した直後の要素はID不明なので名前で管理
     const handleDelete = () => {
-      checkedData?.forEach((id) => {
-        deleteMenu(db, props.restaurant, id);
-        setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.id !== id));
+      checkedData?.forEach((name) => {
+        //　nameフィールドでトリガー
+        deleteMenuWithName(db, props.restaurant, name);
+        setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
       })
     }
     useEffect(() => {
@@ -49,8 +51,6 @@ const AdminMenuList = (props: Props) => {
           setList((list) => [])};
 
     }, [])
-    console.log('above return');
-    console.log(list);
     return (
 <div className="overflow-scroll h-128">
   <div className="p-12">
@@ -88,7 +88,7 @@ const AdminMenuList = (props: Props) => {
                       <td scope="col" className="px-6 py-4">{data.nutrition?.C}</td>
                       <td scope="col" className="px-6 py-4">{data.imageURL}</td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.id]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.name]}/>
             
                         </td>
                       </tr>

@@ -13,7 +13,7 @@ export type firebaseOnLoadProp = {
 
 };
 
-const UploadImage: React.FC = () => {
+const UploadImage = (props: any) => {
     const [myFiles, setMyFiles] = useState<File[]>([]);
     const [clickable, setClickable] = useState(false);
     const [src, setSrc] = useState('');
@@ -45,15 +45,6 @@ const UploadImage: React.FC = () => {
             // upload process
             const imageRef = ref(storage, `/images/${myFiles[0].name}`);
             const uploadTask: any = uploadBytesResumable(imageRef, acceptedImg);
-            const updateMenuData: any = () => {
-                getDownloadURL(uploadTask.snapshot.ref)
-                .then((downloadURL: string) => {
-
-                    // TODO: 管理フォームを作った時はここに処理を追記
-                    console.log("ダウンロードしたURL" + downloadURL);
-                    
-                });
-            }
             // uploadTask.on(ignite condition, ignite func, failed, succeed)
             uploadTask.on(
                 'state_changed',
@@ -93,8 +84,12 @@ const UploadImage: React.FC = () => {
                         getDownloadURL(uploadTask.snapshot.ref)
                             .then(function (downloadURL: string) {
                                 console.log("ダウンロードしたURL" + downloadURL);
-                                
+                                const setData = props.props;
+                                setData('imageURL', downloadURL);
+                                setMyFiles([]);
+                                setSrc('');
                             });
+                            
                     } catch (error: any) {
                         switch (error.code) {
                             case 'storage/object-not-found':
@@ -136,33 +131,35 @@ const UploadImage: React.FC = () => {
 
     return (
         <div>
-            <div className="w-4/5 px-4 py-2 mx-auto my-4 text-center rounded-md">
-            <div
-                className="bg-gray-400 border-2 border-gray-500 rounded-md"
-                {...getRootProps()}
-            >
-                {/* この中をタップすれば画像を選択できる */}
-                <input {...getInputProps()} />
-                {myFiles.length === 0 ? (
-                <p className="py-4">画像を選択またはドラッグ＆ドロップ(この文字をクリックするとウィンドウが開きます)</p>
-                ) : (
-                <div>
-                    {myFiles.map((file: File) => (
-                    <React.Fragment key={file.name}>
-                        {src && <Image src={src} width={100} height={100} alt="menu-card${file.name}" />}
-                    </React.Fragment>
-                    ))}
+            <div className="w-1/5 px-4 py-2 mx-auto my-4 text-center rounded-md">
+                <div
+                    className="bg-gray-400 border-2 border-gray-500 rounded-md flex justify-center"
+                    {...getRootProps()}
+                >
+                    {/* この中をタップすれば画像を選択できる */}
+                    <input {...getInputProps()} />
+                    {myFiles.length === 0 ? (
+                    <p className="py-4">画像を選択またはドラッグ＆ドロップ</p>
+                    ) : (
+                    <div>
+                        {myFiles.map((file: File) => (
+                        <React.Fragment key={file.name}>
+                            {src && <Image src={src} width={100} height={100} alt="menu-card${file.name}" />}
+                        </React.Fragment>
+                        ))}
+                    </div>
+                    )}
                 </div>
-                )}
-            </div>
-            <button
-                disabled={!clickable}
-                type="submit"
-                className="px-4 py-2 my-4 bg-gray-200 rounded-md"
-                onClick={() => handleUpload(myFiles)}
-            >
-                UPLOAD
-            </button>
+                <button
+                    disabled={!clickable}
+                    type="submit"
+                    className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+        hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
+        focus:ring-offset-2"
+                    onClick={() => handleUpload(myFiles)}
+                    >
+                    UPLOAD
+                </button>
             </div>
     </div>
     );

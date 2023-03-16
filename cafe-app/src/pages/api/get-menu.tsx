@@ -120,10 +120,28 @@ export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuP
     })
 }
 
-export const deleteMenu = async (db: any, targetRestaurant: string, docID: any) => {
+export const deleteMenuWithID = (db: any, targetRestaurant: string, docID: any) => {
+    // フォームから追加した直後の要素はID不明
     const docRef = doc(db, targetRestaurant, docID);
     deleteDoc(docRef);
-    
+}
+
+export const deleteMenuWithName = async (db: any, targetRestaurant: string, menuName: string) => {
+    const collRef = collection(db, targetRestaurant);
+    const q = query(collRef, where('name', '==', menuName));
+    const docSnap = await getDocs(q);
+    let newData: any;
+
+    // docSnap は要素1, 条件検索のためqueryを使用
+    docSnap.forEach((d) => {
+        if (d.exists()) {
+            const docRef = doc(db, targetRestaurant, d.id);
+            deleteDoc(docRef);
+            console.log("Document data:", d.data());
+        } else {
+            console.log("No such document.");
+        } 
+    })
 }
 
 export const listenMenus = (db: any, setFunc: Function,targetRestaurant: string) => {

@@ -26,7 +26,7 @@ export default function Home() {
       <br></br>
       <div></div>
       保存データのリスト
-      <AdminMenuList props="DaVinch"></AdminMenuList>
+      <AdminMenuList restaurant="DaVinch"></AdminMenuList>
       <br></br>
       <div></div>
       <JobForm props="DaVinch"></JobForm>

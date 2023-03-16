@@ -1,17 +1,20 @@
 
 import { useEffect, useState } from 'react';
-import { getAllNews, listenNews, deleteNews } from '../pages/api/get-news';
+import { getAllNews, listenNews, deleteNewsWithDate } from '../pages/api/get-news';
 import { db } from '../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import { format } from 'date-fns/fp';
 import { Timestamp } from 'firebase/firestore';
 import { CheckboxProps } from './InputCheckbox';
+import NewsForm from './NewsForm';
+
 type NewsProps = {
   props: "DaVinch_News" | "Pascal_News" | "Faraday_News";
 }
 
 type Data = {
+  title: string;
   content: string;
   date: Timestamp;
   id: any;
@@ -22,7 +25,7 @@ const AdminNewsList = (props: NewsProps) => {
     const voidFunc = () => {};
 
     const [list, setList] = useState<Array<any>>([]);
-    const [checkedData, setCheckedData] = useState<Array<boolean>>([]);
+    const [checkedData, setCheckedData] = useState<Array<any>>([]);
 
     let newList: any[] = [];
     const updateList = (doc: any) => {
@@ -35,9 +38,10 @@ const AdminNewsList = (props: NewsProps) => {
     };
     const formatDate = format('yyyy-MM-dd');
     const handleDelete = () => {
-      checkedData?.forEach((id) => {
-        deleteNews(db, props.props, id);
-                setList((prevState: any[]) => prevState.filter((obj: Data) => obj.id !== id));
+      checkedData?.forEach((date) => {
+        // dateフィールドでトリガー
+        deleteNewsWithDate(db, props.props, date);
+                setList((prevState: any[]) => prevState.filter((obj: Data) => obj.date !== date));
       });
     }
 
@@ -65,6 +69,7 @@ const AdminNewsList = (props: NewsProps) => {
               <thead
                 className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
                 <tr>
+                  <th scope="col" className="px-6 py-4">件名</th>
                   <th scope="col" className="px-6 py-4">お知らせ</th>
                   <th scope="col" className="px-6 py-4">更新日時</th>
                   <th scope="col" className="px-6 py-4">
@@ -78,10 +83,11 @@ const AdminNewsList = (props: NewsProps) => {
                     {
                     return (
                     <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
+                      <td scope="col" className="px-6 py-4">{data.title}</td>
                       <td scope="col" className="px-6 py-4">{data.content}</td>
                       <td scope="col" className="px-6 py-4">{data.date ? formatDate(data.date.toDate()) : ""}</td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.id]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.date]}/>
             
                         </td>
                       </tr>
@@ -95,6 +101,7 @@ const AdminNewsList = (props: NewsProps) => {
       </div>
     </div>
   </div>
+  <NewsForm props={props.props} parentProps={setList}></NewsForm>
 </div>
 )
 }
