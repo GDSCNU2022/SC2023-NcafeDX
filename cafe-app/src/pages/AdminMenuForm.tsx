@@ -4,7 +4,10 @@ const inter = Inter({ subsets: ['latin'] })
 
 const AdminMenuForm = () => {
     return (
+        <div>
         <AdminMenuList restaurant={"DaVinch"}></AdminMenuList>
+        </div>
+
     );
 }
 

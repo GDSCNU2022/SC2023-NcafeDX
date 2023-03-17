@@ -59,6 +59,7 @@ const AdminNewsList = (props: NewsProps) => {
     }, [])
 
     return (
+<div>
 <div className="overflow-scroll h-128">
   <div className="p-12">
     <div className="flex flex-col">
@@ -85,8 +86,8 @@ const AdminNewsList = (props: NewsProps) => {
                     {
                     return (
                     <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
-                      <td scope="col" className="px-6 py-4">{data.title}</td>
-                      <td scope="col" className="px-6 py-4">{data.content}</td>
+                      <td scope="col" className="px-6 py-4 truncate">{data.title}</td>
+                      <td scope="col" className="px-6 py-4 truncate">{data.content}</td>
                       <td scope="col" className="px-6 py-4">{data.date ? formatDate(data.date.toDate()) : ""}</td>
                       <td scope="col" className="px-6 py-4">
                       <InputCheckbox props={[checkedData, setCheckedData, data.date]}/>
@@ -103,6 +104,8 @@ const AdminNewsList = (props: NewsProps) => {
       </div>
     </div>
   </div>
+
+</div>
   <NewsForm props={props.props} parentProps={setList}></NewsForm>
 </div>
 )

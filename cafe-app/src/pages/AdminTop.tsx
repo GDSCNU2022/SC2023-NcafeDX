@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import MenuCard from '../components/MenuCard';
 const AdminTop = () => {
     return (
         <div>
@@ -11,6 +11,7 @@ const AdminTop = () => {
                 <Link href ="/AdminNewsForm">News Form</Link>
                 </li>
             </ul>
+            <MenuCard props={"DaVinch/唐揚げ定食"}/>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import { updateDoc, doc, addDoc, where, collection,
     query, getDocs, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
-import _MenuCard from '../../components/_menucard';
 
 type Nutrition = {
     kcal: number;
@@ -13,7 +12,7 @@ export type MenuProps = {
     category: string;
     nutrition: Nutrition;
     price: number;
-    stars : number | null;
+    stars? : number | null;
     imageURL?: string | null;
 }
 
