@@ -29,7 +29,6 @@ const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<string>>([]);
-    const [inputChecked, setInputChecked] = useState(false);
 
     const updateList = (doc: any) => {
         const docData = doc.data();
@@ -48,7 +47,6 @@ const AdminMenuList = (props: Props) => {
         deleteMenuWithName(db, props.restaurant, name);
         setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
         reset();
-        setCheckedData(() => []);
       })
     }
 
@@ -218,7 +216,7 @@ const AdminMenuList = (props: Props) => {
                         <span><Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/></span>
                         </div></td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.name, inputChecked, setInputChecked]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.name]}/>
             
                         </td>
                       </tr>
