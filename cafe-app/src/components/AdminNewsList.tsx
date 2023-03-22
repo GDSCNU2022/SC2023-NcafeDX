@@ -91,7 +91,7 @@ const AdminNewsList = (props: NewsProps) => {
                       <td scope="col" className="px-6 py-4 truncate">{data.content}</td>
                       <td scope="col" className="px-6 py-4">{data.date ? formatDate(data.date.toDate()) : ""}</td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.date, inputChecked, setInputChecked]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.date]}/>
             
                         </td>
                       </tr>

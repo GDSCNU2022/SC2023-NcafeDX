@@ -16,6 +16,7 @@ const UploadImageForm = (props: Props) => {
     }
 
     const imageUpload = (file: any): void => {
+        console.log("call in imageUpload");
         try {
             const imageRef = ref(storage, `images/${file.name}`);
             uploadBytes(imageRef, file).then((snapshot) => {
@@ -37,8 +38,7 @@ const UploadImageForm = (props: Props) => {
     return (
         <div className="inline-block align-middle w-64 mx-auto">
             <input className="align-middle" type="file" onChange={handleChange}/>
-            <span>{uploadUrl}</span>
-            <button onClick={() => imageUpload(image)}></button>
+            <button onClick={() => imageUpload(image)}>Upload</button>
             </div>
     )
 }
