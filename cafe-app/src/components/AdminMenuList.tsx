@@ -29,6 +29,7 @@ const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<string>>([]);
+    const [inputChecked, setInputChecked] = useState(false);
 
     const updateList = (doc: any) => {
         const docData = doc.data();
@@ -46,6 +47,8 @@ const AdminMenuList = (props: Props) => {
         //　nameフィールドでトリガー
         deleteMenuWithName(db, props.restaurant, name);
         setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
+        reset();
+        setCheckedData(() => []);
       })
     }
 
@@ -55,21 +58,25 @@ const AdminMenuList = (props: Props) => {
       if(category === "noodle") return "麺類";
       if(category === "curry") return "カレー";
     }
+    // stateはイベント処理が終わるまで更新されないことに注意
     const onChangeInput = (e: any, id: number) => {
       const targetName = list[id].name;
       const {name, value} = e.target;
+      console.log(`name:${name}`);
+      const field = name.split('-')[0];
 
       setList((d: any) => {
         console.log("call setList");
+        console.log(d);
         const newList = [...d];
         newList.map((obj: any) => {
-        if(targetName === obj.name && name) {
-          if(name === "kcal"|| name === "P"|| name === "F"|| name === "C"){
+        if(targetName === obj.name && field) {
+          if(field === "kcal"|| field === "P"|| field === "F"|| field === "C"){
             console.log("Edit Nutrition");
-            obj["nutrition"][name] = value;
+            obj["nutrition"][field] = value;
             
           } else {
-            obj[name] = value;
+            obj[field] = value;
           
           }
           console.log(obj);
@@ -135,9 +142,10 @@ const AdminMenuList = (props: Props) => {
                 list.map((data: any, i) => 
                     (<tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
                       <td scope="col" className="px-6 py-4 truncate">
+                        <span>{data.name}</span><p></p>
                         <input
                           type="text"
-                          {...register(`name`, {
+                          {...register(`name-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.name
                         }
@@ -145,8 +153,9 @@ const AdminMenuList = (props: Props) => {
                           </td>
                       <td scope="col" className="px-6 py-4">
                         <input
+                          className="w-14"
                           type="number"
-                          {...register(`price`, {
+                          {...register(`price-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.price
                         }
@@ -154,7 +163,7 @@ const AdminMenuList = (props: Props) => {
                         </td>
                       <td scope="col" className="px-6 py-4">
                         <select
-                          {...register(`category`, {
+                          {...register(`category-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.category
                         }
@@ -166,8 +175,9 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
+                          className="w-14"
                           type="number"
-                          {...register(`kcal`, {
+                          {...register(`kcal-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.nutrition?.kcal
                         }
@@ -175,8 +185,9 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
+                          className="w-14"
                           type="number"
-                          {...register(`P`, {
+                          {...register(`P-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.nutrition?.P
                         }
@@ -184,8 +195,9 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
+                          className="w-14"
                           type="number"
-                          {...register(`F`, {
+                          {...register(`F-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.nutrition?.F
                         }
@@ -193,19 +205,20 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
+                          className="w-14"
                           type="number"
-                          {...register(`C`, {
+                          {...register(`C-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.nutrition?.C
                         }
                           )}/>
                       </td>
                       <td scope="col" className="px-6 py-4">
-                        <div className="w-64 m-2 truncate">
+                        <div className="m-2 truncate w-16">
                         <span><Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/></span>
                         </div></td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.name]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.name, inputChecked, setInputChecked]}/>
             
                         </td>
                       </tr>
