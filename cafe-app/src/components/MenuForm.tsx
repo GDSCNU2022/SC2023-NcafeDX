@@ -7,6 +7,12 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 //TODO 名前で管理しているため名前の重複チェック必須(yup使用が主流)
 
+export const gender = [
+        {label: '定食', value: 'teishoku'},
+        {label: '丼', value: 'don'},
+        {label: '麺類', value: 'noodle'},
+        {label: 'カレー', value: 'curry'},
+    ]
 const MenuForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [uploadDataURL, setUploadDataURL] = useState('');
@@ -51,12 +57,6 @@ const MenuForm = (props: any) => {
         setUploadDataURL('');
     };
 
-    const gender = [
-        {label: '定食', value: 'teishoku'},
-        {label: '丼', value: 'don'},
-        {label: '麺類', value: 'noodle'},
-        {label: 'カレー', value: 'curry'},
-    ]
     return(
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>

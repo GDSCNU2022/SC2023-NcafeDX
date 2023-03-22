@@ -1,10 +1,13 @@
 
 import { useEffect, useState, useRef } from 'react';
-import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName } from '../pages/api/get-menu';
+import { useForm } from 'react-hook-form';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../pages/api/get-menu';
 import { db } from '../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
-import MenuForm from './MenuForm';
+import MenuForm, {gender} from './MenuForm';
+import Image from 'next/image';
+import { isTemplateExpression } from 'typescript';
 
 type Props = {
     restaurant: RestaurantType;
@@ -23,8 +26,10 @@ type NewProps = {
 
 
 const AdminMenuList = (props: Props) => {
+    const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<string>>([]);
+
     const updateList = (doc: any) => {
         const docData = doc.data();
         const newObj = {
@@ -49,6 +54,46 @@ const AdminMenuList = (props: Props) => {
       if(category === "don") return "丼";
       if(category === "noodle") return "麺類";
       if(category === "curry") return "カレー";
+    }
+    const onChangeInput = (e: any, id: number) => {
+      const targetName = list[id].name;
+      const {name, value} = e.target;
+
+      setList((d: any) => {
+        console.log("call setList");
+        const newList = [...d];
+        newList.map((obj: any) => {
+        if(targetName === obj.name && name) {
+          if(name === "kcal"|| name === "P"|| name === "F"|| name === "C"){
+            console.log("Edit Nutrition");
+            obj["nutrition"][name] = value;
+            
+          } else {
+            obj[name] = value;
+          
+          }
+          console.log(obj);
+        }
+      }
+        )
+        return newList;
+          })
+
+      // 必ずstateを書き換えた後に実行するよう（objが更新されないため）
+      const update = () => {
+        console.log("call update");
+        list.map((obj) => {
+          if(obj.name === targetName){
+            updateMenu(db, `${props.restaurant}/${obj.name}`, obj);
+            console.log(`${name}: ${value}`);
+            // [var]: value 鉤括弧大事
+            reset({[name]: value});
+          }
+        })
+      }
+
+      update();
+      
     }
     useEffect(() => {
         // strictModeのせいでマウント時に2回レンダリングされる
@@ -77,7 +122,7 @@ const AdminMenuList = (props: Props) => {
                   <th scope="col" className="px-6 py-4">P</th>
                   <th scope="col" className="px-6 py-4">F</th>
                   <th scope="col" className="px-6 py-4">C</th>
-                  <th scope="col" className="px-6 py-4">Image URL</th>
+                  <th scope="col" className="px-6 py-4">登録画像</th>
                   <th scope="col" className="px-6 py-4">
                     <button onClick={handleDelete} className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
@@ -89,16 +134,75 @@ const AdminMenuList = (props: Props) => {
                 {
                 list.map((data: any, i) => 
                     (<tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
-                      <td scope="col" className="px-6 py-4 truncate"><span>{data.name}</span></td>
-                      <td scope="col" className="px-6 py-4">{data.price}</td>
-                      <td scope="col" className="px-6 py-4">{handleCategory(data.category)}</td>
-                      <td scope="col" className="px-6 py-4">{data.nutrition?.kcal}</td>
-                      <td scope="col" className="px-6 py-4">{data.nutrition?.P}</td>
-                      <td scope="col" className="px-6 py-4">{data.nutrition?.F}</td>
-                      <td scope="col" className="px-6 py-4">{data.nutrition?.C}</td>
+                      <td scope="col" className="px-6 py-4 truncate">
+                        <input
+                          type="text"
+                          {...register(`name`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.name
+                        }
+                          )}/>
+                          </td>
+                      <td scope="col" className="px-6 py-4">
+                        <input
+                          type="number"
+                          {...register(`price`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.price
+                        }
+                          )}/>
+                        </td>
+                      <td scope="col" className="px-6 py-4">
+                        <select
+                          {...register(`category`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.category
+                        }
+                          )}>
+                            {gender.map((item, i) => (
+                            <option value={item.value} key={item.value}>{item.label}</option>
+                        ))}
+                          </select>
+                      </td>
+                      <td scope="col" className="px-6 py-4">
+                        <input
+                          type="number"
+                          {...register(`kcal`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.nutrition?.kcal
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-6 py-4">
+                        <input
+                          type="number"
+                          {...register(`P`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.nutrition?.P
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-6 py-4">
+                        <input
+                          type="number"
+                          {...register(`F`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.nutrition?.F
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-6 py-4">
+                        <input
+                          type="number"
+                          {...register(`C`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.nutrition?.C
+                        }
+                          )}/>
+                      </td>
                       <td scope="col" className="px-6 py-4">
                         <div className="w-64 m-2 truncate">
-                        <span>{data.imageURL}</span>
+                        <span><Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/></span>
                         </div></td>
                       <td scope="col" className="px-6 py-4">
                       <InputCheckbox props={[checkedData, setCheckedData, data.name]}/>
