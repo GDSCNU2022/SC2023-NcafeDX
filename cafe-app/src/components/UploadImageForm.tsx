@@ -25,7 +25,8 @@ const UploadImageForm = (props: Props) => {
             }).catch((err) => console.log(err));
             getDownloadURL(imageRef).then((url: string) => {
                 setUploadUrl(() => url);
-                props.setValue('imageURL', url);
+                if(url){ props.setValue('imageURL', url);
+                } else { props.setValue('imageURL', "");}
                 console.log("upload data URL");
                 console.log(url);
             });

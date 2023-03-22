@@ -29,6 +29,7 @@ const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<string>>([]);
+    const [inputCheckedList, setInputCheckedList] = useState<boolean[]>([]);
 
     const updateList = (doc: any) => {
         const docData = doc.data();
@@ -40,6 +41,7 @@ const AdminMenuList = (props: Props) => {
           return [...list, newObj];
         });
     };
+
     // フォームから追加した直後の要素はID不明なので名前で管理
     const handleDelete = () => {
       checkedData?.forEach((name) => {
@@ -47,6 +49,10 @@ const AdminMenuList = (props: Props) => {
         deleteMenuWithName(db, props.restaurant, name);
         setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
         reset();
+      })
+      console.log(inputCheckedList);
+      inputCheckedList?.forEach((b) => {
+        setInputCheckedList((list: Array<boolean>) => list.filter((bool: boolean) => !bool));
       })
     }
 
@@ -213,10 +219,14 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <div className="m-2 truncate w-16">
-                        <span><Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/></span>
+                        <span>{
+                        data.imageURL ? 
+                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/>
+                          : <p>画像なし</p>
+                          }</span>
                         </div></td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.name]}/>
+                      <InputCheckbox props={[setCheckedData, data.name, inputCheckedList, setInputCheckedList, i]}/>
             
                         </td>
                       </tr>

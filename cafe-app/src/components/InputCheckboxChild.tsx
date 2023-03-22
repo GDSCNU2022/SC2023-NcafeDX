@@ -6,7 +6,6 @@ type InputProps = {
 }
 
 const InputCheckboxChild = ({checked, handleChange}: InputProps) => {
-    const [checkedValues, setCheckedValues] = useState([]);
 
     return (
         <div>

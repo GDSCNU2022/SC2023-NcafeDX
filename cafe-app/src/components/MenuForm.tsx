@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent} from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { newMenu } from '../pages/api/get-menu';
+import { newMenu, MenuProps } from '../pages/api/get-menu';
 import {db} from '../../firebase/client';
 import UploadImageForm from './UploadImageForm';
 //TODO 名前で管理しているため名前の重複チェック必須(yup使用が主流)
@@ -12,6 +12,18 @@ export const gender = [
         {label: '麺類', value: 'noodle'},
         {label: 'カレー', value: 'curry'},
     ]
+
+type FormMenuProps = {
+    name: string;
+    price: number;
+    category: string;
+    kcal: number;
+    P: number;
+    F: number;
+    C: number;
+    imageURL: string;
+}
+
 const MenuForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [imageUrl, setImageUrl] = useState('');
@@ -20,7 +32,8 @@ const MenuForm = (props: any) => {
 
     const setList = props.parentProps;
     const onSubmit = (data: any) => {
-        const newData = {
+        if(!data.imageURL){data.imageURL = '';}
+        const newData: MenuProps = {
             name: data.name,
             category: data.category,
             price: data.price,
@@ -28,6 +41,7 @@ const MenuForm = (props: any) => {
             imageURL: data.imageURL,
         }
         console.log(`newData: ${newData}`);
+        console.log(newData);
         // firebaseへ入力データをアップロード
         newMenu(db, props.props, newData);
         setList((list: Array<any>) => [...list, newData]);
@@ -110,7 +124,7 @@ const MenuForm = (props: any) => {
 
                     <div className="flex flex-col w-64 mx-auto py-2">
                         <label className="text-sm font-bold">Image URL</label>
-                        <input {...register('imageURL',{ required: false, disabled: true })}
+                        <input {...register('imageURL',{ required: false, disabled: true})}
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-300 rounded-md shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                         <ErrorMessage errors={errors} name="imageURL" />

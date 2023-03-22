@@ -1,37 +1,41 @@
-import React, { Dispatch, SetStateAction, useState, useRef } from 'react';
+import React, { Dispatch, SetStateAction, useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { CheckKeyConstraint } from 'react-hook-form/dist/types/path/common';
 import InputCheckboxChild from './InputCheckboxChild';
 
 export type CheckboxProps = {
-    props: [any, Dispatch<SetStateAction<any>>, any];
+    props: [Dispatch<SetStateAction<any>>, any, any, any, number];
 }
 
-const InputCheckbox = (props: CheckboxProps) => {
-    // const [checkedData, setCheckedData] = useState(false);
-    const [inputChecked, setInputChecked] = useState(false);
-    const checkedData = props.props[0];
-    const setCheckedData = props.props[1];
-    const docID = props.props[2];
+const InputCheckbox = forwardRef((props: CheckboxProps, ref: any) => {
+
+    const setCheckedData = props.props[0];
+    const docID = props.props[1];
+    const inputCheckedList = props.props[2];
+    const setInputCheckedList = props.props[3];
+    const index = props.props[4];
 
     const handleChange = (checked: boolean) => {
         if (checked){
-            setInputChecked(checked);
-            setCheckedData((list: Array<any>) => [...list, docID]);
+            setCheckedData((list: Array<any>) => list ? [...list, docID] : [true]);
         } else { 
-            setInputChecked(checked);
             setCheckedData ((list: Array<any>) => {
-                const newArray = list.filter( id => id !== docID)
-                return newArray;
+                list ? list.filter((id) => id !== docID) : [false];
         });}
+        inputCheckedList[index] = checked;
     }
+
+    useEffect(() => {
+        setInputCheckedList((list: Array<boolean>) => [...list, false]);
+    }, []);
 
     return (
         <div>
             <InputCheckboxChild
-            checked={inputChecked}
+            checked={inputCheckedList[index]}
             handleChange={(e) => handleChange(e.target.checked)}/>
         </div>
     )
 }
+)
 
 export default InputCheckbox;
