@@ -26,6 +26,7 @@ const AdminNewsList = (props: NewsProps) => {
 
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<any>>([]);
+    const [inputChecked, setInputChecked] = useState(false);
 
     let newList: any[] = [];
     const updateList = (doc: any) => {
@@ -90,7 +91,7 @@ const AdminNewsList = (props: NewsProps) => {
                       <td scope="col" className="px-6 py-4 truncate">{data.content}</td>
                       <td scope="col" className="px-6 py-4">{data.date ? formatDate(data.date.toDate()) : ""}</td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[checkedData, setCheckedData, data.date]}/>
+                      <InputCheckbox props={[checkedData, setCheckedData, data.date, inputChecked, setInputChecked]}/>
             
                         </td>
                       </tr>

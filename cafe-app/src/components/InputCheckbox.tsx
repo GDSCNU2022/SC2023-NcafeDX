@@ -1,17 +1,18 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { Dispatch, SetStateAction, useState, useRef } from 'react';
 import { CheckKeyConstraint } from 'react-hook-form/dist/types/path/common';
 import InputCheckboxChild from './InputCheckboxChild';
 
 export type CheckboxProps = {
-    props: [any, Dispatch<SetStateAction<any>>, any];
+    props: [any, Dispatch<SetStateAction<any>>, any, any, any];
 }
 
 const InputCheckbox = (props: CheckboxProps) => {
     // const [checkedData, setCheckedData] = useState(false);
-    const [inputChecked, setInputChecked] = useState(false);
     const checkedData = props.props[0];
     const setCheckedData = props.props[1];
     const docID = props.props[2];
+    const inputChecked = props.props[3];
+    const setInputChecked = props.props[4];
 
     const handleChange = (checked: boolean) => {
         if (checked){
