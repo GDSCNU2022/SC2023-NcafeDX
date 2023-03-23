@@ -4,7 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { db, storage } from '../../firebase/client';
 
 type Props = {
-    setValue: Function;
+    setValue?: Function;
 }
 
 const UploadImageForm = (props: Props) => {
@@ -25,21 +25,23 @@ const UploadImageForm = (props: Props) => {
             }).catch((err) => console.log(err));
             getDownloadURL(imageRef).then((url: string) => {
                 setUploadUrl(() => url);
-                if(url){ props.setValue('imageURL', url);
-                } else { props.setValue('imageURL', "");}
+                if(url && props.setValue){ props.setValue('imageURL', url);
+                } else if (props.setValue){ props.setValue('imageURL', "");}
                 console.log("upload data URL");
                 console.log(url);
             });
-        } catch(err) {
+            } catch(err) {
             console.log(err);
         }
+
     }
 
 
     return (
-        <div className="inline-block align-middle w-64 mx-auto">
-            <input className="align-middle" type="file" onChange={handleChange}/>
-            <button onClick={() => imageUpload(image)}>Upload</button>
+        <div className="inline-block w-64 mx-auto m-1 p-2">
+            <input className="align-middle m-1" type="file" onChange={handleChange}/>
+            <button className="bg-slate-400 shadow-sm rounded-sm m-1 px-2 py-1"
+                onClick={() => imageUpload(image)}>Upload</button>
             </div>
     )
 }

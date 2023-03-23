@@ -8,8 +8,9 @@ const AdminTop = () => {
                 <li>
                 <Link href="/AdminMenuForm">Menu Form</Link>
                 <br/>
-                <Link href ="/AdminNewsForm">News Form</Link>
+                <Link href="/AdminNewsForm">News Form</Link>
                 </li>
+                <Link href="/AdminImageForm">Image Form</Link>
             </ul>
             <MenuCard props={"DaVinch/唐揚げ定食"}/>
         </div>
