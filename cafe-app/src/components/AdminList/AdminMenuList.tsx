@@ -1,11 +1,11 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../pages/api/get-menu';
-import { db } from '../../firebase/client';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../../pages/api/get-menu';
+import { db } from '../../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
-import MenuForm, {gender} from './MenuForm';
+import MenuForm, {gender} from '../Form/MenuForm';
 import Image from 'next/image';
 
 

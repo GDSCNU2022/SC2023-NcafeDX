@@ -12,12 +12,6 @@ const ModalImageGrid =  (props: Props) => {
         preventScroll: true
     });
 
-    const toggleModal = (e: any) => {
-        if(e.target === e.currentTarget){
-            setIsOpenModal(!isOpenModal);
-        }
-    };
-
     const handlerSubmit = (url: string) => {
         console.log("called handlerSubmit in ModalImageGrid");
         if(props.parentHandlerSubmit){

@@ -1,13 +1,13 @@
 
 import { useEffect, useState } from 'react';
-import { getAllNews, listenNews, deleteNewsWithDate } from '../pages/api/get-news';
-import { db } from '../../firebase/client';
+import { getAllNews, listenNews, deleteNewsWithDate } from '../../pages/api/get-news';
+import { db } from '../../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import { format } from 'date-fns/fp';
 import { Timestamp } from 'firebase/firestore';
 import { CheckboxProps } from './InputCheckbox';
-import NewsForm from './NewsForm';
+import NewsForm from '../Form/NewsForm';
 
 type NewsProps = {
   props: "DaVinch_News" | "Pascal_News" | "Faraday_News";

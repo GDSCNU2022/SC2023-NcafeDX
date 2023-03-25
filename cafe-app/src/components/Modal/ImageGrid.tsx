@@ -1,5 +1,5 @@
 import {useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { getAllImages } from '../pages/api/get-image';
+import { getAllImages } from '../../pages/api/get-image';
 import Image from 'next/image';
 
 type Props = {

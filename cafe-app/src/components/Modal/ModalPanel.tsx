@@ -1,7 +1,7 @@
 import ImageGrid from './ImageGrid';
 import { useState } from 'react';
-import UploadImageForm from './UploadImageForm';
-import { deleteImagesWithURL } from '../pages/api/get-image';
+import UploadImageForm from '../Form/UploadImageForm';
+import { deleteImagesWithURL } from '../../pages/api/get-image';
 type Props = {
     close?: (e: any) => void;
     parentHandlerSubmit?: Function;

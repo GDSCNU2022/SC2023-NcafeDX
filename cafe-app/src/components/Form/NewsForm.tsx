@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { newNews } from '../pages/api/get-news';
-import { db } from '../../firebase/client';
+import { newNews } from '../../pages/api/get-news';
+import { db } from '../../../firebase/client';
 import { Timestamp } from 'firebase/firestore';
 import { Textarea } from '@material-tailwind/react';
 
