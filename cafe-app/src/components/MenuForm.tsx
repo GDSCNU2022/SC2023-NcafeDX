@@ -4,6 +4,7 @@ import { ErrorMessage } from '@hookform/error-message';
 import { newMenu, MenuProps } from '../pages/api/get-menu';
 import {db} from '../../firebase/client';
 import UploadImageForm from './UploadImageForm';
+import ModalImageGrid from './ModalImageGrid';
 //TODO 名前で管理しているため名前の重複チェック必須(yup使用が主流)
 
 export const gender = [
@@ -28,8 +29,6 @@ const MenuForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [imageUrl, setImageUrl] = useState('');
 
-    
-
     const setList = props.parentProps;
     const onSubmit = (data: any) => {
         if(!data.imageURL){data.imageURL = '';}
@@ -50,9 +49,15 @@ const MenuForm = (props: any) => {
         
     };
 
+    const gridHandlerSubmit = (url: string) => {
+        console.log("in gridHandler")
+        console.log(url);
+        setValue('imageURL', url);
+    }
+
     return(
         <div>
-            <UploadImageForm setValue={setValue}></UploadImageForm>
+            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}></ModalImageGrid>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="p-4">

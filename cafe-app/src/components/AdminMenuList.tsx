@@ -7,7 +7,7 @@ import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import MenuForm, {gender} from './MenuForm';
 import Image from 'next/image';
-import { isTemplateExpression } from 'typescript';
+
 
 type Props = {
     restaurant: RestaurantType;
@@ -146,7 +146,6 @@ const AdminMenuList = (props: Props) => {
                 list.map((data: any, i) => 
                     (<tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
                       <td scope="col" className="px-6 py-4 truncate">
-                        <span>{data.name}</span><p></p>
                         <input
                           type="text"
                           {...register(`name-${i}`, {
@@ -221,7 +220,7 @@ const AdminMenuList = (props: Props) => {
                         <div className="m-2 truncate w-16">
                         <span>{
                         data.imageURL ? 
-                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className="dark:bg-neutral-900"/>
+                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-slate-800"/>
                           : <p>画像なし</p>
                           }</span>
                         </div></td>
