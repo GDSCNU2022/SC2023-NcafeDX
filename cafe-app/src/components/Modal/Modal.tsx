@@ -1,11 +1,23 @@
-import { FC, ReactNode, cloneElement } from 'react';
+import { FC, ReactNode, cloneElement, useState } from 'react';
+import Modal from 'react-modal';
 
 type Props = {
     close: Function;
     children: ReactNode;
 }
 
-const Modal = (props: Props) => {
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
+const ModalView = (props: Props) => {
 
 return (
     <>
@@ -18,4 +30,4 @@ return (
 
 )
 }
-export default Modal;
+export default ModalView;

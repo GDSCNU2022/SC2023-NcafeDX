@@ -3,7 +3,7 @@ import { useState } from 'react';
 import UploadImageForm from '../Form/UploadImageForm';
 import { deleteImagesWithURL } from '../../pages/api/get-image';
 type Props = {
-    close?: (e: any) => void;
+    close?: () => void;
     parentHandlerSubmit?: Function;
 }
 
@@ -22,19 +22,31 @@ const Panel = (props: Props) => {
         }
 
         if(props.close) {
-            props.close(e);
+            props.close();
         };
     };
 
     const handleDelete = () => {
-        setImgSrcList((list: any) => list.filter((url: string) => url !== selectedUrl));
-        deleteImagesWithURL(selectedUrl);
+        if(selectedUrl){
+            setImgSrcList((list: any) => list.filter((url: string) => url !== selectedUrl));
+            deleteImagesWithURL(selectedUrl);
+        }
     };
 
     const handlerImageForm = (url: string) => {
-        console.log("In Form Handler")
-        console.log(url);
-        setImgSrcList((list: any) => [...list, url]);
+        if(url){
+            console.log("In Form Handler")
+            console.log(url);
+            setImgSrcList((list: any) => [...list, url]);
+        }
+    }
+
+    const handlerClose = () => {
+        if(props.close){
+            console.log("call in handlerClose");
+            props.close();
+        }
+
     }
 
     return (
@@ -45,11 +57,14 @@ const Panel = (props: Props) => {
                     <UploadImageForm onClick={handlerImageForm}/>
                 </div>
                 <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
-                type='button' onClick={props.close}>Cancel</button>
+                type='button' onClick={handleSubmit}>OK</button>
                 <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
                 type='button' onClick={handleDelete}>Delete</button>
-                <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
-                type='button' onClick={handleSubmit}>OK</button>
+                <div className="flex flex-row-reverse">
+                    <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
+                    type='button' onClick={handlerClose}>Cancel</button>
+                </div>
+
 
             </div>
         </div>
