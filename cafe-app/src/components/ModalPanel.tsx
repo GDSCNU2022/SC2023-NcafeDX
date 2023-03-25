@@ -1,9 +1,6 @@
 import ImageGrid from './ImageGrid';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
 import UploadImageForm from './UploadImageForm';
-import { Literata } from 'next/font/google';
 import { deleteImagesWithURL } from '../pages/api/get-image';
 type Props = {
     close?: (e: any) => void;

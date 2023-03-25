@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Modal from './Modal';
 import Panel from './ModalPanel';
+import { useModal } from 'react-hooks-use-modal';
 
 type Props = {
     parentHandlerSubmit?: Function;
@@ -8,6 +8,9 @@ type Props = {
 
 const ModalImageGrid =  (props: Props) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+    const [Modal, open, close] = useModal('__next', {
+        preventScroll: true
+    });
 
     const toggleModal = (e: any) => {
         if(e.target === e.currentTarget){
@@ -24,14 +27,12 @@ const ModalImageGrid =  (props: Props) => {
 
     return (
 <>
-    <button type='button' onClick={toggleModal} className="p-2 justify-start m-4 bg-slate-600 align-middle h-10 shadow-md rounded-md">
+    <button type='button' onClick={open} className="p-2 justify-start m-4 bg-slate-600 align-middle h-10 shadow-md rounded-md">
         Register Menu Image
-    </button>
-    {isOpenModal && (
-        <Modal close={toggleModal}>
+        <Modal>
             <Panel parentHandlerSubmit={handlerSubmit}/>
             </Modal>
-    )}
+        </button>
 </>
     );
 }
