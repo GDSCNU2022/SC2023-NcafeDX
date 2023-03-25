@@ -115,7 +115,7 @@ const AdminMenuList = (props: Props) => {
 
     }, [])
     return (
-<div>
+<div className="">
 <div className="overflow-auto h-128 max-h-128 my-12 mx-6">
   <div className="">
     <div className="flex flex-col">
@@ -135,7 +135,7 @@ const AdminMenuList = (props: Props) => {
                   <th scope="col" className="px-6 py-4">C</th>
                   <th scope="col" className="px-6 py-4">登録画像</th>
                   <th scope="col" className="px-6 py-4">
-                    <button onClick={handleDelete} className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+                    <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
         focus:ring-offset-2">Delete</button>
                   </th>
