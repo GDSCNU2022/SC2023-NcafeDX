@@ -9,7 +9,7 @@ const Modal = (props: Props) => {
 
 return (
     <>
-    <div onClick={props.close} className="flex justify-center">
+    <div onClick={props.close} className="flex justify-center w-128">
         <div>
             {cloneElement(props.children as any, {close: props.close})}
             </div>
