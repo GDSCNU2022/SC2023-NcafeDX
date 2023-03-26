@@ -51,7 +51,7 @@ const Panel = (props: Props) => {
 
     return (
         <div>
-            <div className="bg-gray-300 p-2 rounded-md justify-start w-128">
+            <div className="bg-gray-300 p-2 rounded-md w-128">
                 <ImageGrid parentHandler={setSelectedUrl} srcList={imgSrcList} setSrcList={setImgSrcList}/>
                 <div className="flex justify-start mt-2">
                     <UploadImageForm onClick={handlerImageForm}/>

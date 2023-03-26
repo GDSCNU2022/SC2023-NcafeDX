@@ -60,8 +60,8 @@ const MenuForm = (props: any) => {
             <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}></ModalImageGrid>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-4">
-                <div className="inline-flex">
+                <div className="p-4 overflow-auto">
+                <div className="inline-flex md:w-full sm:w-full">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
                         <input {...register('name',{required: true, maxLength: 20})} 
