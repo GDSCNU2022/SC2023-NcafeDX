@@ -124,7 +124,7 @@ const AdminMenuList = (props: Props) => {
           <div className="overflow-hidden">
             <table className="min-w-full text-left text-sm font-light">
               <thead
-                className="border-b bg-white font-medium">
+                className="border-b  bg-neutral-200 font-medium">
                 <tr>
                   <th scope="col" className="px-6 py-4">名前</th>
                   <th scope="col" className="px-6 py-4">価格</th>

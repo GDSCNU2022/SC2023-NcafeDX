@@ -60,8 +60,8 @@ const MenuForm = (props: any) => {
             <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}></ModalImageGrid>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-4">
-                <div className="inline-flex">
+                <div className="p-4 overflow-auto">
+                <div className="inline-flex sm:w-full">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
                         <input {...register('name',{required: true, maxLength: 20})} 
@@ -79,7 +79,7 @@ const MenuForm = (props: any) => {
                         </div>
 
                     <div className="flex flex-col w-24 mx-auto py-2">
-                        <label  htmlFor="dropdown" className="text-sm font-bold">カテゴリー</label>
+                        <label  htmlFor="dropdown" className="text-sm font-bold">種類</label>
                         <select {...register('category', { required: true })}
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">

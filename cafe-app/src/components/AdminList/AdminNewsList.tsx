@@ -6,7 +6,6 @@ import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import { format } from 'date-fns/fp';
 import { Timestamp } from 'firebase/firestore';
-import { CheckboxProps } from './InputCheckbox';
 import NewsForm from '../Form/NewsForm';
 import ModalNewsWindow from '../Modal/ModalNewsWindow';
 
@@ -40,7 +39,7 @@ const AdminNewsList = (props: NewsProps) => {
         setList((list) => [...list, newObj]);
     };
     const formatDate = format("yyyy年MM月dd日 hh時mm分ss秒");
-    
+
     const handleDelete = () => {
       checkedData?.forEach((date) => {
         // dateフィールドでトリガー
@@ -81,7 +80,7 @@ const AdminNewsList = (props: NewsProps) => {
                   <th scope="col" className="px-6 py-4">お知らせ</th>
                   <th scope="col" className="px-6 py-4">更新日時</th>
                   <th scope="col" className="px-6 py-4 flex justify-center">
-                    <button onClick={handleDelete} className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+                    <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
         focus:ring-offset-2">Delete</button>
                   </th>
