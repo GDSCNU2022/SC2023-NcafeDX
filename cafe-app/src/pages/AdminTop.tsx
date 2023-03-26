@@ -1,5 +1,5 @@
 import Link from "next/link";
-import CreateQR from '../components/CreateQR';
+import CreateQR from '../components/Examples/CreateQR';
 
 const AdminTop = () => {
     return (
