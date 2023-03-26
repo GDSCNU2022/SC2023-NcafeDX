@@ -61,7 +61,7 @@ const MenuForm = (props: any) => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="p-4 overflow-auto">
-                <div className="inline-flex sm:w-full">
+                <div className="inline-flex w-128">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
                         <input {...register('name',{required: true, maxLength: 20})} 
@@ -135,14 +135,13 @@ const MenuForm = (props: any) => {
                         <ErrorMessage errors={errors} name="imageURL" />
                         </div>
 
-                    <div className="flex flex-col mx-auto py-2">
+                </div>
+                        <div className="">
                         <button type="submit"
-                        className="flex flex-col mt-4 py-2 px-4 m-2 bg-blue-500 text-white rounded-md shadow-sm 
+                        className="py-2 mt-6 w-24 bg-blue-500 text-white rounded-md shadow-sm 
                         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
                         focus:ring-offset-2 h-10">Submit</button>
                         </div>
-
-                </div>
             </div>
         </form>
 
