@@ -9,7 +9,7 @@ const InputCheckboxChild = ({checked, handleChange}: InputProps) => {
 
     return (
         <div>
-            <input type="checkbox" onChange={(e) => handleChange(e)} checked={checked}></input>
+            <input className="bg-neutral-200" type="checkbox" onChange={(e) => handleChange(e)} checked={checked}></input>
         </div>
     )
 }

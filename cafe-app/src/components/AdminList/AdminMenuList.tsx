@@ -1,11 +1,11 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../pages/api/get-menu';
-import { db } from '../../firebase/client';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../../pages/api/get-menu';
+import { db } from '../../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
-import MenuForm, {gender} from './MenuForm';
+import MenuForm, {gender} from '../Form/MenuForm';
 import Image from 'next/image';
 
 
@@ -115,7 +115,7 @@ const AdminMenuList = (props: Props) => {
 
     }, [])
     return (
-<div>
+<div className="">
 <div className="overflow-auto h-128 max-h-128 my-12 mx-6">
   <div className="">
     <div className="flex flex-col">
@@ -124,7 +124,7 @@ const AdminMenuList = (props: Props) => {
           <div className="overflow-hidden">
             <table className="min-w-full text-left text-sm font-light">
               <thead
-                className="border-b bg-white font-medium dark:border-neutral-500 dark:bg-neutral-600">
+                className="border-b bg-white font-medium">
                 <tr>
                   <th scope="col" className="px-6 py-4">名前</th>
                   <th scope="col" className="px-6 py-4">価格</th>
@@ -134,8 +134,8 @@ const AdminMenuList = (props: Props) => {
                   <th scope="col" className="px-6 py-4">F</th>
                   <th scope="col" className="px-6 py-4">C</th>
                   <th scope="col" className="px-6 py-4">登録画像</th>
-                  <th scope="col" className="px-6 py-4">
-                    <button onClick={handleDelete} className="mt-4 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+                  <th scope="col" className="px-6 py-4 flex justify-center">
+                    <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
         focus:ring-offset-2">Delete</button>
                   </th>
@@ -144,7 +144,7 @@ const AdminMenuList = (props: Props) => {
               <tbody>
                 {
                 list.map((data: any, i) => 
-                    (<tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" key={i}>
+                    (<tr className="border-b bg-neutral-100" key={i}>
                       <td scope="col" className="px-6 py-4 truncate">
                         <input
                           type="text"
@@ -152,11 +152,12 @@ const AdminMenuList = (props: Props) => {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.name
                         }
-                          )}/>
+                          )}
+                          className='bg-neutral-200'/>
                           </td>
                       <td scope="col" className="px-6 py-4">
                         <input
-                          className="w-14"
+                          className="w-14 bg-neutral-200"
                           type="number"
                           {...register(`price-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
@@ -170,7 +171,8 @@ const AdminMenuList = (props: Props) => {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.category
                         }
-                          )}>
+                          )}
+                          className='bg-neutral-200'>
                             {gender.map((item, i) => (
                             <option value={item.value} key={item.value}>{item.label}</option>
                         ))}
@@ -178,17 +180,18 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
-                          className="w-14"
+                          className="w-14 bg-neutral-200"
                           type="number"
                           {...register(`kcal-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
                           value: data.nutrition?.kcal
                         }
-                          )}/>
+                          )}
+                          />
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
-                          className="w-14"
+                          className="w-14 bg-neutral-200"
                           type="number"
                           {...register(`P-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
@@ -198,7 +201,7 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
-                          className="w-14"
+                          className="w-14 bg-neutral-200"
                           type="number"
                           {...register(`F-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
@@ -208,7 +211,7 @@ const AdminMenuList = (props: Props) => {
                       </td>
                       <td scope="col" className="px-6 py-4">
                         <input
-                          className="w-14"
+                          className="w-14 bg-neutral-200"
                           type="number"
                           {...register(`C-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
@@ -217,10 +220,10 @@ const AdminMenuList = (props: Props) => {
                           )}/>
                       </td>
                       <td scope="col" className="px-6 py-4">
-                        <div className="m-2 truncate w-16">
+                        <div className="m-2 truncate w-16 bg-neutral-200">
                         <span>{
                         data.imageURL ? 
-                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-slate-800"/>
+                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-neutral-300"/>
                           : <p>画像なし</p>
                           }</span>
                         </div></td>

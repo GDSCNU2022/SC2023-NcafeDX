@@ -1,5 +1,5 @@
 import {useState, useEffect, Dispatch, SetStateAction } from 'react';
-import { getAllImages } from '../pages/api/get-image';
+import { getAllImages } from '../../pages/api/get-image';
 import Image from 'next/image';
 
 type Props = {
@@ -9,6 +9,11 @@ type Props = {
 }
 
 const ImageGrid = (props: Props) => {
+
+    const handlerOnClick = (url: string) => {
+        console.log(url);
+        props.parentHandler(() => url)
+    };
 
     useEffect(() => {
         getAllImages(props.setSrcList).then(() => console.log(props.srcList)).catch((err) => console.log(`Error: ${err}`));
@@ -22,7 +27,7 @@ const ImageGrid = (props: Props) => {
         {props.srcList?.map((url: string, i) => (
             <button className="m-0.5 p-2 bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
                         focus:ring-offset-2 w-32"
-                    onClick={() => props.parentHandler(() => url)} key={i}>
+                    onClick={() => handlerOnClick(url)} key={i}>
                 <div className="relative md:aspect-square">
                 <Image src={url} fill object-fit="contain" alt="画像URLがありません"
                 className="bg-slate-600 rounded-md shadow-md bg-clip-padding"/>

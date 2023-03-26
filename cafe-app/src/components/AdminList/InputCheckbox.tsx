@@ -9,27 +9,30 @@ export type CheckboxProps = {
 const InputCheckbox = forwardRef((props: CheckboxProps, ref: any) => {
 
     const setCheckedData = props.props[0];
-    const docID = props.props[1];
+    const docQuery = props.props[1];
     const inputCheckedList = props.props[2];
     const setInputCheckedList = props.props[3];
     const index = props.props[4];
 
     const handleChange = (checked: boolean) => {
+        console.log(inputCheckedList);
+        console.log(index);
         if (checked){
-            setCheckedData((list: Array<any>) => list ? [...list, docID] : [true]);
+            setCheckedData((list: Array<any>) => {
+                console.log(list);
+                return list ? [...list, docQuery] : [docQuery]}
+                );
         } else { 
             setCheckedData ((list: Array<any>) => {
-                list ? list.filter((id) => id !== docID) : [false];
+                console.log(list)
+                list ? list.filter((id) => id !== docQuery) : [docQuery];
+                
         });}
         inputCheckedList[index] = checked;
     }
 
-    useEffect(() => {
-        setInputCheckedList((list: Array<boolean>) => [...list, false]);
-    }, []);
-
     return (
-        <div>
+        <div className="flex justify-center">
             <InputCheckboxChild
             checked={inputCheckedList[index]}
             handleChange={(e) => handleChange(e.target.checked)}/>

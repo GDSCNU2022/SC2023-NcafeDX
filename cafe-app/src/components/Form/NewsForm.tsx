@@ -1,10 +1,16 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { newNews } from '../pages/api/get-news';
-import { db } from '../../firebase/client';
+import { newNews } from '../../pages/api/get-news';
+import { db } from '../../../firebase/client';
 import { Timestamp } from 'firebase/firestore';
 import { Textarea } from '@material-tailwind/react';
+
+export type NewsProps = {
+    title: string;
+    content: string;
+    date?: Timestamp;
+}
 
 const NewsForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
