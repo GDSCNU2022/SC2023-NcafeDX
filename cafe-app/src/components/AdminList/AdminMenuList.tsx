@@ -116,7 +116,7 @@ const AdminMenuList = (props: Props) => {
     }, [])
     return (
 <div className="">
-<div className="overflow-auto h-128 max-h-128 my-12 mx-6">
+<div className="overflow-auto h-128 max-h-128 my-12 m-4">
   <div className="">
     <div className="flex flex-col">
       <div className="sm:-mx-6 lg:-mx-8">
