@@ -6,6 +6,12 @@ import { db } from '../../../firebase/client';
 import { Timestamp } from 'firebase/firestore';
 import { Textarea } from '@material-tailwind/react';
 
+export type NewsProps = {
+    title: string;
+    content: string;
+    date?: Timestamp;
+}
+
 const NewsForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
     const setList = props.parentProps;

@@ -105,7 +105,6 @@ export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuP
     const collRef = collection(db, pathArr[0]);
     const q = query(collRef, where('name', '==', pathArr[1]));
     const docSnap = await getDocs(q);
-    let newData: any;
 
     // docSnap は要素1, 条件検索のためqueryを使用
     docSnap.forEach((d) => {

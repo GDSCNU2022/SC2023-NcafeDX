@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import Panel from './ModalImagePanel';
-import Modal, { setAppElement } from 'react-modal';
-import { is } from 'date-fns/locale';
+import ModalNewsPanel from './ModalNewsPanel';
+import Modal from 'react-modal';
+import handler from '@/pages/api/hello';
 
 type Props = {
-    parentHandlerSubmit?: Function;
+    restaurant: string;
+    data: any;
+    parentHandlerSubmit: Function;
 }
+
 const customStyles = {
     overlay: {
         backgroundColor:'rgba(50,50,50, 0.8)'
@@ -21,18 +24,9 @@ const customStyles = {
     },
 };
 
-setAppElement('#__next');
-
-const ModalImageGrid =  (props: Props) => {
+const ModalNewsWindow = (props: Props) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-
-    const handlerSubmit = (url: string) => {
-        console.log("called handlerSubmit in ModalImageGrid");
-        if(props.parentHandlerSubmit){
-            props.parentHandlerSubmit(url);
-        }
-    };
-
+    
     const openModal = () => {
         setIsOpenModal(() => true);
     };
@@ -46,20 +40,28 @@ const ModalImageGrid =  (props: Props) => {
         setIsOpenModal(() => false);
     };
 
+
     return (
-<>
-    <button onClick={openModal} className="p-2 justify-start m-4 bg-slate-600 align-middle
-    h-10 shadow-md rounded-md text-white">
-        Register Menu Images</button>
+        <>
+        <button onClick={openModal} 
+        className="px-2 bg-slate-600 align-middle
+        h-6 shadow-md rounded-md text-white"
+        >Edit</button>
         <Modal
             isOpen={isOpenModal}
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
-            contentLabel='Menu Images'>
-            <Panel parentHandlerSubmit={handlerSubmit} close={closeModal}/>
-            </Modal>
-</> 
+            contentLabel='News Form'>
+            <div className="w-96">
+                <ModalNewsPanel parentHandlerSubmit={props.parentHandlerSubmit} restaurant={props.restaurant} data={props.data} close={closeModal}/>
+            </div>
+
+        </Modal>
+
+
+
+        </>
     );
-}
-export default ModalImageGrid;
+};
+export default ModalNewsWindow;

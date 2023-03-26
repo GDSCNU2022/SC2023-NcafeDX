@@ -53,15 +53,15 @@ const Panel = (props: Props) => {
         <div>
             <div className="bg-gray-300 p-2 rounded-md justify-start w-128">
                 <ImageGrid parentHandler={setSelectedUrl} srcList={imgSrcList} setSrcList={setImgSrcList}/>
-                <div className="flex justify-start">
+                <div className="flex justify-start mt-2">
                     <UploadImageForm onClick={handlerImageForm}/>
                 </div>
-                <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
+                <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md text-white"
                 type='button' onClick={handleSubmit}>OK</button>
-                <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
+                <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md text-white"
                 type='button' onClick={handleDelete}>Delete</button>
                 <div className="flex flex-row-reverse">
-                    <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md"
+                    <button className="p-2 m-1 bg-slate-600 align-middle h-10 shadow-md rounded-md text-white"
                     type='button' onClick={handlerClose}>Cancel</button>
                 </div>
 

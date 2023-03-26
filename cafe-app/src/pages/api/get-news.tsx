@@ -30,11 +30,32 @@ export const newNews = async (db: any, targetCollection: string, saveNews: NewsP
     const getDate = Timestamp.now();
     const saveObj = {
         ...saveNews,
-        date: getDate,
     }
+    // update date
+    saveObj.date = getDate;
+
     const collRef = collection(db, targetCollection);
     await addDoc(collRef, saveObj);
     console.log(`Document uploaded at ${collRef.id}`);
+}
+
+export const updateNewsWithDate = async (db: any, targetCollection: string, updateNews: {title: string, content: string, date: Timestamp}) => {
+    const getDate = updateNews.date;
+    const saveObj = {
+        ...updateNews,
+        date: Timestamp.now()
+    }
+    const q = query(collection(db, targetCollection), where('date', '==', getDate));
+    const docSnap = await getDocs(q);
+
+    docSnap.forEach((d) => {
+        if(d.exists()) {
+            const docRef = doc(db, targetCollection, d.id);
+            updateDoc(docRef, saveObj);
+        } else {
+            console.log("No such document.");
+        }
+    })
 }
 
 export const deleteNews = async (db: any, targetCollection: string, docID: any) => {
