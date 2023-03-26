@@ -6,7 +6,6 @@ import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import { format } from 'date-fns/fp';
 import { Timestamp } from 'firebase/firestore';
-import { CheckboxProps } from './InputCheckbox';
 import NewsForm from '../Form/NewsForm';
 import ModalNewsWindow from '../Modal/ModalNewsWindow';
 
