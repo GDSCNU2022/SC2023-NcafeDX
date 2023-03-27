@@ -1,5 +1,6 @@
 import Link from "next/link";
 import CreateQR from '../components/Examples/CreateQR';
+import ModalStarWindow from '../components/Modal/ModalStarWindow';
 
 const AdminTop = () => {
     return (
@@ -10,7 +11,8 @@ const AdminTop = () => {
                 flex justify-center text-xl">Menu Form</Link>
                 <Link href="/AdminNewsForm" className="m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl">News Form</Link>
-                <CreateQR text='https://gdsc.community.dev/nihon-university/'></CreateQR>
+                <CreateQR text='https://gdsc.community.dev/nihon-university/'/>
+                <ModalStarWindow restaurant="DaVinch" menuName="唐揚げ定食"/>
             </div>
         </div>
 
