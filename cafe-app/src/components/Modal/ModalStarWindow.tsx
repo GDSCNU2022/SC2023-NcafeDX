@@ -25,6 +25,10 @@ const customStyles = {
 };
 
 const ModalStarWindow = (props: Props) => {
+    /*
+    Usage:
+    <ModalStarWindow restaurant={"RestaurantName"} menuName={TargetMenuName}>
+    */
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
     
     const openModal = () => {
