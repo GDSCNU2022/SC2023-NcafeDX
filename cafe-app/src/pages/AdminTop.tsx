@@ -5,7 +5,7 @@ const AdminTop = () => {
     return (
         <div className='flex justify-center'>
             <div className="grid grid-cols-1">
-                <p className="text-2xl">管理者用ページ</p>
+                <p className="text-2xl text-center">管理者用ページ</p>
                 <Link href="/AdminMenuForm" className="m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl">Menu Form</Link>
                 <Link href="/AdminNewsForm" className="m-2 text-neutral-800 hover:text-blue-500

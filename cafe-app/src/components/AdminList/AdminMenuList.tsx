@@ -223,7 +223,7 @@ const AdminMenuList = (props: Props) => {
                         <div className="m-2 truncate w-16 bg-neutral-200">
                         <span>{
                         data.imageURL ? 
-                          <Image src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-neutral-300"/>
+                          <img src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-neutral-300"/>
                           : <p>画像なし</p>
                           }</span>
                         </div></td>
