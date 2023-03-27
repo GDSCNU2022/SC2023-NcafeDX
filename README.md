@@ -1,6 +1,6 @@
 ![](https://img.shields.io/github/stars/:org)
 ![](https://img.shields.io/github/forks/:user/:repo?label=Fork)
-![](https://img.shields.io/github/commit-activity/:interval/:user/:repo)
+![](https://img.shields.io/github/commit-activity/:interval/:GDSC2022/:SC2023-cafeDX)
 
 # Solution Challenge 2023
 This repository is for [Solution Challenge 2023](https://developers.google.com/community/gdsc-solution-challenge?hl=ja) held by Google Developers
