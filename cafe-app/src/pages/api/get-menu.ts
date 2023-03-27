@@ -12,6 +12,7 @@ export type MenuProps = {
     category: string;
     nutrition: Nutrition;
     price: number;
+    starStorage: number[];
     stars? : number | null;
     imageURL?: string | null;
 }

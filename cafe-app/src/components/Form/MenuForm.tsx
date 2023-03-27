@@ -36,6 +36,8 @@ const MenuForm = (props: any) => {
             name: data.name,
             category: data.category,
             price: data.price,
+            starStorage: [],
+            stars: 0,
             nutrition: {kcal: data.kcal, P: data.P, F: data.F, C: data.C},
             imageURL: data.imageURL,
         }
@@ -57,7 +59,7 @@ const MenuForm = (props: any) => {
 
     return(
         <div>
-            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}></ModalImageGrid>
+            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}/>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="p-4 overflow-auto">
