@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { db, storage } from '../../firebase/client';
-import { getMenu, MenuProps } from '../pages/api/get-menu';
+import { db } from '../../../firebase/client';
+import { getMenu, MenuProps } from '../../pages/api/get-menu';
 import Image from 'next/image';
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
@@ -44,7 +44,7 @@ const MenuCard = (props: any) => {
                 </ul>)
                 : (<div>No Props</div>)}
         </div>
-        {menus && menus.imageURL ?  <Image src={menus.imageURL as string} width={64} height={64} alt=""/> : <></>}
+        {menus && menus.imageURL ?  <img src={menus.imageURL as string} width={64} height={64} alt=""/> : <></>}
 
         </div>
 

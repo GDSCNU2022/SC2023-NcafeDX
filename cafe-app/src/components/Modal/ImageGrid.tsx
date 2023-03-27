@@ -29,7 +29,7 @@ const ImageGrid = (props: Props) => {
                         focus:ring-offset-2 w-32"
                     onClick={() => handlerOnClick(url)} key={i}>
                 <div className="relative aspect-square">
-                <Image src={url} fill object-fit="contain" alt="画像URLがありません"
+                <img src={url} object-fit="contain" alt="画像URLがありません"
                 className="bg-slate-600 rounded-md shadow-md bg-clip-padding"/>
                 </div>
             </button>
