@@ -1,7 +1,7 @@
 import { updateDoc, doc, addDoc, where, collection,
     query, getDocs, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
 
-type Nutrition = {
+export type Nutrition = {
     kcal: number;
     P: number;
     F: number;

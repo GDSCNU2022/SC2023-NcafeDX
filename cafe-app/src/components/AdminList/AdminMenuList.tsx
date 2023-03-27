@@ -126,14 +126,9 @@ const AdminMenuList = (props: Props) => {
               <thead
                 className="border-b  bg-neutral-200 font-medium">
                 <tr>
-                  <th scope="col" className="px-6 py-4">名前</th>
-                  <th scope="col" className="px-6 py-4">価格</th>
-                  <th scope="col" className="px-6 py-4">種類</th>
-                  <th scope="col" className="px-6 py-4">kcal</th>
-                  <th scope="col" className="px-6 py-4">P</th>
-                  <th scope="col" className="px-6 py-4">F</th>
-                  <th scope="col" className="px-6 py-4">C</th>
-                  <th scope="col" className="px-6 py-4">登録画像</th>
+                  {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C', '登録画像'].map((inp: string) => (
+                  <th scope="col" className="px-6 py-4">{inp}</th>
+                  ))}
                   <th scope="col" className="px-6 py-4 flex justify-center">
                     <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
