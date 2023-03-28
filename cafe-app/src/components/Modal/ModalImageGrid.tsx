@@ -5,7 +5,8 @@ import { is } from 'date-fns/locale';
 
 type Props = {
     parentHandlerSubmit?: Function;
-    text: string;
+    src?: string;
+    text?: string;
     index?: number;
 }
 const customStyles = {
@@ -28,12 +29,14 @@ setAppElement('#__next');
 const ModalImageGrid =  (props: Props) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
-    const handlerSubmit = (url: string, i?: number) => {
+    const handlerSubmit = (url: string) => {
         console.log("called handlerSubmit in ModalImageGrid");
-        if(props.parentHandlerSubmit && i){
+        console.log(props.index);
+        // 0<number>が undefined扱いになるので注意
+        if(props.parentHandlerSubmit && (props.index !== undefined)){
             console.log(url);
-            console.log(i);
-            props.parentHandlerSubmit(url, i);
+            console.log(props.index);
+            props.parentHandlerSubmit(url, props.index);
         } else if (props.parentHandlerSubmit) {
             props.parentHandlerSubmit(url);
         }
@@ -54,9 +57,13 @@ const ModalImageGrid =  (props: Props) => {
 
     return (
 <>
-    <button onClick={openModal} className="p-2 justify-start m-4 bg-slate-600 align-middle
-    h-10 shadow-md rounded-md text-white">
-        {props.text}</button>
+    {props.src ? <button onClick={openModal} className="outline w-16 bg-neutral-400 outline-1 hover:outline-2 hover:shadow-md  hover:outline-slate-600 hover:outline-offset-none">
+        <div className="relative aspect-square flex justify-center">
+        <img src={props.src} className="p-0.5 object-cover"/>
+        </div></button> : <button onClick={openModal} className={props.index !== undefined ?
+        "px-1 h-6 text-center bg-slate-600 align-middle shadow-md rounded-md text-white m-1" 
+        : "p-2 justify-start bg-slate-600 align-middle h-10 shadow-md rounded-md text-white m-4"}>
+        {props.text}</button>}
         <Modal
             isOpen={isOpenModal}
             onAfterOpen={afterOpenModal}

@@ -1,7 +1,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithName, updateMenu } from '../../pages/api/get-menu';
+import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithID, updateMenu } from '../../pages/api/get-menu';
 import { db } from '../../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
@@ -35,7 +35,7 @@ const AdminMenuList = (props: Props) => {
         const docData = doc.data();
         const newObj = {
           ...docData,
-          id: doc.id,
+          id: doc.id
         };
         setList((list) => {
           return [...list, newObj];
@@ -44,10 +44,10 @@ const AdminMenuList = (props: Props) => {
 
     // フォームから追加した直後の要素はID不明なので名前で管理
     const handleDelete = () => {
-      checkedData?.forEach((name) => {
+      checkedData?.forEach((id) => {
         //　nameフィールドでトリガー
-        deleteMenuWithName(db, props.restaurant, name);
-        setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.name !== name));
+        deleteMenuWithID(db, props.restaurant, id);
+        setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.id !== id));
         reset();
       })
       console.log(inputCheckedList);
@@ -65,63 +65,65 @@ const AdminMenuList = (props: Props) => {
 
     const handleImageEdit = (url: string, i: number) => {
       setList((d: any) => {
-        const obj = list[i];
-        obj.imageURL = url;
-        updateMenu(db, `${props.restaurant}/${obj.name}`, obj);
-        reset
+        const obj = d[i];
+        const newObj = {
+          ...obj,
+          imageURL: url
+        }
+        const newList = [...d];
+        newList[i] = newObj;
+        console.log('here');
+        console.log(i);
+        console.log(obj);
+        updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+        reset();
         console.log(`Updated URL: ${obj.imageURL}`);
-        return [...list];
+        return newList;
       })
 
     };
 
     // stateはイベント処理が終わるまで更新されないことに注意
     const onChangeInput = (e: any, id: number) => {
+      const targetId = list[id].id;
       const targetName = list[id].name;
       const {name, value} = e.target;
+      console.log(id);
+      console.log(targetId);
+      console.log(targetName);
       console.log(`name:${name}`);
       const field = name.split('-')[0];
 
-      setList((d: any) => {
-        console.log("call setList");
-        console.log(d);
-        const newList = [...d];
-        newList.map((obj: any) => {
-        if(targetName === obj.name && field) {
+      setList((l: any) => {
+        const newList = [...l];
+        newList.map((obj: any , i: number) => {
+        if(targetId && (targetId === obj.id) && field) {
           if(field === "kcal"|| field === "P"|| field === "F"|| field === "C"){
             console.log("Edit Nutrition");
-            obj["nutrition"][field] = value;
-            
+            const newObj = {
+              ...obj,
+              nutrition: {...obj.nutrition, [field]: value}
+            };
+            updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
           } else {
-            obj[field] = value;
-          
-          }
-          console.log(obj);
+            console.log(`${obj[field]} => ${value}`);
+            const newObj = {
+              ...obj,
+              [field]: value
+            };
+            updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+          } 
         }
       }
         )
         return newList;
           })
-
-      // 必ずstateを書き換えた後に実行するよう（objが更新されないため）
-      const update = () => {
-        console.log("call update");
-        list.map((obj) => {
-          if(obj.name === targetName){
-            updateMenu(db, `${props.restaurant}/${obj.name}`, obj);
-            console.log(`${name}: ${value}`);
-            // [var]: value 鉤括弧大事
-            reset({[name]: value});
-          }
-        })
-      }
-
-      update();
       
     }
     useEffect(() => {
         // strictModeのせいでマウント時に2回レンダリングされる
         getAllMenus(db, updateList, props.restaurant)
+
         return () => {
           console.log("unmounting...");
           setList((list) => [])};
@@ -129,21 +131,21 @@ const AdminMenuList = (props: Props) => {
     }, [])
     return (
 <div className="">
-<div className="overflow-auto h-128 max-h-128 my-12 m-4">
+<div className="overflow-auto h-128 max-h-128 m-4">
   <div className="">
     <div className="flex flex-col">
       <div className="sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
-            <table className="min-w-full text-left text-sm font-light">
+            <table className="table-auto min-w-full text-left text-sm font-light">
               <thead
                 className="border-b  bg-neutral-200 font-medium">
                 <tr>
                   {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C', '登録画像'].map((inp: string) => (
-                  <th scope="col" className="px-6 py-4">{inp}</th>
+                  <th scope="col" className="px-4 py-2">{inp}</th>
                   ))}
-                  <th scope="col" className="px-6 py-4 flex justify-center">
-                    <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+                  <th scope="col" className="px-4 py-2 flex justify-center">
+                    <button onClick={handleDelete} className="py-1 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
         focus:ring-offset-2">Delete</button>
                   </th>
@@ -151,9 +153,9 @@ const AdminMenuList = (props: Props) => {
               </thead>
               <tbody>
                 {
-                list.map((data: any, i) => 
+                list.map((data: any, i: number) => 
                     (<tr className="border-b bg-neutral-100" key={i}>
-                      <td scope="col" className="px-6 py-4 truncate">
+                      <td scope="col" className="px-4 py-2 truncate">
                         <input
                           type="text"
                           {...register(`name-${i}`, {
@@ -163,7 +165,7 @@ const AdminMenuList = (props: Props) => {
                           )}
                           className='bg-neutral-200'/>
                           </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="number"
@@ -173,7 +175,7 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                         </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <select
                           {...register(`category-${i}`, {
                           onChange: (e: any) => onChangeInput(e, i),
@@ -186,7 +188,7 @@ const AdminMenuList = (props: Props) => {
                         ))}
                           </select>
                       </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="number"
@@ -197,7 +199,7 @@ const AdminMenuList = (props: Props) => {
                           )}
                           />
                       </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="number"
@@ -207,7 +209,7 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="number"
@@ -217,7 +219,7 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="number"
@@ -227,19 +229,12 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
-                      <td scope="col" className="px-6 py-4 inline-flex">
-                        <div className="m-2 truncate w-16 bg-neutral-200">
-                        <span>{
-                        data.imageURL ? 
-                          <img src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-neutral-300"/>
-                          : <p>画像なし</p>
-                          }</span>
-                        </div>
-                          <ModalImageGrid parentHandlerSubmit={handleImageEdit} text="Edit" index={i}/>
+                      <td scope="col" className="px-4 py-2 inline-grid">
+                          <ModalImageGrid parentHandlerSubmit={handleImageEdit} src={data.imageURL} index={i}/>
 
                         </td>
                       <td scope="col" className="px-6 py-4">
-                      <InputCheckbox props={[setCheckedData, data.name, inputCheckedList, setInputCheckedList, i]}/>
+                      <InputCheckbox props={[setCheckedData, data.id, inputCheckedList, setInputCheckedList, i]}/>
             
                         </td>
                       </tr>

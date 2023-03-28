@@ -1,5 +1,6 @@
 import { updateDoc, doc, addDoc, where, collection,
     query, getDocs, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
+import shortid from 'shortid';
 
 export type Nutrition = {
     kcal: number;
@@ -90,33 +91,24 @@ export const newMenu = async (db: any, targetRestaurant: string, saveMenu: MenuP
     /* Usage
     newMenu(db, restaurantName, menuObject)
     */
-    const collRef = collection(db, targetRestaurant);
-    await addDoc(collRef, saveMenu);
-    console.log(`Document uploaded at ${collRef.id}`);
+    const initId = shortid.generate();
+    const docRef = doc(db, targetRestaurant, initId);
+    const saveObj = {
+        ...saveMenu,
+        id: initId,
+    }
+    await setDoc(docRef, saveObj);
 }
 
-export const updateMenu = async(db: any, targetPath: string, newMenuProps: MenuProps) => {
+export const updateMenu = (db: any, targetPath: string, newMenuProps: MenuProps) => {
     /* Usage
-    updateMenu(db, 'DaVinch/shiru-nashi-tantan', {stars: 4.5});
+    updateMenu(db, 'DaVinch/docId', {stars: 4.5});
     */
     
     const path: string = targetPath;
     const pathArr: string[] = path.split('/');
-    const lenArr: number = pathArr.length;
-    const collRef = collection(db, pathArr[0]);
-    const q = query(collRef, where('name', '==', pathArr[1]));
-    const docSnap = await getDocs(q);
-
-    // docSnap は要素1, 条件検索のためqueryを使用
-    docSnap.forEach((d) => {
-        if (d.exists()) {
-            const docRef = doc(db, pathArr[0], d.id);
-            updateDoc(docRef, newMenuProps);
-            console.log("Document data:", d.data());
-        } else {
-            console.log("No such document.");
-        } 
-    })
+    const docRef = doc(db, pathArr[0], pathArr[1]);
+    updateDoc(docRef, newMenuProps);
 }
 
 export const deleteMenuWithID = (db: any, targetRestaurant: string, docID: any) => {
