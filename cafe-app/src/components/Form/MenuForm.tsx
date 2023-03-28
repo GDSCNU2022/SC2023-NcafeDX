@@ -30,8 +30,8 @@ const MenuForm = (props: any) => {
     const [imageUrl, setImageUrl] = useState('');
 
     const setList = props.parentProps;
-    const onSubmit = (data: any) => {
-        if(!data.imageURL){data.imageURL = '';}
+    const onSubmit = async (data: any) => {
+        if(data.imageURL){
         const newData: MenuProps = {
             name: data.name,
             category: data.category,
@@ -44,22 +44,25 @@ const MenuForm = (props: any) => {
         console.log(`newData: ${newData}`);
         console.log(newData);
         // firebaseへ入力データをアップロード
-        newMenu(db, props.props, newData);
+        await newMenu(db, props.props, newData);
         setList((list: Array<any>) => [...list, newData]);
         reset();
         console.log("reset imageUrl");
+    } else {
+        console.log("Url is undefined!");
+    }
         
     };
 
     const gridHandlerSubmit = (url: string) => {
         console.log("in gridHandler")
         console.log(url);
-        setValue('imageURL', url);
+        if(url) setValue('imageURL', url);
     }
 
     return(
         <div>
-            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit}/>
+            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit} text="Register Image"/>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="p-4 overflow-auto">

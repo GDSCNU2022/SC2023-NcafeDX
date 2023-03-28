@@ -7,7 +7,7 @@ import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import MenuForm, {gender} from '../Form/MenuForm';
 import Image from 'next/image';
-
+import ModalImageGrid from '../Modal/ModalImageGrid';
 
 type Props = {
     restaurant: RestaurantType;
@@ -62,6 +62,19 @@ const AdminMenuList = (props: Props) => {
       if(category === "noodle") return "麺類";
       if(category === "curry") return "カレー";
     }
+
+    const handleImageEdit = (url: string, i: number) => {
+      setList((d: any) => {
+        const obj = list[i];
+        obj.imageURL = url;
+        updateMenu(db, `${props.restaurant}/${obj.name}`, obj);
+        reset
+        console.log(`Updated URL: ${obj.imageURL}`);
+        return [...list];
+      })
+
+    };
+
     // stateはイベント処理が終わるまで更新されないことに注意
     const onChangeInput = (e: any, id: number) => {
       const targetName = list[id].name;
@@ -214,14 +227,17 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-6 py-4 inline-flex">
                         <div className="m-2 truncate w-16 bg-neutral-200">
                         <span>{
                         data.imageURL ? 
                           <img src={data.imageURL} width={64} height={64} alt="画像登録なし" className=" bg-neutral-300"/>
                           : <p>画像なし</p>
                           }</span>
-                        </div></td>
+                        </div>
+                          <ModalImageGrid parentHandlerSubmit={handleImageEdit} text="Edit" index={i}/>
+
+                        </td>
                       <td scope="col" className="px-6 py-4">
                       <InputCheckbox props={[setCheckedData, data.name, inputCheckedList, setInputCheckedList, i]}/>
             
