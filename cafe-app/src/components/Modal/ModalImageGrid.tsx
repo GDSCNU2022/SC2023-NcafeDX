@@ -5,6 +5,8 @@ import { is } from 'date-fns/locale';
 
 type Props = {
     parentHandlerSubmit?: Function;
+    text: string;
+    index?: number;
 }
 const customStyles = {
     overlay: {
@@ -26,9 +28,13 @@ setAppElement('#__next');
 const ModalImageGrid =  (props: Props) => {
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
-    const handlerSubmit = (url: string) => {
+    const handlerSubmit = (url: string, i?: number) => {
         console.log("called handlerSubmit in ModalImageGrid");
-        if(props.parentHandlerSubmit){
+        if(props.parentHandlerSubmit && i){
+            console.log(url);
+            console.log(i);
+            props.parentHandlerSubmit(url, i);
+        } else if (props.parentHandlerSubmit) {
             props.parentHandlerSubmit(url);
         }
     };
@@ -50,7 +56,7 @@ const ModalImageGrid =  (props: Props) => {
 <>
     <button onClick={openModal} className="p-2 justify-start m-4 bg-slate-600 align-middle
     h-10 shadow-md rounded-md text-white">
-        Register Menu Images</button>
+        {props.text}</button>
         <Modal
             isOpen={isOpenModal}
             onAfterOpen={afterOpenModal}
