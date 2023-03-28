@@ -31,6 +31,7 @@ const MenuForm = (props: any) => {
 
     const setList = props.parentProps;
     const onSubmit = async (data: any) => {
+        console.log(data);
         if(data.imageURL){
         const newData: MenuProps = {
             name: data.name,
