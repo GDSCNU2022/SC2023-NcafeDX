@@ -66,10 +66,10 @@ const AdminNewsList = (props: NewsProps) => {
 
     return (
 <div>
-<div className="overflow-scroll h-128">
-  <div className="p-12">
-    <div className="flex flex-col">
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+<div className="overflow-auto h-128 max-h-128 m-4">
+  <div className="">
+    <div className="flex flex-col sm:min-w-full md:min-w-full">
+      <div className="sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
             <table className="min-w-full text-left text-sm font-light">
@@ -86,7 +86,7 @@ const AdminNewsList = (props: NewsProps) => {
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="overflow-hidden">
                 {list ? 
                 list.map((data: Data, i) => 
                     {
@@ -94,7 +94,7 @@ const AdminNewsList = (props: NewsProps) => {
                     <tr className="border-b bg-neutral-100 dark:border-neutral-500" key={i}>
                       <td scope="col" className="px-6 py-4 truncate">{data.title}</td>
                       <td scope="col" className="px-6 py-4 truncate">{data.content}</td>
-                      <td scope="col" className="px-6 py-4">{data.date ? formatDate(data.date.toDate()) : ""}</td>
+                      <td scope="col" className="px-6 py-4 truncate">{data.date ? formatDate(data.date.toDate()) : ""}</td>
                       <td scope="col" className="px-6 py-4 flex justify-center">
                       <div>
                         <ModalNewsWindow restaurant={props.props} data={data} parentHandlerSubmit={setList}/>
@@ -106,7 +106,8 @@ const AdminNewsList = (props: NewsProps) => {
                       </tr>
                     );
                     })
-                  : <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700" >お知らせはありません</tr>}
+                  : <tr className="border-b bg-neutral-100 
+                  dark:border-neutral-500 dark:bg-neutral-700" >お知らせはありません</tr>}
               </tbody>
             </table>
           </div>

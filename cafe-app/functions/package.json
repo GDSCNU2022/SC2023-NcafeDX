@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
@@ -12,7 +13,7 @@
   "engines": {
     "node": "16"
   },
-  "main": "lib/index.js",
+  "main": "src/index.ts",
   "dependencies": {
     "@google-cloud/storage": "^6.9.4",
     "firebase-admin": "^11.5.0",
