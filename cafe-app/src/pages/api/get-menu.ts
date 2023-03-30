@@ -1,6 +1,13 @@
 import { updateDoc, doc, addDoc, where, collection,
     query, getDocs, setDoc, onSnapshot, deleteDoc } from 'firebase/firestore';
 
+export const categories = [
+    { nameid: "teishoku", href: "/teishoku",name: "定食" },
+    { nameid: "don"     , href: "/don"     ,name: "丼" },
+    { nameid: "noodle"  , href: "/noodle"  ,name: "麺類" },
+    { nameid: "curry"   , href: "/curry"   ,name: "カレー" },
+  ];
+  
 export type Nutrition = {
     kcal: number;
     P: number;

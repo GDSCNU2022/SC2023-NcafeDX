@@ -1,23 +1,30 @@
 import Link from "next/link";
-import CreateQR from '../components/Examples/CreateQR';
-import ModalStarWindow from '../components/Modal/ModalStarWindow';
+import CreateQR from "../components/Examples/CreateQR";
+import ModalStarWindow from "../components/Modal/ModalStarWindow";
 import PFCRadarChart from "@/components/Examples/PFCRaderChart";
-import MenuCard from '@/components/Examples/MenuCard';
+import MenuCard from "@/components/Examples/MenuCard";
 
 const AdminTop = () => {
-    return (
-        <div className='flex justify-center'>
-            <div className="grid grid-cols-1">
-                <p className="text-2xl text-center">管理者用ページ</p>
-                <Link href="/AdminMenuForm" className="m-2 text-neutral-800 hover:text-blue-500
-                flex justify-center text-xl">Menu Form</Link>
-                <Link href="/AdminNewsForm" className="m-2 text-neutral-800 hover:text-blue-500
-                flex justify-center text-xl">News Form</Link>
-                <CreateQR text='https://gdsc.community.dev/nihon-university/'/>
-                <MenuCard path='DaVinch/唐揚げ定食'/>
-            </div>
-        </div>
-
-    )
-}
+  return (
+    <div className="flex flex-col h-80 bg-gray-300">
+      <p className="text-2xl text-center pb-10">管理者用メニュー</p>
+      <div className="grid grid-cols-2">
+        <Link
+          href="/AdminMenuForm"
+          className="py-20 m-2 text-neutral-800 hover:text-blue-500
+                flex justify-center text-xl border border-gray-900 rounded"
+        >
+          メニューの編集
+        </Link>
+        <Link
+          href="/AdminNewsForm"
+          className="py-20 m-2 text-neutral-800 hover:text-blue-500
+                flex justify-center text-xl  border border-gray-900 rounded"
+        >
+          お知らせの編集
+        </Link>
+      </div>
+    </div>
+  );
+};
 export default AdminTop;

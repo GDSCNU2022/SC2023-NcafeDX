@@ -1,12 +1,12 @@
 import { useState } from "react";
-import ModalNewsPanel from "./ModalNewsPanel";
+import ModalUserNewsPanel from "./ModalUserNewsPanel";
 import Modal from "react-modal";
 import handler from "@/pages/api/hello";
-import SubmitStarRating from "./SubmitStarRating";
 
 type Props = {
   restaurant: string;
-  menuName: string;
+  data: any;
+  parentHandlerSubmit: Function;
 };
 
 const customStyles = {
@@ -20,15 +20,12 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    background: "white",
+    background: "rgba(50,50,50, 0.0)",
+    border: "none",
   },
 };
 
-const ModalStarWindow = (props: Props) => {
-  /*
-    Usage:
-    <ModalStarWindow restaurant={"RestaurantName"} menuName={TargetMenuName}>
-    */
+const ModalUserNewsWindow = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const openModal = () => {
@@ -48,28 +45,27 @@ const ModalStarWindow = (props: Props) => {
     <>
       <button
         onClick={openModal}
-        className="px-2 bg-slate-600 align-middle
-        h-6 shadow-md rounded-md text-white"
+        className="mt-4 px-1 text-xs bg-slate-300 align-middle
+        h-6 shadow-md rounded-md text-gray-900"
       >
-        Review
+        詳細
       </button>
       <Modal
         isOpen={isOpenModal}
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        ariaHideApp={false}
-        contentLabel="News Form"
       >
-        <div className="w-40">
-          <SubmitStarRating
-            parentCloseHandler={closeModal}
+        <div className="bg-white w-96 shadow-lg rounded-lg">
+          <ModalUserNewsPanel
+            parentHandlerSubmit={props.parentHandlerSubmit}
             restaurant={props.restaurant}
-            menuName={props.menuName}
+            data={props.data}
+            close={closeModal}
           />
         </div>
       </Modal>
     </>
   );
 };
-export default ModalStarWindow;
+export default ModalUserNewsWindow;
