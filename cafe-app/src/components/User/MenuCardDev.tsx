@@ -109,6 +109,7 @@ const MenuCardDev = (props: Props) => {
                                           <ModalMenuInfo
                                             restaurant={props.restaurant}
                                             name={menu.name}
+                                            id={menu.id}
                                           />
                                         </div>
                                       </a>

@@ -15,6 +15,7 @@ type Props = {
 const NutritionCard = (props: Props) => {
   const initMenu = {
     name: "",
+    id: "",
     price: 999,
     category: "don",
     stars: 0,

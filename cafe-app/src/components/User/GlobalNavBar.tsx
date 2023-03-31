@@ -3,7 +3,10 @@ import { auth, provider } from "../../../firebase/client";
 import { signInWithPopup } from "firebase/auth";
 import Link from "next/link";
 import AdminTop from "@/pages/AdminTop";
-const allowedEmails = ["********"];
+
+const admin = JSON.parse(process.env.NEXT_PUBLIC_ADMIN as string) 
+
+const allowedEmails = [admin.email];
 
 
 function GlobalNavBar() {
@@ -14,11 +17,16 @@ function GlobalNavBar() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      if (user && user.email && allowedEmails.includes(user.email)) {
+      if (user && user.email 
+        // Everyone can login as an admin for Solution Challenge 2023
+        /* &&  allowedEmails.includes(user.email) */
+        ) {
         setUser(user);
         setMessage("認証しました");
         setIsAdmin(() => true);
-      } else if (user && user.email && !allowedEmails.includes(user.email)) {
+      } else if (user && user.email 
+        /* && !allowedEmails.includes(user.email) */
+        ) {
         setUser(undefined);
         setMessage("認証できません");
         setIsAdmin(() => false);
@@ -105,7 +113,7 @@ function GlobalNavBar() {
                       signIn();
                     }}
                   >
-                    管理者ログイン
+                    Admin Login
                   </button>
                 </li>
               </ul>
@@ -114,10 +122,10 @@ function GlobalNavBar() {
 
           <ul className="DESKTOP-MENU hidden space-x-8 lg:flex ">
             <li>
-              <Link href="/#news">お知らせ</Link>
+              <Link href="/#news">News</Link>
             </li>
             <li>
-              <Link href="/#infomation">食堂情報</Link>
+              <Link href="/#infomation">Restaurant Info</Link>
             </li>
             <li className="flex text-xs top-0 justify-center ">
               <button
@@ -126,7 +134,7 @@ function GlobalNavBar() {
                   signIn();
                 }}
               >
-                管理者ログイン
+                Admin Login
               </button>
             </li>
           </ul>
@@ -156,9 +164,11 @@ function GlobalNavBar() {
           <AdminTop />
           <button
             className="flex -mt-10 mx-auto text-2xl text-center pb-10  hover:text-blue-500"
-            onClick={() => auth.signOut()}
+            onClick={() => {
+              auth.signOut();
+            }}
           >
-            ログアウト
+            Log out
           </button>
         </div>
       ) : null}

@@ -17,6 +17,7 @@ export type Nutrition = {
 }
 export type MenuProps = {
     name: string;
+    id: string;
     category: string;
     nutrition: Nutrition;
     price: number;

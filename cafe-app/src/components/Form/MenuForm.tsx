@@ -35,6 +35,7 @@ const MenuForm = (props: any) => {
         if(data.imageURL){
         const newData: MenuProps = {
             name: data.name,
+            id: data.id,
             category: data.category,
             price: data.price,
             starStorage: [],

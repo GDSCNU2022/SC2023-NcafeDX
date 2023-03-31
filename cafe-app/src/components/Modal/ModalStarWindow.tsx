@@ -7,6 +7,7 @@ import SubmitStarRating from "./SubmitStarRating";
 type Props = {
   restaurant: string;
   menuName: string;
+  id: string;
 };
 
 const customStyles = {
@@ -66,6 +67,7 @@ const ModalStarWindow = (props: Props) => {
             parentCloseHandler={closeModal}
             restaurant={props.restaurant}
             menuName={props.menuName}
+            id={props.id}
           />
         </div>
       </Modal>

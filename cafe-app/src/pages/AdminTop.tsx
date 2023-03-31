@@ -7,21 +7,21 @@ import MenuCard from "@/components/Examples/MenuCard";
 const AdminTop = () => {
   return (
     <div className="flex flex-col h-80 bg-gray-300">
-      <p className="text-2xl text-center pb-10">管理者用メニュー</p>
+      <p className="text-2xl text-center pb-10">Admin Form</p>
       <div className="grid grid-cols-2">
         <Link
           href="/AdminMenuForm"
           className="py-20 m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl border border-gray-900 rounded"
         >
-          メニューの編集
+          メニューの編集(Edit Menus)
         </Link>
         <Link
           href="/AdminNewsForm"
           className="py-20 m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl  border border-gray-900 rounded"
         >
-          お知らせの編集
+          お知らせの編集(Edit News)
         </Link>
       </div>
     </div>
