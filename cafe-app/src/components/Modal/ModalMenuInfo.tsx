@@ -9,6 +9,7 @@ import NutritionCard from "../User/NutritionCard";
 type Props = {
   restaurant: string;
   name: string;
+  id: string;
 };
 
 function cafecolor(prop: string) {
@@ -40,6 +41,7 @@ const customStyles = {
 const ModalMenuInfo = (props: Props) => {
   const initMenu = {
     name: "",
+    id: "",
     price: 999,
     category: "don",
     stars: 0,
@@ -173,6 +175,7 @@ const ModalMenuInfo = (props: Props) => {
                       <ModalStarWindow
                         restaurant={props.restaurant}
                         menuName={props.name}
+                        id={props.id}
                       />
                     </div>
                   </div>

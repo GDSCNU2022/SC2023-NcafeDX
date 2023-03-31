@@ -16,6 +16,7 @@ const MenuCard = (props: Props) => {
   const initMenu = {
     name: "",
     price: 999,
+    id: "",
     category: "don",
     stars: 0,
     starStorage: [0],
@@ -52,7 +53,7 @@ const MenuCard = (props: Props) => {
           )}
 
           <MenuStarRatings ratings={menus.stars ? menus.stars : 0} />
-          <ModalStarWindow restaurant="DaVinch" menuName={menus.name} />
+          <ModalStarWindow restaurant="DaVinch" menuName={menus.name} id={menus.id} />
         </div>
 
         <div className="">

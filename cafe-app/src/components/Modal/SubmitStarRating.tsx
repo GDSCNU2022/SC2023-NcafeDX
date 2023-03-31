@@ -8,20 +8,26 @@ type Props = {
     parentCloseHandler: Function;
     restaurant: string;
     menuName: string;
+    id: string;
 }
 const SubmitStarRating = (props: Props) => {
     const ratingSubmit = (newRating: number) => {
         console.log(newRating);
         const path = `${props.restaurant}/${props.menuName}`;
+        console.log(`StarRating got ${props.restaurant}/${props.menuName}`);
         getMenu(db, path).then((menu: any) => {
             const newObj = {...menu};
             // calc avg of star ratings.
             if(newObj.starStorage.length !== 0) {newObj.starStorage.push(newRating);};
             var avgRating: number = 0;
             newObj.starStorage.map((rating: number) => avgRating += rating);
-            newObj.stars = avgRating / newObj.starStorage.length;
-
-            updateMenu(db, path, newObj);
+            console.log(`${avgRating}/ ${newObj.starStorage.length}`);
+            newObj.stars = avgRating === 0 ? newRating : avgRating / newObj.starStorage.length;
+            newObj.starStorage.push(newRating);
+            console.log(newObj);
+            console.log(path);
+      
+            updateMenu(db, `${props.restaurant}/${props.id}`, newObj);
             if(props.parentCloseHandler) props.parentCloseHandler();
         }
         )
