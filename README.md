@@ -15,6 +15,8 @@ or RUN This command if would like to access on local at under the **_cafe-app_**
 npm run dev
 ```
 
+Everyone can login as an administrator for Solution Challenge 2023 now, however, we are going to close this login page after the competition.
+
 ## How to Contribute the Numbers of SDGs
 
 ### 3: GOOD HEALTH AND WELL-BEING
