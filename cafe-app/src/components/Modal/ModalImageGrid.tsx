@@ -1,33 +1,37 @@
-import { useState } from 'react';
-import Panel from './ModalImagePanel';
-import Modal, { setAppElement } from 'react-modal';
-import { is } from 'date-fns/locale';
+import { useState } from "react";
+import { db } from "../../../firebase/client";
+import Panel from "./ModalImagePanel";
+import Modal, { setAppElement } from "react-modal";
+import { is } from "date-fns/locale";
 
 type Props = {
+
     parentHandlerSubmit?: Function;
     src?: string;
     text?: string;
     index?: number;
 }
+
 const customStyles = {
-    overlay: {
-        backgroundColor:'rgba(50,50,50, 0.8)'
-    },
-    content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    background: 'gray',
-    },
+  overlay: {
+    backgroundColor: "rgba(50,50,50, 0.8)",
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    background: "gray",
+  },
 };
 
-setAppElement('#__next');
+setAppElement("#__next");
 
-const ModalImageGrid =  (props: Props) => {
-    const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+const ModalImageGrid = (props: Props) => {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
 
     const handlerSubmit = (url: string) => {
         console.log("called handlerSubmit in ModalImageGrid");
@@ -42,18 +46,19 @@ const ModalImageGrid =  (props: Props) => {
         }
     };
 
-    const openModal = () => {
-        setIsOpenModal(() => true);
-    };
 
-    const afterOpenModal = () => {
-        console.log(isOpenModal);
+  const openModal = () => {
+    setIsOpenModal(() => true);
+  };
+
+  const afterOpenModal = () => {
+    console.log(isOpenModal);
     // references are now sync'd and can be accessed.
-    };
+  };
 
-    const closeModal = () => {
-        setIsOpenModal(() => false);
-    };
+  const closeModal = () => {
+    setIsOpenModal(() => false);
+  };
 
     return (
 <>

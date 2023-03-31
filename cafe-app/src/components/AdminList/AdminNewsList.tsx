@@ -1,69 +1,74 @@
-
-import { useEffect, useState } from 'react';
-import { getAllNews, listenNews, deleteNewsWithDate, newNews } from '../../pages/api/get-news';
-import { db } from '../../../firebase/client';
-import { database } from 'firebase-admin';
-import InputCheckbox from './InputCheckbox';
-import { format } from 'date-fns/fp';
-import { Timestamp } from 'firebase/firestore';
-import NewsForm from '../Form/NewsForm';
-import ModalNewsWindow from '../Modal/ModalNewsWindow';
+import { useEffect, useState } from "react";
+import {
+  getAllNews,
+  listenNews,
+  deleteNewsWithDate,
+  newNews,
+} from "../../pages/api/get-news";
+import { db } from "../../../firebase/client";
+import { database } from "firebase-admin";
+import InputCheckbox from "./InputCheckbox";
+import { format } from "date-fns/fp";
+import { Timestamp } from "firebase/firestore";
+import NewsForm from "../Form/NewsForm";
+import ModalNewsWindow from "../Modal/ModalNewsWindow";
 
 type NewsProps = {
   props: "DaVinch_News" | "Pascal_News" | "Faraday_News";
-}
+};
 
 type Data = {
   title: string;
   content: string;
   date: Timestamp;
   id: any;
-}
+};
 
 const AdminNewsList = (props: NewsProps) => {
-    // get init data
-    const voidFunc = () => {};
+  // get init data
+  const voidFunc = () => {};
 
-    const [list, setList] = useState<Array<any>>([]);
-    const [checkedData, setCheckedData] = useState<Array<any>>([]);
-    const [inputChecked, setInputChecked] = useState(false);
-    const [inputCheckedList, setInputCheckedList] = useState<boolean[]>([]);
+  const [list, setList] = useState<Array<any>>([]);
+  const [checkedData, setCheckedData] = useState<Array<any>>([]);
+  const [inputChecked, setInputChecked] = useState(false);
+  const [inputCheckedList, setInputCheckedList] = useState<boolean[]>([]);
 
-    let newList: any[] = [];
-    const updateList = (doc: any) => {
-      const docData = doc.data();
-      const newObj = {
-        ...docData,
-        id: doc.id
-      }
-        setList((list) => [...list, newObj]);
+  let newList: any[] = [];
+  const updateList = (doc: any) => {
+    const docData = doc.data();
+    const newObj = {
+      ...docData,
+      id: doc.id,
     };
-    const formatDate = format("yyyy年MM月dd日 hh時mm分ss秒");
+    setList((list) => [...list, newObj]);
+  };
+  const formatDate = format("yyyy年MM月dd日 hh時mm分ss秒");
 
-    const handleDelete = () => {
-      checkedData?.forEach((date) => {
-        // dateフィールドでトリガー
-        deleteNewsWithDate(db, props.props, date);
-        setList((prevState: any[]) => prevState.filter((obj: Data) => obj.date !== date));
-      });
-      inputCheckedList?.forEach((b) => {
-        setInputCheckedList((list: Array<boolean>) => list.filter((bool: boolean) => !bool));
-      })
-    }
+  const handleDelete = () => {
+    checkedData?.forEach((date) => {
+      // dateフィールドでトリガー
+      deleteNewsWithDate(db, props.props, date);
+      setList((prevState: any[]) =>
+        prevState.filter((obj: Data) => obj.date !== date)
+      );
+    });
+    inputCheckedList?.forEach((b) => {
+      setInputCheckedList((list: Array<boolean>) =>
+        list.filter((bool: boolean) => !bool)
+      );
+    });
+  };
 
+  useEffect(() => {
+    // strictModeのせいでマウント時に2回レンダリングされる
+    newList = [];
+    getAllNews(db, updateList, props.props);
 
-    useEffect(() => {
-        // strictModeのせいでマウント時に2回レンダリングされる
-        newList = [];
-        getAllNews(db, updateList, props.props)
-
-        return () => {
-          console.log("unmounting...");
-          setList(() => []);
-        };
-
-    }, [])
-
+    return () => {
+      console.log("unmounting...");
+      setList(() => []);
+    };
+  }, []);
     return (
 <div>
 <div className="overflow-auto h-128 max-h-128 m-4">
@@ -113,13 +118,9 @@ const AdminNewsList = (props: NewsProps) => {
           </div>
         </div>
       </div>
+      <NewsForm props={props.props} parentProps={setList}></NewsForm>
     </div>
-  </div>
-
-</div>
-  <NewsForm props={props.props} parentProps={setList}></NewsForm>
-</div>
-)
-}
+  );
+};
 
 export default AdminNewsList;
