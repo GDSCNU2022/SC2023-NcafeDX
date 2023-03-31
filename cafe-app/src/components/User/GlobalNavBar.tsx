@@ -5,24 +5,25 @@ import Link from "next/link";
 import AdminTop from "@/pages/AdminTop";
 const allowedEmails = ["********"];
 
+
 function GlobalNavBar() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const [message, setMessage] = useState("");
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user && allowedEmails.includes(user.email)) {
+    const unsubscribe = auth.onAuthStateChanged((user: any) => {
+      if (user && user.email && allowedEmails.includes(user.email)) {
         setUser(user);
         setMessage("認証しました");
         setIsAdmin(() => true);
-      } else if (user && !allowedEmails.includes(user.email)) {
-        setUser(null);
+      } else if (user && user.email && !allowedEmails.includes(user.email)) {
+        setUser(undefined);
         setMessage("認証できません");
         setIsAdmin(() => false);
       } else {
-        setUser(null);
+        setUser(undefined);
         setIsAdmin(() => false);
         setMessage("");
       }
