@@ -19,13 +19,13 @@ const InputCheckbox = forwardRef((props: CheckboxProps, ref: any) => {
         console.log(index);
         if (checked){
             setCheckedData((list: Array<any>) => {
-                console.log(list);
+                console.log(list ? [...list, docQuery] : [docQuery]);
                 return list ? [...list, docQuery] : [docQuery]}
                 );
         } else { 
             setCheckedData ((list: Array<any>) => {
                 console.log(list)
-                list ? list.filter((id) => id !== docQuery) : [docQuery];
+                list ? list.filter((id) => id !== docQuery) : [];
                 
         });}
         inputCheckedList[index] = checked;

@@ -69,95 +69,52 @@ const AdminNewsList = (props: NewsProps) => {
       setList(() => []);
     };
   }, []);
-
-  return (
-    <div>
-      <div className="overflow-scroll h-128">
-        <div className="px-12 pt-3">
-          <div className="flex flex-col">
-            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div className="overflow-hidden">
-                  <table className="min-w-full text-left text-sm font-light">
-                    <thead className="border-b bg-neutral-200 font-medium">
-                      <tr>
-                        <th scope="col" className="px-6 py-4">
-                          件名
-                        </th>
-                        <th scope="col" className="px-6 py-4">
-                          お知らせ
-                        </th>
-                        <th scope="col" className="px-6 py-4">
-                          更新日時
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-6 py-4 flex justify-center"
-                        >
-                          <button
-                            onClick={handleDelete}
-                            className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+    return (
+<div>
+<div className="overflow-auto h-128 max-h-128 m-4">
+  <div className="">
+    <div className="flex flex-col sm:min-w-full md:min-w-full">
+      <div className="sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
+            <table className="min-w-full text-left text-sm font-light">
+              <thead
+                className="border-b bg-neutral-200 font-medium">
+                <tr>
+                  <th scope="col" className="px-6 py-4">件名</th>
+                  <th scope="col" className="px-6 py-4">お知らせ</th>
+                  <th scope="col" className="px-6 py-4">更新日時</th>
+                  <th scope="col" className="px-6 py-4 flex justify-center">
+                    <button onClick={handleDelete} className="py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
-        focus:ring-offset-2"
-                          >
-                            Delete
-                          </button>
-                        </th>
+        focus:ring-offset-2">Delete</button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="overflow-hidden">
+                {list ? 
+                list.map((data: Data, i) => 
+                    {
+                    return (
+                    <tr className="border-b bg-neutral-100 dark:border-neutral-500" key={i}>
+                      <td scope="col" className="px-6 py-4 truncate">{data.title}</td>
+                      <td scope="col" className="px-6 py-4 truncate">{data.content}</td>
+                      <td scope="col" className="px-6 py-4 truncate">{data.date ? formatDate(data.date.toDate()) : ""}</td>
+                      <td scope="col" className="px-6 py-4 flex justify-center">
+                      <div>
+                        <ModalNewsWindow restaurant={props.props} data={data} parentHandlerSubmit={setList}/>
+                      <InputCheckbox props={[setCheckedData, data.date, inputCheckedList, setInputCheckedList, i]}/>
+                      </div>
+
+            
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {list ? (
-                        list.map((data: Data, i) => {
-                          return (
-                            <tr
-                              className="border-b bg-neutral-100 dark:border-neutral-500"
-                              key={i}
-                            >
-                              <td scope="col" className="px-6 py-4 truncate">
-                                {data.title}
-                              </td>
-                              <td scope="col" className="px-6 py-4 truncate">
-                                {data.content}
-                              </td>
-                              <td scope="col" className="px-6 py-4">
-                                {data.date
-                                  ? formatDate(data.date.toDate())
-                                  : ""}
-                              </td>
-                              <td
-                                scope="col"
-                                className="px-6 py-4 flex justify-center"
-                              >
-                                <div>
-                                  <ModalNewsWindow
-                                    restaurant={props.props}
-                                    data={data}
-                                    parentHandlerSubmit={setList}
-                                  />
-                                  <InputCheckbox
-                                    props={[
-                                      setCheckedData,
-                                      data.date,
-                                      inputCheckedList,
-                                      setInputCheckedList,
-                                      i,
-                                    ]}
-                                  />
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })
-                      ) : (
-                        <tr className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                          お知らせはありません
-                        </tr>
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+                    );
+                    })
+                  : <tr className="border-b bg-neutral-100 
+                  dark:border-neutral-500 dark:bg-neutral-700" >お知らせはありません</tr>}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
