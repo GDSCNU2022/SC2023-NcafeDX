@@ -70,7 +70,6 @@ const AdminNewsList = (props: NewsProps) => {
     };
   }, []);
     return (
-<div>
 <div className="overflow-auto h-128 max-h-128 m-4">
   <div className="">
     <div className="flex flex-col sm:min-w-full md:min-w-full">
@@ -119,6 +118,8 @@ const AdminNewsList = (props: NewsProps) => {
         </div>
       </div>
       <NewsForm props={props.props} parentProps={setList}></NewsForm>
+    </div>
+    </div>
     </div>
   );
 };
