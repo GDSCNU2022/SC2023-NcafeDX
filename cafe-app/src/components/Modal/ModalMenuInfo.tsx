@@ -120,10 +120,11 @@ const ModalMenuInfo = (props: Props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="flex flex-shrink-0 items-center justify-end rounded-t-md border-b-2 border-neutral-100 border-opacity-100 dark:border-opacity-50 pt-10 md:pt-0">
+        <div className="bg-gray-300 p-2 rounded-md w-128">
+        <div className="flex flex-shrink-0 items-center justify-end rounded-t-md border-b-2 border-neutral-100 border-opacity-100 dark:border-opacity-50 md:pt-0">
           <button
             type="button"
-            className="box-content pt-10 md:pt-15 rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+            className="box-content md:pt-15 rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
             data-te-modal-dismiss
             onClick={closeModal}
           >
@@ -143,7 +144,7 @@ const ModalMenuInfo = (props: Props) => {
             </svg>
           </button>
         </div>
-        <div className={"m-auto rounded h-screen w-60 my-auto max-w-screen-md"}>
+        <div className={"m-auto rounded w-60 my-auto max-w-screen-md"}>
           <section className="flex-col container mx-auto text-gray-900 border-t border-gray-200 w-full">
             <div className="flex flex-wrap">
               <div className="w-full pt-12 sm:pt-0">
@@ -192,6 +193,7 @@ const ModalMenuInfo = (props: Props) => {
               </div>
             </div>
           </section>
+        </div>
         </div>
       </Modal>
     </>

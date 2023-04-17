@@ -4,7 +4,7 @@ import { signInWithPopup } from "firebase/auth";
 import Link from "next/link";
 import AdminTop from "@/pages/AdminTop";
 
-const admin = JSON.parse(process.env.NEXT_PUBLIC_ADMIN as string) 
+const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string) 
 
 const allowedEmails = [admin.email];
 

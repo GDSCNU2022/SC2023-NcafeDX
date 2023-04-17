@@ -7,7 +7,7 @@ import {
 } from "../../pages/api/get-menu";
 import MenuStarRatings from "../Examples/MenuStarRatings";
 import ModalMenuInfo from "../Modal/ModalMenuInfo";
-
+import ReactStarRatings from "@/components/Examples/ReactStarRatings";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/

@@ -13,6 +13,7 @@ const MenuStarRatings = (props: Props) => {
             color2={'#ffd700'}
             value={props.ratings}
             edit={false}
+            half={false}
             />
         </>
     );

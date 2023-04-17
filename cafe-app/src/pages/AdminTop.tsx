@@ -14,14 +14,14 @@ const AdminTop = () => {
           className="py-20 m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl border border-gray-900 rounded"
         >
-          メニューの編集(Edit Menus)
+          Edit Menus
         </Link>
         <Link
           href="/AdminNewsForm"
           className="py-20 m-2 text-neutral-800 hover:text-blue-500
                 flex justify-center text-xl  border border-gray-900 rounded"
         >
-          お知らせの編集(Edit News)
+          Edit News
         </Link>
       </div>
     </div>

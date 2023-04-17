@@ -13,16 +13,16 @@ const UserHome = () => {
       <div className="container md:w-1/2 mx-auto">
         <div className="mt-10 border border-gray-300 shadow-lg rounded-2xl">
           <h1 className="text-xl underline text-center pb-1" id="news">
-            食堂からのお知らせ
+            News
           </h1>
           <UserNewsList props="DaVinch_News" />
         </div>
         <h1 className={headstytle} id="infomation">
-          食堂情報
+          Information
         </h1>
         <CafeInfo />
         <h1 className={headstytle} id="access">
-          アクセス
+          Access
         </h1>
         <CafeAccess />
       </div>

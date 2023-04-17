@@ -1,5 +1,6 @@
 import React from "react";
 const CafeteriaItems = [
+  /*
   {
     name: "FARADAY HALL（ファラデーホール）",
     time: "10:00~15:00，17:00~19:00",
@@ -22,13 +23,12 @@ const CafeteriaItems = [
       "https://firebasestorage.googleapis.com/v0/b/gdsc-nu-sc2023.appspot.com/o/images%2Fpascalhall.jpg?alt=media&token=610d9629-ee5a-4d2f-9553-565e90b1b64a",
     url: "/",
   },
+  */
   {
-    name: "DA VINCH HALL（ファラデーホール）",
-    time: "10:00~15:00，17:00~19:00",
-    floor1: "",
-    seats1: "",
-    floor2: "2階（定食・麺）",
-    seats2: "380",
+    name: "DA VINCH HALL",
+    time: "10:00~15:00, 17:00~19:00",
+    floor1: "1F (Lunch set/Don)",
+    seats1: "380 seats",
     imageURL:
       "https://firebasestorage.googleapis.com/v0/b/gdsc-nu-sc2023.appspot.com/o/images%2Fdavinchhall.jpg?alt=media&token=de24748c-e3b1-4821-8966-17e8e7c6f9bb",
     url: "/DaVinch",
@@ -48,7 +48,7 @@ function FloorInfo(props: any) {
     return (
       <div className="flex mt-2 mb-4">
         <p className="font-medium w-1/2 sm:w-1/3">{props.floor2}</p>
-        <p className="">{props.seats2}席</p>
+        <p className="">{props.seats2} seats</p>
       </div>
     );
   }
@@ -72,14 +72,14 @@ const CafeInfo = () => {
                 {cafeteria.name}
               </h2>
               <div className="flex pt-5">
-                <p className="font-medium pr-5">営業時間</p>
+                <p className="font-medium pr-5">Available Time</p>
                 <p>{cafeteria.time}</p>
               </div>
               {FloorInfo(cafeteria)}
               <div className="text-center md:pt-5">
                 <a href={cafeteria.url}>
                   <button className="text-white bg-gray-400 px-6 border-0 rounded text-lg hover:bg-gray-200 hover:text-gray-900 duration-300">
-                    メニューを見る
+                    Open the Menus
                   </button>
                 </a>
               </div>
