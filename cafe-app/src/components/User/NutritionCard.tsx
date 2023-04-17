@@ -41,7 +41,7 @@ const NutritionCard = (props: Props) => {
   return (
     <div className="flex justify-between w-full">
       <div className="">
-        <h2 className="text-gray-900 underline text-left pl-2">栄養素情報</h2>
+        <h2 className="text-gray-900 underline text-left pl-2">Nutrition</h2>
         <div id="table" className="flex flex-row">
           <div className="w-0 pl-0">
             <PFCRadarChart
@@ -52,26 +52,26 @@ const NutritionCard = (props: Props) => {
               }}
             />
           </div>
-          <table className="inline-block px-1 m-1 font-light">
+          <table className="flex inline-block px-1 m-1 font-light">
             <tbody>
               <tr className={tablestyle}>
-                <td>エネルギー</td>
-                <td>{menus.nutrition.kcal} </td>
+                <td>Cal: </td>
+                <td className="text-right">{menus.nutrition.kcal}</td>
                 <td>kcal</td>
               </tr>
               <tr className={tablestyle}>
-                <td>タンパク質</td>
-                <td>{menus.nutrition.P} </td>
+                <td>P: </td>
+                <td className="text-right">{menus.nutrition.P} </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
-                <td>脂質</td>
-                <td>{menus.nutrition.F} </td>
+                <td>F: </td>
+                <td className="text-right">{menus.nutrition.F} </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
-                <td>炭水化物</td>
-                <td>{menus.nutrition.C} </td>
+                <td>C: </td>
+                <td className="text-right">{menus.nutrition.C} </td>
                 <td>g</td>
               </tr>
             </tbody>

@@ -22,13 +22,13 @@ function GlobalNavBar() {
         /* &&  allowedEmails.includes(user.email) */
         ) {
         setUser(user);
-        setMessage("認証しました");
+        setMessage("Authorized");
         setIsAdmin(() => true);
       } else if (user && user.email 
         /* && !allowedEmails.includes(user.email) */
         ) {
         setUser(undefined);
-        setMessage("認証できません");
+        setMessage("Could not Authorize");
         setIsAdmin(() => false);
       } else {
         setUser(undefined);
@@ -90,17 +90,17 @@ function GlobalNavBar() {
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
                   <Link href="/#news" onClick={() => setIsNavOpen(false)}>
-                    お知らせ
+                    News
                   </Link>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
                   <Link href="/#infomation" onClick={() => setIsNavOpen(false)}>
-                    食堂情報
+                    Restaurant Info
                   </Link>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
                   <Link href="/#access" onClick={() => setIsNavOpen(false)}>
-                    アクセス
+                    Access
                   </Link>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">

@@ -99,7 +99,7 @@ const UserNewsList = (props: NewsProps) => {
                 })
               ) : (
                 <h2 className="border-b bg-neutral-100 dark:border-neutral-500 dark:bg-neutral-700">
-                  お知らせはありません
+                  No News
                 </h2>
               )}
             </div>
