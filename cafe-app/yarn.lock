@@ -2397,7 +2397,7 @@ firebase-functions@^4.2.1:
     node-fetch "^2.6.7"
     protobufjs "^7.2.2"
 
-firebase@^9.17.2:
+firebase@^9.19.1:
   version "9.19.1"
   resolved "https://registry.npmjs.org/firebase/-/firebase-9.19.1.tgz"
   integrity sha512-MeukV4NIk6usV1ZbnoA36gumK62JzxOZmF6OZyqkFwJ7edpAEyYNZXvExQlFsvnx2ery0UwNIvu4pKIZS3HiEQ==

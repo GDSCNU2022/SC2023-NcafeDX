@@ -121,7 +121,7 @@ const ModalMenuInfo = (props: Props) => {
         style={customStyles}
       >
         <div className="bg-gray-300 p-2 rounded-md w-128">
-        <div className="flex flex-shrink-0 items-center justify-end rounded-t-md border-b-2 border-neutral-100 border-opacity-100 dark:border-opacity-50 md:pt-0">
+        <div className="flex flex-shrink-0 items-center justify-end md:pt-0">
           <button
             type="button"
             className="box-content md:pt-15 rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
@@ -144,26 +144,18 @@ const ModalMenuInfo = (props: Props) => {
             </svg>
           </button>
         </div>
-        <div className={"m-auto rounded w-60 my-auto max-w-screen-md"}>
-          <section className="flex-col container mx-auto text-gray-900 border-t border-gray-200 w-full">
+
+        <div className={"m-auto w-96 my-auto max-w-screen-md"}>
+          <section className="flex-col container mx-auto text-gray-900 border-gray-200 w-full">
             <div className="flex flex-wrap">
-              <div className="w-full pt-12 sm:pt-0">
-                <div className="object-left-top bg-white rounded-lg shadow-lg">
-                  <div className="aspect-[8/5]">
-                    <div
-                      className={`w-full ${stylecolor} rounded-t-lg h-1/5 `}
-                    ></div>
-                    <div
-                      className={`w-full ${stylecolor} rounded-b-full h-4/5`}
-                    ></div>
-                  </div>
-                  <div className="relative">
-                    <div className="absolute w-10/12 top-2/5 md:top-0 left-1/2 transform -translate-x-1/2 -translate-y-3/4">
-                      <img className="rounded-lg" src={imageURL} />
+                <div className="bg-white rounded-t-lg">
+                  <div className="flex justify-center content-border">
+                    <div className="w-fit">
+                      <img className="rounded-t-lg" src={imageURL} />
                     </div>
                   </div>
                   <div className="relative pt-2 px-2 md:pt-4">
-                    <div className="items-center pt-10 md:pt-4 mb-1">
+                    <div className="items-center md:pt-4 mb-1">
                       <MenuStarRatings ratings={menu.stars ? menu.stars : 0} />
                       <h2 className="text-gray-900 text-md font-medium">
                         {menu.name}
@@ -180,13 +172,12 @@ const ModalMenuInfo = (props: Props) => {
                       />
                     </div>
                   </div>
-                </div>
               </div>
             </div>
-            <div className="container  mx-auto">
+            <div className="container mx-auto pt-1">
               <div className="flex flex-wrap">
                 <div className="w-full">
-                  <div className="object-left-top bg-white rounded-lg shadow-lg pb-5">
+                  <div className="object-left-top bg-white rounded-b-lg shadow-lg pb-5">
                     <NutritionCard path={path} />
                   </div>
                 </div>

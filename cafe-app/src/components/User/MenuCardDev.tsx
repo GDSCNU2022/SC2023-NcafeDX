@@ -62,7 +62,7 @@ const MenuCardDev = (props: Props) => {
               >
                 {category.name}
               </h2>
-              <div className="container md:w-3/5 mx-auto">
+              <div className="container md:w-4/5 mx-auto">
                 <div className="flex flex-wrap">
                   {list.map((menu, index) => {
                     return (
@@ -72,7 +72,7 @@ const MenuCardDev = (props: Props) => {
                             return (
                               <>
                                 <div
-                                  className="aspect-[1/1] w-1/2 md:w-1/2 p-1 mx-auto"
+                                  className="aspect-[1/1] w-1/2 md:w-1/2 p-6 mx-auto"
                                   key={index}
                                 >
                                   <div className="object-left-top bg-white rounded-lg shadow-lg ">
@@ -87,7 +87,7 @@ const MenuCardDev = (props: Props) => {
                                     <div className="relative">
                                       <div className="absolute w-10/12 top-3/5 left-1/2 transform -translate-x-1/2 -translate-y-3/4">
                                         <img
-                                          className="rounded-lg"
+                                          className="rounded-lg bg-clip-padding"
                                           src={menu.imageURL}
                                         />{" "}
                                       </div>

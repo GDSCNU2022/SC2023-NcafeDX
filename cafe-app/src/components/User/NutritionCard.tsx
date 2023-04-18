@@ -36,14 +36,14 @@ const NutritionCard = (props: Props) => {
       setMenus(value);
     });
   }, []);
-  const tablestyle = "bg-white border-b bg-neutral-100 text-xs text-left";
+  const tablestyle = "bg-white border-b bg-neutral-100 text-sm text-left";
 
   return (
     <div className="flex justify-between w-full">
       <div className="">
-        <h2 className="text-gray-900 underline text-left pl-2">Nutrition</h2>
+        <h2 className="text-gray-900 underline text-left pl-2 text-lg">Nutrition</h2>
         <div id="table" className="flex flex-row">
-          <div className="w-0 pl-0">
+          <div className="w-0">
             <PFCRadarChart
               data={{
                 P: menus.nutrition.P,
@@ -56,22 +56,22 @@ const NutritionCard = (props: Props) => {
             <tbody>
               <tr className={tablestyle}>
                 <td>Cal: </td>
-                <td className="text-right">{menus.nutrition.kcal}</td>
+                <td className="text-right">&nbsp;{menus.nutrition.kcal}&nbsp;</td>
                 <td>kcal</td>
               </tr>
               <tr className={tablestyle}>
                 <td>P: </td>
-                <td className="text-right">{menus.nutrition.P} </td>
+                <td className="text-right">&nbsp;{menus.nutrition.P}&nbsp; </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
                 <td>F: </td>
-                <td className="text-right">{menus.nutrition.F} </td>
+                <td className="text-right">&nbsp;{menus.nutrition.F}&nbsp; </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
                 <td>C: </td>
-                <td className="text-right">{menus.nutrition.C} </td>
+                <td className="text-right">&nbsp;{menus.nutrition.C}&nbsp; </td>
                 <td>g</td>
               </tr>
             </tbody>
