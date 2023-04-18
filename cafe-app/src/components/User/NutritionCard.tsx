@@ -36,14 +36,14 @@ const NutritionCard = (props: Props) => {
       setMenus(value);
     });
   }, []);
-  const tablestyle = "bg-white border-b bg-neutral-100 text-xs text-left";
+  const tablestyle = "bg-white border-b bg-neutral-100 text-sm text-left";
 
   return (
     <div className="flex justify-between w-full">
       <div className="">
-        <h2 className="text-gray-900 underline text-left pl-2">栄養素情報</h2>
+        <h2 className="text-gray-900 underline text-left pl-2 text-lg">Nutrition</h2>
         <div id="table" className="flex flex-row">
-          <div className="w-0 pl-0">
+          <div className="w-0">
             <PFCRadarChart
               data={{
                 P: menus.nutrition.P,
@@ -52,26 +52,26 @@ const NutritionCard = (props: Props) => {
               }}
             />
           </div>
-          <table className="inline-block px-1 m-1 font-light">
+          <table className="flex inline-block px-1 m-1 font-light">
             <tbody>
               <tr className={tablestyle}>
-                <td>エネルギー</td>
-                <td>{menus.nutrition.kcal} </td>
+                <td>Cal: </td>
+                <td className="text-right">&nbsp;{menus.nutrition.kcal}&nbsp;</td>
                 <td>kcal</td>
               </tr>
               <tr className={tablestyle}>
-                <td>タンパク質</td>
-                <td>{menus.nutrition.P} </td>
+                <td>P: </td>
+                <td className="text-right">&nbsp;{menus.nutrition.P}&nbsp; </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
-                <td>脂質</td>
-                <td>{menus.nutrition.F} </td>
+                <td>F: </td>
+                <td className="text-right">&nbsp;{menus.nutrition.F}&nbsp; </td>
                 <td>g</td>
               </tr>
               <tr className={tablestyle}>
-                <td>炭水化物</td>
-                <td>{menus.nutrition.C} </td>
+                <td>C: </td>
+                <td className="text-right">&nbsp;{menus.nutrition.C}&nbsp; </td>
                 <td>g</td>
               </tr>
             </tbody>

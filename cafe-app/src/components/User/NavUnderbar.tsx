@@ -1,11 +1,10 @@
-import React from "react";
 import Link from "next/link";
 
 function NavUnderbar() {
   return (
     <>
-      <div className="shadow fixed bottom-0 bg-white container mx-auto items-center text-center w-full">
-        <nav className="grid pb-3 grid-cols-3 font-medium text-gray-900 items-center">
+      <div className="shadow fixed bottom-0 bg-white mx-auto text-center w-full">
+        <nav className="grid pb-2 grid-cols-3 font-medium text-gray-900 items-center place-content-stretch">
           <div className="hover:bg-yellow-300 duration-300">
             <Link href="/">
               <div className="mt-1 inline-block">
@@ -39,7 +38,7 @@ function NavUnderbar() {
             </Link>
           </div>
           <div className="hover:bg-yellow-300 duration-300">
-            <a href="https://forms.gle/rZGWi9MzH7somHkF6">
+            <a href="https://forms.gle/rZGWi9MzH7somHkF6" target="_blank" rel="noopner noreferrer">
               <div className="mt-1 inline-block">
                 <svg
                   width="24"
