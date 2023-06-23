@@ -18,14 +18,13 @@ function GlobalNavBar() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
       if (user && user.email 
-        // Everyone can login as an admin for Solution Challenge 2023
-        /* &&  allowedEmails.includes(user.email) */
+        &&  allowedEmails.includes(user.email)
         ) {
         setUser(user);
         setMessage("Authorized");
         setIsAdmin(() => true);
       } else if (user && user.email 
-        /* && !allowedEmails.includes(user.email) */
+        && !allowedEmails.includes(user.email)
         ) {
         setUser(undefined);
         setMessage("Could not Authorize");
