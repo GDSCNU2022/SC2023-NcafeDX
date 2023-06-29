@@ -8,7 +8,6 @@ const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string)
 
 const allowedEmails = [admin.email];
 
-
 function GlobalNavBar() {
   const [user, setUser] = useState();
   const [message, setMessage] = useState("");
