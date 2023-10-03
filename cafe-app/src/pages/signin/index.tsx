@@ -1,13 +1,85 @@
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+        getAuth,
+        signInWithEmailAndPassword, 
+        signOut, 
+        signInWithRedirect,
+        getRedirectResult,
+        GoogleAuthProvider,
+        onAuthStateChanged,
+        } from 'firebase/auth'
 import { NextPage } from 'next'
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 import { FirebaseError } from 'firebase/app'
 import router from 'next/router'
 import { useForm } from 'react-hook-form'
 import { LoginForm } from '@src/features/common/types'
-import { auth } from '@src/firebase/client'
-// import { StyledFirebaseAuth, FirebaseAuth } from 'react-firebaseui'
-import { GoogleAuthProvider } from 'firebase/auth'
+import { auth, provider } from '@src/firebase/client'
+
+export const GoogleLogin = () => {
+  const _provider = provider
+  const _auth = auth
+
+  // Google login
+  const clicklogin = () => {
+    signInWithRedirect(_auth, _provider)
+  }
+
+  useEffect(() => {
+    getRedirectResult(_auth)
+    .then((result) => {
+      console.log(result)
+      if(result !== null){
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential ? credential.accessToken : null
+        console.log(token)
+
+        // signed-in user info.
+        const user = result.user
+        console.log(user)
+        console.log(user.uid)
+        router.push('/MyPage')
+      }
+    }).catch((err) => {
+      console.error(err)
+      // error handlings
+      const errorCode = err.code
+      const errorMessage = err.message
+      const email = err.email
+      console.error(errorCode)
+      console.error(errorMessage)
+      console.error(email)
+    })
+  }, [])
+
+  const checkLogin = () => {
+    onAuthStateChanged(_auth, (user) => {
+      if (user) {
+        const uid = user.uid
+        const email = user.email
+        console.log(uid)
+        console.log(email)
+      } else {
+        console.log("signed out")
+      }
+    })
+  }
+
+  checkLogin()
+
+  const clickLogout = async () => {
+    signOut(_auth).then(() => {
+      console.log("ログアウトしました")
+    })
+    .catch((err) => {
+      console.log(`エラーが発生しました (${err})`)
+    })
+  }
+
+  return (
+    <>
+    <button onClick={() => clicklogin()}>Googleログイン</button>
+    </>  )
+}
 
 export const SignIn: FC<NextPage> = () => {
   const [error, setError] = useState('')
@@ -79,7 +151,9 @@ export const SignIn: FC<NextPage> = () => {
               </button>
             </div>
           </form>
-
+          
+          <GoogleLogin/>
+          
           <button className='mt-4 w-full text-center' onClick={() => router.push('/signup')}>
             新規登録はこちら
           </button>

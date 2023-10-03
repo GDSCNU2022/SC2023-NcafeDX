@@ -26,6 +26,7 @@ const UserHome = () => {
         </h1>
         <CafeAccess />
       </div>
+      
       <NavUnderbar />
     </>
   );

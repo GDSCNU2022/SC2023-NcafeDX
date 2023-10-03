@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider } from "@src/firebase/client";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup } from "@firebase/auth";
 import Link from "next/link";
 import AdminTop from "@src/pages/AdminTop";
 import router from 'next/router'
@@ -52,9 +52,6 @@ function GlobalNavBar() {
         <button className="pl-5 text-xl font-bold italic" onClick={()=>{router.push('/')}}>
             N cafe
         </button>
-        <button onClick={()=>{router.push('/signin')}}>
-          ログイン
-        </button>
         <nav>
           <section className="MOBILE-MENU flex lg:hidden">
             <button>
@@ -105,6 +102,11 @@ function GlobalNavBar() {
                   </button>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
+                  <button onClick={()=>{router.push('/signin')}}>
+                  マイページ
+                  </button>
+                </li>
+                <li className="border-b border-gray-400 my-8 uppercase">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
@@ -114,7 +116,7 @@ function GlobalNavBar() {
                       signIn();
                     }}
                   >
-                    Admin Login
+                    管理者ログイン
                   </button>
                 </li>
               </ul>
@@ -129,13 +131,13 @@ function GlobalNavBar() {
               <Link href="/#infomation">Restaurant Info</Link>
             </li>
             <li className="flex text-xs top-0 justify-center ">
-              <button
-                onClick={() => {
-                  setIsNavOpen(false);
-                  signIn();
-                }}
-              >
-                Admin Login
+              <button onClick={()=>{router.push('/signin')}}>
+              マイページ
+              </button>
+            </li>
+            <li className="flex text-xs top-0 justify-center ">
+              <button onClick={() => { setIsNavOpen(false); signIn();}}>
+                管理者ログイン
               </button>
             </li>
           </ul>
