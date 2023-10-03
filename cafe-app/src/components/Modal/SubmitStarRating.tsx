@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactStars from 'react-stars';
 import { getMenu, updateMenu } from '../../pages/api/get-menu';
-import { db } from '../../../firebase/client';
+import { db } from '../../firebase/client';
 
 // ref https://www.geeksforgeeks.org/how-to-add-star-rating-in-nextjs/
 type Props = {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import Panel from "./ModalImagePanel";
 import Modal, { setAppElement } from "react-modal";
 import { is } from "date-fns/locale";

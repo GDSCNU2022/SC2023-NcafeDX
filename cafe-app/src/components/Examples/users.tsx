@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { db } from '../../../firebase/client';
+import { db } from '../../firebase/client';
 import { UserProps, getUser } from '../../pages/api/get-user';
 const userTestProps: UserProps ={
     name: "test taro",

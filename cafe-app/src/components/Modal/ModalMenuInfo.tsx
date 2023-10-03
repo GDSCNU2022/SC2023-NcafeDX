@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { getMenu, MenuProps } from "../../pages/api/get-menu";
 import Modal from "react-modal";
 import MenuStarRatings from "../Examples/MenuStarRatings";

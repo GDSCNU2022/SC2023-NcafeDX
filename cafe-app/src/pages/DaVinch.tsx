@@ -1,6 +1,6 @@
-import GlobalNavBar from "@/components/User/GlobalNavBar";
-import MenuCardDev from "@/components/User/MenuCardDev";
-import NavUnderbar from "@/components/User/NavUnderbar";
+import GlobalNavBar from "@src/components/User/GlobalNavBar";
+import MenuCardDev from "@src/components/User/MenuCardDev";
+import NavUnderbar from "@src/components/User/NavUnderbar";
 
 const DaVinch = () => {
   return (

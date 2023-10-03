@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { getMenu, MenuProps, Nutrition } from "../../pages/api/get-menu";
 import PFCRadarChart from "./PFCRaderChart";
 import ModalStarWindow from "../Modal/ModalStarWindow";

@@ -5,7 +5,7 @@ import {
   deleteNewsWithDate,
   newNews,
 } from "../../pages/api/get-news";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { database } from "firebase-admin";
 import InputCheckbox from "./InputCheckbox";
 import { format } from "date-fns/fp";
