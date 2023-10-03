@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { db, storage } from '../../../firebase/client';
+import { db, storage } from '../../firebase/client';
 
 type Props = {
     setValue?: Function;

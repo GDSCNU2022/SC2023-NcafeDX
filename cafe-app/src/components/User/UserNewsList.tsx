@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllNews, deleteNewsWithDate } from "../../pages/api/get-news";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { database } from "firebase-admin";
 import { format } from "date-fns/fp";
 import { Timestamp } from "firebase/firestore";

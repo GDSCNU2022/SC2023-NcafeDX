@@ -1,8 +1,8 @@
-import CafeAccess from "@/components/User/CafeAccess";
-import CafeInfo from "@/components/User/CafeInfo";
-import GlobalNavBar from "@/components/User/GlobalNavBar";
-import NavUnderbar from "@/components/User/NavUnderbar";
-import UserNewsList from "@/components/User/UserNewsList";
+import CafeAccess from "@src/components/User/CafeAccess";
+import CafeInfo from "@src/components/User/CafeInfo";
+import GlobalNavBar from "@src/components/User/GlobalNavBar";
+import NavUnderbar from "@src/components/User/NavUnderbar";
+import UserNewsList from "@src/components/User/UserNewsList";
 import Link from "next/link";
 
 const headstytle = "text-xl underline text-center pt-10 pb-3";

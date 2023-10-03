@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent} from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { newMenu, MenuProps } from '../../pages/api/get-menu';
-import { db } from '../../../firebase/client';
+import { db } from '../../firebase/client';
 import UploadImageForm from './UploadImageForm';
 import ModalImageGrid from '../Modal/ModalImageGrid';
 //TODO 名前で管理しているため名前の重複チェック必須(yup使用が主流)

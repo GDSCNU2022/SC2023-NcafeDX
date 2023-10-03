@@ -23,8 +23,8 @@ function NavUnderbar() {
                   />
                 </svg>
               </div>
-              <div className="text-xs text-gray-900">ホーム</div>
             </Link>
+            <div className="text-xs text-gray-900">ホーム</div>
           </div>
           <div className="text-green-400 mr-5 hover:text-white hover:bg-yellow-300 duration-300">
             <Link href="/DaVinch">
@@ -34,8 +34,8 @@ function NavUnderbar() {
               >
                 Da
               </div>
-              <div className="text-xs text-gray-900">メニュー</div>
             </Link>
+            <div className="text-xs text-gray-900">メニュー</div>
           </div>
           <div className="hover:bg-yellow-300 duration-300">
             <a href="https://forms.gle/rZGWi9MzH7somHkF6" target="_blank" rel="noopner noreferrer">

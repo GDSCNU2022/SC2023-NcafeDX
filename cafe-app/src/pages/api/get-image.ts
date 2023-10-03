@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { storage } from '../../../firebase/client';
+import { storage } from '../../firebase/client';
 import { ref, listAll, getDownloadURL, deleteObject } from 'firebase/storage';
 
 export const getAllImages = async (setFunc: Function) => {

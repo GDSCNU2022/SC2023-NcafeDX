@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { updateNewsWithDate } from "../../pages/api/get-news";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { Textarea } from "@material-tailwind/react";
 import { NewsProps } from "../Form/NewsForm";
 import { Timestamp } from "firebase/firestore";
