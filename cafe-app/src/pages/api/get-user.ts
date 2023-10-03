@@ -1,4 +1,4 @@
-import { doc, updateDoc, addDoc, where, collection, query, getDocs } from 'firebase/firestore';
+import { doc, updateDoc, setDoc, addDoc, where, collection, query, getDocs, getDoc } from 'firebase/firestore';
 
 
 type BoolDay = {
@@ -14,48 +14,52 @@ type VotedCategory = {
 }
 
 export type UserProps = {
-    name: string;
-    mail: string;
+    uid: string;
     points: number;
-    couponID: string;
-    boolDay: BoolDay;
-    votedCategory: VotedCategory;
+    couponID: string[];
+    boolDay: boolean[];
+    votedCategoryPerDay: boolean[];
 }
-export const getUser: any = async(db: any, targetPath: string) => {
-    /* Usage
-    getUser(db, 'example@gmail.com').then((value) => {your processing})
-    */
-    const path: string = targetPath;
-    const pathArr: string[] = path.split('/');
-    const lenArr: number = pathArr.length;
-    const collRef = collection(db, 'Users');
-    try {
-    const q = query(collRef, where('mail', '==', pathArr[0]));
-    const docSnap = await getDocs(q);
-    let newData: any;
 
-    // docSnap は要素1, 条件検索のためqueryを使用
+export const checkUser: any = async(db: any, uid: string) => {
+    const collRef = collection(db, 'Users');
+    const q = query(collRef, where('uid', '==', uid));
+    const docSnap = await getDocs(q);
+
     docSnap.forEach((doc) => {
         if (doc.exists()) {
-            console.log("Document data:", doc.data());
-            newData = doc.data();
+            console.log("user was found")
+            return true
         } else {
             console.log("No such document.");
+            return false
         } 
     })
-    return newData;
-    } catch (error) {
-        console.log("That User doesn't exist.");
+
+}
+
+export const getUser: any = async(db: any, uid: string, setFunc: Function) => {
+    /* Usage
+    getUser(db, uid).then((value) => {your processing})
+    */
+    const docRef = doc(db, 'Users', uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists() && docSnap.data()){
+        setFunc(docSnap.data())
+    } else {
+        console.log("No such document.");
     }
 }
 
-export const newUser = async (db: any, saveUser: UserProps) => {
+export const newUser = async (db: any, uid:string, saveUser: UserProps) => {
     /* Usage
-    newMenu(db, userObject)
+    newMenu(db, uid, userObject)
     */
-    const collRef = collection(db, 'Users')
-    await addDoc(collRef, saveUser);
-    console.log(`Document uploaded at ${collRef.id}`)
+    const _saveUser = saveUser
+    const d = doc(db, 'Users', uid)
+    await setDoc(d, _saveUser);
+    console.log(`Document uploaded at ${uid}`)
 }
 
 export const updateUser = async(db: any, userMail: string, newUserProps: UserProps) => {
