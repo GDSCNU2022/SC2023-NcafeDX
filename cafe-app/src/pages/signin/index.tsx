@@ -64,7 +64,7 @@ export const SignIn: FC<NextPage> = () => {
   const isValid = async (data: LoginForm) => {
     try {
       await signInWithEmailAndPassword(_auth, data.email, data.password)
-      router.push('/MyPage')
+      router.push('/mypages/MyPage')
     } catch (e) {
       if (e instanceof FirebaseError) {
         console.log(e)
@@ -88,7 +88,7 @@ export const SignIn: FC<NextPage> = () => {
       const email = user.email
       console.log(uid)
       console.log(email)
-      router.push('/MyPage')
+      router.push('/mypages/MyPage')
     } else {
       console.log("signed out")
     }

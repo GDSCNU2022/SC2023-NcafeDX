@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, provider } from "@src/firebase/client";
 import { signInWithPopup } from "@firebase/auth";
 import Link from "next/link";
-import AdminTop from "@src/pages/AdminTop";
+import AdminTop from "@src/pages/adminpages/AdminTop";
 import router from 'next/router'
 
 const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string) 

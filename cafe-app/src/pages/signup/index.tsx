@@ -24,7 +24,7 @@ export const SignUp: FC<NextPage> = () => {
       })
       await sendEmailVerification(userCredential.user)
       // route mypage after login
-      router.push('/')
+      router.push('/mypages/MyPage')
     } catch (e) {
       if (e instanceof FirebaseError) {
         console.log(e)

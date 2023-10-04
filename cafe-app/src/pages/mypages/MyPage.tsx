@@ -9,6 +9,7 @@ import { CouponCardProps } from './CouponCard'
 import CouponCard from './CouponCard'
 import router from 'next/router'
 
+// TODO: funciton to load coupons from database
 // TODO: write status of each user with uid and load/save functions.
 // TODO: make UI
 
@@ -94,7 +95,7 @@ const Mypage = () => {
     <>
     <GlobalNavBar/>
     <div className="text-center">
-    <div className="m-4">
+    <div className="m-10">
       <a className="text-2xl">
         こんにちは
       </a>
@@ -106,12 +107,13 @@ const Mypage = () => {
       </a>
     </div>
 
-      <div className="grid grid-cols-3 gap-4 m-4">
+      <div className="grid grid-cols-3 gap-4 m-4 mb-16">
         <MyPageCard title="ポイント" text={`${userInfo.points} pt`}/>
         <MyPageCard title="今日の投稿(時間帯)" text={`${userInfo.boolDay}`}/>
         <MyPageCard title="今日の投稿(種類)" text={`${userInfo.votedCategoryPerDay}`}/>
       </div>
-      <div className="grid grid-cols-2 gap-4 m-8 bg-white border-4">
+      <a className="text-2xl">所持クーポン</a>
+      <div className="grid grid-cols-2 gap-4mb-8 mx-8 bg-white border-4">
         <div className="flex mx-12 my-4">
           <CouponCard title={couponProps.title}
           couponCode={couponProps.couponCode}
@@ -119,7 +121,9 @@ const Mypage = () => {
         </div>
       </div>
     </div>
-    <button onClick={() => {clickLogout()}}>ログアウト</button>
+    <div className="flex justify-center bg-gray-400 mt-4">
+      <button onClick={() => {clickLogout()}}>ログアウト</button>
+    </div>
     </>
   )
 }
