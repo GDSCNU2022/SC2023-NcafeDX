@@ -22,9 +22,6 @@ export const GoogleLogin = () => {
   // Google login
   const clicklogin = () => {
     signInWithRedirect(_auth, _provider)
-  }
-
-  useEffect(() => {
     getRedirectResult(_auth)
     .then((result) => {
       console.log(result)
@@ -49,32 +46,7 @@ export const GoogleLogin = () => {
       console.error(errorMessage)
       console.error(email)
     })
-  }, [])
-
-  const checkLogin = () => {
-    onAuthStateChanged(_auth, (user) => {
-      if (user) {
-        const uid = user.uid
-        const email = user.email
-        console.log(uid)
-        console.log(email)
-      } else {
-        console.log("signed out")
-      }
-    })
-  }
-
-  checkLogin()
-
-  const clickLogout = async () => {
-    signOut(_auth).then(() => {
-      console.log("ログアウトしました")
-    })
-    .catch((err) => {
-      console.log(`エラーが発生しました (${err})`)
-    })
-  }
-
+}
   return (
     <>
     <button onClick={() => clicklogin()}>Googleログイン</button>
@@ -84,6 +56,10 @@ export const GoogleLogin = () => {
 export const SignIn: FC<NextPage> = () => {
   const [error, setError] = useState('')
   const _auth = auth
+
+  useEffect(() => {
+    checkLogin()
+  }, [])
 
   const isValid = async (data: LoginForm) => {
     try {
@@ -105,6 +81,20 @@ export const SignIn: FC<NextPage> = () => {
     }
   }
 
+  const checkLogin = () => {
+  onAuthStateChanged(_auth, (user) => {
+    if (user) {
+      const uid = user.uid
+      const email = user.email
+      console.log(uid)
+      console.log(email)
+      router.push('/MyPage')
+    } else {
+      console.log("signed out")
+    }
+  })
+  }
+
   const {
     register,
     handleSubmit,
@@ -114,7 +104,7 @@ export const SignIn: FC<NextPage> = () => {
     <>
       <div className='flex'>
         <div className='mx-auto flex w-full flex-col items-center md:w-3/5 lg:w-2/3'>
-          <h1 className='my-10 text-2xl font-bold text-white'> ログイン </h1>
+          <h1 className='my-10 text-2xl font-bold '> ログイン </h1>
           <form className='mt-2 flex w-8/12 flex-col lg:w-1/2' onSubmit={handleSubmit(isValid)}>
             <div className='mb-4'>
               <label className='mb-1 block'>メールアドレス</label>
@@ -143,8 +133,8 @@ export const SignIn: FC<NextPage> = () => {
             </div>
             <div className='mb-6'>
               <button
-                className='mt-4 w-full rounded bg-sky-200 py-4 text-center font-sans 
-                text-xl font-bold leading-tight text-white md:px-12 md:py-4 md:text-base'
+                className='mt-4 w-full rounded bg-pink-400 py-4 text-center font-sans 
+                text-xl font-bold leading-tight md:px-12 md:py-4 md:text-base text-white'
                 type='submit'
               >
                 ログインする

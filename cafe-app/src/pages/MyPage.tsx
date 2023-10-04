@@ -1,9 +1,14 @@
-import { getAuth, onAuthStateChanged } from '@firebase/auth'
+import { getAuth, onAuthStateChanged, signOut } from '@firebase/auth'
 import { db } from '@src/firebase/client'
 import { useState, useEffect } from 'react'
 import { checkUser, getUser, newUser, UserProps } from '@src/pages/api/get-user'
 import { doc, getDoc } from '@firebase/firestore'
 import GlobalNavBar from '@src/components/User/GlobalNavBar'
+import MyPageCard from '@src/components/User/MyPageCard'
+import { CouponCardProps } from './CouponCard'
+import CouponCard from './CouponCard'
+import router from 'next/router'
+
 // TODO: write status of each user with uid and load/save functions.
 // TODO: make UI
 
@@ -68,27 +73,53 @@ const Mypage = () => {
     })
     }
 
+    const clickLogout = async () => {
+    signOut(auth).then(() => {
+      console.log("ログアウトしました")
+      router.push('/')
+    })
+    .catch((err) => {
+      console.log(`エラーが発生しました (${err})`)
+    })
+  }
+
     console.log(`in updateInfo`)
     console.log(userInfo)
+
+    // boolDay: boolean[morning, day, night]
+    // votedCategoryPerDay: boolean[teishoku, noodle, don, curry]
+    const couponProps: CouponCardProps = {title: "唐揚げ１個無料", couponCode: "AAAABBBBCCCCDDDD", duration: 'yyyy-mm-dd' }
 
   return (
     <>
     <GlobalNavBar/>
-    <div>
-      こんにちは {user.displayName} さん
-      <div>
-        {userInfo.points}pt
+    <div className="text-center">
+    <div className="m-4">
+      <a className="text-2xl">
+        こんにちは
+      </a>
+      <a className="text-2xl font-bold m-4">
+        {user.displayName}
+      </a>
+      <a className="text-2xl">
+        さん
+      </a>
+    </div>
+
+      <div className="grid grid-cols-3 gap-4 m-4">
+        <MyPageCard title="ポイント" text={`${userInfo.points} pt`}/>
+        <MyPageCard title="今日の投稿(時間帯)" text={`${userInfo.boolDay}`}/>
+        <MyPageCard title="今日の投稿(種類)" text={`${userInfo.votedCategoryPerDay}`}/>
       </div>
-      <div>
-        クーポン{userInfo.couponID}
-      </div>
-      <div>
-        今日の投稿{userInfo.boolDay}
-      </div>
-      <div>
-        今日の投稿（カテゴリ別）{userInfo.votedCategoryPerDay}
+      <div className="grid grid-cols-2 gap-4 m-8 bg-white border-4">
+        <div className="flex mx-12 my-4">
+          <CouponCard title={couponProps.title}
+          couponCode={couponProps.couponCode}
+          duration={couponProps.duration}/>
+        </div>
       </div>
     </div>
+    <button onClick={() => {clickLogout()}}>ログアウト</button>
     </>
   )
 }
