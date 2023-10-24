@@ -48,9 +48,9 @@ function GlobalNavBar() {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-gray-400 p-4 shadow-lg">
+      <div className="flex items-center justify-between p-4 shadow-lg">
         <button className="pl-5 text-xl font-bold italic" onClick={()=>{router.push('/')}}>
-            N cafe
+            DA VINCH HALL
         </button>
         <nav>
           <section className="MOBILE-MENU flex lg:hidden">

@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { checkUser, getUser, newUser, UserProps } from '@src/pages/api/get-user'
 import { doc, getDoc } from '@firebase/firestore'
 import GlobalNavBar from '@src/components/User/GlobalNavBar'
-import MyPageCard from '@src/components/User/MyPageCard'
+import MyPageCard from '@src/components/User/mypage/MyPageCard'
+import IsVotedTimeCard from '@src/components/User/mypage/IsVotedTimeCard'
+import IsVotdeCategoryPerDayCard from '@src/components/User/mypage/IsVotedCategoryPerDayCard'
 import { CouponCardProps } from './CouponCard'
 import CouponCard from './CouponCard'
 import router from 'next/router'
@@ -12,6 +14,7 @@ import router from 'next/router'
 // TODO: funciton to load coupons from database
 // TODO: write status of each user with uid and load/save functions.
 // TODO: make UI
+// TODO: function to submit a review and reflect isVoted per day, and reset them at other day.
 
 const Mypage = () => {
   const auth = getAuth()
@@ -109,8 +112,8 @@ const Mypage = () => {
 
       <div className="grid grid-cols-3 gap-4 m-4 mb-16">
         <MyPageCard title="ポイント" text={`${userInfo.points} pt`}/>
-        <MyPageCard title="今日の投稿(時間帯)" text={`${userInfo.boolDay}`}/>
-        <MyPageCard title="今日の投稿(種類)" text={`${userInfo.votedCategoryPerDay}`}/>
+        <IsVotedTimeCard title="今日の投稿(時間帯)" boolDay={userInfo.boolDay}/>
+        <IsVotdeCategoryPerDayCard title="今日の投稿(種類)" isVotedCategoryPerDay={userInfo.votedCategoryPerDay}/>
       </div>
       <a className="text-2xl">所持クーポン</a>
       <div className="grid grid-cols-2 gap-4mb-8 mx-8 bg-white border-4">

@@ -20,7 +20,7 @@ function cafecolor(prop: string) {
   if (prop === "Pascal") {
     bgcolor = "bg-red-500";
   } else if (prop === "DaVinch") {
-    bgcolor = "bg-green-500";
+    bgcolor = "bg-orange-300";
   } else {
   }
   return bgcolor;
@@ -56,14 +56,14 @@ const MenuCardDev = (props: Props) => {
           return (
             <>
               <h2
-                className="pt-5 text-center text-2xl font-bold  pb-3 underline"
+                className="flex justify-center pt-5 text-center text-2xl font-bold text-pink-400 pb-3"
                 id={category.nameid}
                 key={i}
               >
-                {category.name}
+                {category.name === "Lunch Set" ? "定食" : category.name === "Bowl" ? "丼" : category.name === "Noodle" ? "麺類" : "カレー"}
               </h2>
-              <div className="container md:w-4/5 mx-auto">
-                <div className="flex flex-wrap">
+              <div id="menu-card" className="container mx-auto">
+                <div className="flex flex-wrap justify-center">
                   {list.map((menu, index) => {
                     return (
                       <>
