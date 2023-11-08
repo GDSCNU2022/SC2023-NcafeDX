@@ -22,6 +22,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     background: "rgba(50,50,50, 0.0)",
     border: "none",
+    width: "50%"
   },
 };
 
@@ -56,7 +57,7 @@ const ModalUserNewsWindow = (props: Props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="bg-white w-96 shadow-lg rounded-lg">
+        <div className="bg-white w-full shadow-lg rounded-lg">
           <ModalUserNewsPanel
             parentHandlerSubmit={props.parentHandlerSubmit}
             restaurant={props.restaurant}

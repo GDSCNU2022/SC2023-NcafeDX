@@ -1,5 +1,5 @@
 import MenuCardDev from "@src/components/User/MenuCardDev";
-import AdminTop from "./AdminTop";
+import AdminTop from "./adminpages/AdminTop";
 import UserHome from "./Home";
 import React from "react";
 

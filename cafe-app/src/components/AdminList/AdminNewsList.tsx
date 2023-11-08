@@ -45,6 +45,7 @@ const AdminNewsList = (props: NewsProps) => {
   const formatDate = format("yyyy年MM月dd日 hh時mm分ss秒");
 
   const handleDelete = () => {
+    console.log("in handleDelete")
     checkedData?.forEach((date) => {
       // dateフィールドでトリガー
       deleteNewsWithDate(db, props.props, date);
@@ -61,6 +62,7 @@ const AdminNewsList = (props: NewsProps) => {
 
   useEffect(() => {
     // strictModeのせいでマウント時に2回レンダリングされる
+    console.log("called useEffect()")
     newList = [];
     getAllNews(db, updateList, props.props);
 

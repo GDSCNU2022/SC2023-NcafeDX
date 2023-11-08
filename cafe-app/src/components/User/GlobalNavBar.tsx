@@ -50,7 +50,7 @@ function GlobalNavBar() {
     <>
       <div className="flex items-center justify-between p-4 shadow-lg">
         <button className="pl-5 text-xl font-bold italic" onClick={()=>{router.push('/')}}>
-            DA VINCH HALL
+            DA VINCI HALL
         </button>
         <nav>
           <section className="MOBILE-MENU flex lg:hidden">
@@ -139,6 +139,9 @@ function GlobalNavBar() {
               <button onClick={() => { setIsNavOpen(false); signIn();}}>
                 管理者ログイン
               </button>
+            </li>
+            <li>
+              <Link href="adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
             </li>
           </ul>
         </nav>
