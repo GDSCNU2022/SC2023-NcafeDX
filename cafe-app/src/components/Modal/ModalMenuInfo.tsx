@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { getMenu, MenuProps } from "../../pages/api/get-menu";
 import Modal from "react-modal";
 import MenuStarRatings from "../Examples/MenuStarRatings";
@@ -88,7 +88,7 @@ const ModalMenuInfo = (props: Props) => {
     <>
       <button
         onClick={openModal}
-        className="text-white w-14 bg-gray-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 mx-auto text-center"
+        className="text-white w-14 bg-orange-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 mx-auto text-center"
       >
         <div className="inline-block mt-1">
           <svg
@@ -120,7 +120,7 @@ const ModalMenuInfo = (props: Props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="bg-gray-300 p-2 rounded-md w-128">
+        <div className="bg-orange-300 p-2 rounded-md w-128">
         <div className="flex flex-shrink-0 items-center justify-end md:pt-0">
           <button
             type="button"

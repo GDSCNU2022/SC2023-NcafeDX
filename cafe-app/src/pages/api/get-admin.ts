@@ -10,7 +10,7 @@ export const getAllNews = async (db: any, setFunc: Function) => {
     // return Promise type
     const collRef = collection(db, "News");
     const q = query(collRef);
-    const docSnap = await getDocs(q);
+    const docSnap = await getDocs(q); 
     let newData: any;
 
     // docSnap は要素1, 条件検索のためqueryを使用

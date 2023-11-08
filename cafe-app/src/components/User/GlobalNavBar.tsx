@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { auth, provider } from "../../../firebase/client";
-import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "@src/firebase/client";
+import { signInWithPopup } from "@firebase/auth";
 import Link from "next/link";
-import AdminTop from "@/pages/AdminTop";
+import AdminTop from "@src/pages/adminpages/AdminTop";
+import router from 'next/router'
 
 const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string) 
 
@@ -46,11 +47,9 @@ function GlobalNavBar() {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-gray-400 p-4 shadow-lg">
-        <button>
-          <Link className="pl-5 text-xl font-bold italic" href="/">
-            N cafe
-          </Link>
+      <div className="flex items-center justify-between p-4 shadow-lg">
+        <button className="pl-5 text-xl font-bold italic" onClick={()=>{router.push('/')}}>
+            DA VINCI HALL
         </button>
         <nav>
           <section className="MOBILE-MENU flex lg:hidden">
@@ -87,19 +86,24 @@ function GlobalNavBar() {
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <Link href="/#news" onClick={() => setIsNavOpen(false)}>
+                  <button onClick={()=>{setIsNavOpen(false), router.push('/#news')}}>
                     News
-                  </Link>
+                  </button>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <Link href="/#infomation" onClick={() => setIsNavOpen(false)}>
+                  <button onClick={()=>{setIsNavOpen(false), router.push('/#infomation')}}>
                     Restaurant Info
-                  </Link>
+                  </button>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <Link href="/#access" onClick={() => setIsNavOpen(false)}>
+                  <button onClick={()=>{setIsNavOpen(false), router.push('/#access')}}>
                     Access
-                  </Link>
+                  </button>
+                </li>
+                <li className="border-b border-gray-400 my-8 uppercase">
+                  <button onClick={()=>{router.push('/signin')}}>
+                  マイページ
+                  </button>
                 </li>
                 <li className="border-b border-gray-400 my-8 uppercase">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
@@ -111,7 +115,7 @@ function GlobalNavBar() {
                       signIn();
                     }}
                   >
-                    Admin Login
+                    管理者ログイン
                   </button>
                 </li>
               </ul>
@@ -126,14 +130,17 @@ function GlobalNavBar() {
               <Link href="/#infomation">Restaurant Info</Link>
             </li>
             <li className="flex text-xs top-0 justify-center ">
-              <button
-                onClick={() => {
-                  setIsNavOpen(false);
-                  signIn();
-                }}
-              >
-                Admin Login
+              <button onClick={()=>{router.push('/signin')}}>
+              マイページ
               </button>
+            </li>
+            <li className="flex text-xs top-0 justify-center ">
+              <button onClick={() => { setIsNavOpen(false); signIn();}}>
+                管理者ログイン
+              </button>
+            </li>
+            <li>
+              <Link href="adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
             </li>
           </ul>
         </nav>

@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
 const nextConfig = {
   trailingSlash: true,
   reactStrictMode: true,
@@ -12,6 +13,10 @@ const nextConfig = {
       },
     ],
     domains: ["firebasestorage.googleapis.com"],
+  },
+  webpack(config, options) {
+    config.resolve.alias['@src'] = path.join(__dirname, 'src')
+    return config
   },
 };
 

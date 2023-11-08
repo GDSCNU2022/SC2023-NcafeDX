@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { newNews } from '../../pages/api/get-news';
-import { db } from '../../../firebase/client';
+import { db } from '../../firebase/client';
 import { Timestamp } from 'firebase/firestore';
 import { Textarea } from '@material-tailwind/react';
 
@@ -42,9 +42,9 @@ const NewsForm = (props: any) => {
 
         <div className="w-full mx-auto py-2">
             <label  htmlFor="dropdown" className="text-sm font-bold">本文</label>
-            <Textarea {...register('content',{required: true})} 
+            <textarea {...register('content',{required: true})} 
             className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
-            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></Textarea>
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
             <ErrorMessage errors={errors} name="content"/>
         </div>
             <div className="">

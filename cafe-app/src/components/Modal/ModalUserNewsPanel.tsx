@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { updateNewsWithDate } from "../../pages/api/get-news";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { Textarea } from "@material-tailwind/react";
 import { NewsProps } from "../Form/NewsForm";
 import { Timestamp } from "firebase/firestore";
@@ -33,7 +33,8 @@ const Panel = (props: Props) => {
   const formatDate = format("yyyy年MM月dd日");
 
   return (
-    <>
+    <div className="p-4 bg-gray-400">
+      <div className="p-4 bg-white rounded-lg">
       <div className="flex-col flex-shrink-0 items-center rounded-md border-b-2  border-neutral-100 border-opacity-100 dark:border-opacity-50 px-2 mx-auto">
         <div className="flex justify-between">
           <p>{props.data.date ? formatDate(props.data.date.toDate()) : ""}</p>
@@ -68,12 +69,13 @@ const Panel = (props: Props) => {
           <hr />
         </div>
 
-        <div className="flex flex-col mx-auto py-2">
+        <div className="flex flex-col mx-auto py-2 m-4">
           <p>{props.data.content}</p>
           <ErrorMessage errors={errors} name="content" />
         </div>
       </div>
-    </>
+      </div>
+    </div>
   );
 };
 

@@ -1,8 +1,6 @@
-import MenuCardDev from "@/components/User/MenuCardDev";
-import { Inter } from "next/font/google";
-import AdminTop from "./AdminTop";
-import UserHome from "./UserHome";
-const inter = Inter({ subsets: ["latin"] });
+import MenuCardDev from "@src/components/User/MenuCardDev";
+import AdminTop from "./adminpages/AdminTop";
+import UserHome from "./Home";
 import React from "react";
 
 export default function Home() {

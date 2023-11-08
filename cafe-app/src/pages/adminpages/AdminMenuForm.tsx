@@ -1,6 +1,5 @@
-import { Inter } from 'next/font/google'
-import AdminMenuList from '../components/AdminList/AdminMenuList';
-const inter = Inter({ subsets: ['latin'] })
+import AdminMenuList from '@src/components/AdminList/AdminMenuList';
+
 
 const AdminMenuForm = () => {
     return (

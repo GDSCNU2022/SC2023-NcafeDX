@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllNews, deleteNewsWithDate } from "../../pages/api/get-news";
-import { db } from "../../../firebase/client";
+import { db } from "../../firebase/client";
 import { database } from "firebase-admin";
 import { format } from "date-fns/fp";
 import { Timestamp } from "firebase/firestore";
@@ -66,11 +66,11 @@ const UserNewsList = (props: NewsProps) => {
   }, []);
 
   return (
-    <div>
+    <div className="h-128 bg-cover bg-no-repeat bg-center">
       {/* <div className="overflow-scroll h-128"> */}
-      <div className="px-12 pt-4">
+      <div className="overflow-auto px-12 pt-4">
         <div className="flex flex-col">
-          <div className="overflow-x-auto  no-scrollbar sm:-mx-6 lg:-mx-8">
+          <div className="overflow-hidden overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
               {list ? (
                 list.map((data: Data, i) => {
@@ -81,7 +81,7 @@ const UserNewsList = (props: NewsProps) => {
                         key={i}
                       >
                         <div className=" px-3 py-2 truncate">
-                          <p className="text-xs">
+                          <p className="text-left text-xs">
                             {data.date ? formatDate(data.date.toDate()) : ""}
                           </p>
                           <p className="text-md">{data.title}</p>

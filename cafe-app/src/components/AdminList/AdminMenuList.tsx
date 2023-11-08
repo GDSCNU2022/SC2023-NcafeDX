@@ -2,7 +2,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { MenuProps, getAllMenus, listenMenus, RestaurantType, deleteMenuWithID, updateMenu } from '../../pages/api/get-menu';
-import { db } from '../../../firebase/client';
+import { db } from '../../firebase/client';
 import { database } from 'firebase-admin';
 import InputCheckbox from './InputCheckbox';
 import MenuForm, {gender} from '../Form/MenuForm';
@@ -23,7 +23,6 @@ type NewProps = {
   C: number;
   id: any;
 }
-
 
 const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();

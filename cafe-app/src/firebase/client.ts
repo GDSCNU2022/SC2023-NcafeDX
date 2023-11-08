@@ -17,6 +17,7 @@ export const analytics =
     process.env.NODE_ENV === "production" && typeof window !== "undefined"
     ? getAnalytics()
     : undefined;
+
 export const db = getFirestore();
 export const storage = getStorage();
 export const auth = getAuth();
