@@ -87,21 +87,6 @@ function GlobalNavBar() {
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#news')}}>
-                    News
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#infomation')}}>
-                    Restaurant Info
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#access')}}>
-                    Access
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
                   <button onClick={()=>{router.push('/signin')}}>
                   マイページ
                   </button>
@@ -124,12 +109,6 @@ function GlobalNavBar() {
           </section>
 
           <ul className="DESKTOP-MENU hidden space-x-8 lg:flex ">
-            <li>
-              <Link href="/#news">News</Link>
-            </li>
-            <li>
-              <Link href="/#infomation">Restaurant Info</Link>
-            </li>
             <li className="flex text-xs top-0 justify-center ">
               <button onClick={()=>{router.push('/signin')}}>
               マイページ
@@ -141,7 +120,7 @@ function GlobalNavBar() {
               </button>
             </li>
             <li>
-              <Link href="adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
+              <Link href="/adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
             </li>
           </ul>
         </nav>

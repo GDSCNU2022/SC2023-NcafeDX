@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
-import { db } from "../../firebase/client";
+import { db } from "@src/firebase/client";
 import {
   categories,
   getAllMenus,
   RestaurantType,
-} from "../../pages/api/get-menu";
-import MenuStarRatings from "../Examples/MenuStarRatings";
-import ModalMenuInfo from "../Modal/ModalMenuInfo";
+} from "@src/pages/api/get-menu";
+import MenuStarRatings from "@src/components/Examples/MenuStarRatings";
+import ModalMenuInfo from "@src/components/Modal/ModalMenuInfo";
 import ReactStarRatings from "@src/components/Examples/ReactStarRatings";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
 type Props = {
   restaurant: RestaurantType;
+  category: string;
 };
 
 function cafecolor(prop: string) {
@@ -26,7 +27,7 @@ function cafecolor(prop: string) {
   return bgcolor;
 }
 
-const MenuCardDev = (props: Props) => {
+const EachMenuCategory = (props: Props) => {
   const [list, setList] = useState<Array<any>>([]);
 
   const updateList = (doc: any) => {
@@ -52,23 +53,16 @@ const MenuCardDev = (props: Props) => {
   return (
     <>
       <section className="text-gray-900 border-t border-gray-200">
-        {categories.map((category, i) => {
-          return (
             <>
-              <h2
-                className="flex justify-center pt-5 text-center text-2xl font-bold text-pink-400 pb-3"
-                id={category.nameid}
-                key={i}
-              >
-                {category.name === "Lunch Set" ? "定食" : category.name === "Bowl" ? "丼" : category.name === "Noodle" ? "麺類" : "カレー"}
-              </h2>
               <div id="menu-card" className="container mx-auto">
                 <div className="flex flex-wrap justify-center">
                   {list.map((menu, index) => {
                     return (
                       <>
                         {(() => {
-                          if (category.nameid === menu.category) {
+                          console.log(props.category)
+                          console.log(menu.category)
+                          if (props.category === menu.category) {
                             return (
                               <>
                                 <div
@@ -101,14 +95,8 @@ const MenuCardDev = (props: Props) => {
                                           {menu.name}
                                         </h2>
                                         <h2 className="text-gray-900 text-3xl font-medium">
-                                          {menu.price}
+                                          ¥{menu.price}
                                         </h2>
-                                        <h2>
-                                          {menu.allergens}
-                                        </h2>
-                                        <div>
-                                          <a>{menu.text}</a>
-                                        </div>
                                       </div>
                                       <a href={menu.url}>
                                         <div className="absolute bottom-5 right-5 w-1/4 mx-auto">
@@ -132,10 +120,8 @@ const MenuCardDev = (props: Props) => {
                 </div>
               </div>
             </>
-          );
-        })}
       </section>
     </>
   );
 };
-export default MenuCardDev;
+export default EachMenuCategory;
