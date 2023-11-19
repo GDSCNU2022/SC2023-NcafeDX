@@ -25,11 +25,23 @@ export type Nutrition = {
   F: number;
   C: number;
 };
+export type Allergens = {
+  shrimp: boolean;
+  crab: boolean;
+  walnut: boolean;
+  wheat: boolean;
+  soba: boolean;
+  egg: boolean;
+  dairy: boolean;
+  peanut: boolean;
+}
 export type MenuProps = {
   name: string;
   id: string;
   category: string;
   nutrition: Nutrition;
+  allergens?: Allergens;
+  text: string;
   price: number;
   starStorage: number[];
   stars?: number | null;

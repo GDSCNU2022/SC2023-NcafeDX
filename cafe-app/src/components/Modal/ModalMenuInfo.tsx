@@ -53,6 +53,7 @@ const ModalMenuInfo = (props: Props) => {
       F: 0,
       C: 0,
     },
+    text:""
   };
   const path = props.restaurant + "/" + props.name;
   const [menu, setMenus] = useState<MenuProps>(initMenu);
@@ -88,7 +89,7 @@ const ModalMenuInfo = (props: Props) => {
     <>
       <button
         onClick={openModal}
-        className="text-white w-14 bg-gray-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 mx-auto text-center"
+        className="text-white w-14 bg-orange-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 mx-auto text-center"
       >
         <div className="inline-block mt-1">
           <svg
@@ -120,7 +121,7 @@ const ModalMenuInfo = (props: Props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="bg-gray-300 p-2 rounded-md w-128">
+        <div className="bg-orange-300 p-2 rounded-md w-128">
         <div className="flex flex-shrink-0 items-center justify-end md:pt-0">
           <button
             type="button"
@@ -164,7 +165,7 @@ const ModalMenuInfo = (props: Props) => {
                         ¥{menu.price}
                       </h2>
                     </div>
-                    <div className="absolute bottom-5 right-5 w-1/4 mx-auto">
+                    <div className="flex pb-4 content-end justify-end">
                       <ModalStarWindow
                         restaurant={props.restaurant}
                         menuName={props.name}

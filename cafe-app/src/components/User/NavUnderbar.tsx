@@ -27,7 +27,7 @@ function NavUnderbar() {
             <div className="text-xs text-gray-900">ホーム</div>
           </div>
           <div className="text-green-400 mr-5 hover:text-white hover:bg-yellow-300 duration-300">
-            <Link href="/DaVinch">
+            <Link href="restaurantpages/DaVinch">
               <div
                 className="
               text-2xl "

@@ -49,10 +49,10 @@ const ModalStarWindow = (props: Props) => {
     <>
       <button
         onClick={openModal}
-        className="px-2 bg-slate-600 align-middle
-        h-6 shadow-md rounded-md text-white"
+        className="px-4 pt-2 pb-2 text-align-center bg-slate-600 align-middle
+        shadow-md rounded-md text-white"
       >
-        Review
+        評価する
       </button>
       <Modal
         isOpen={isOpenModal}

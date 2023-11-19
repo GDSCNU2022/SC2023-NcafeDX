@@ -2,8 +2,11 @@ import AdminNewsList from '@src/components/AdminList/AdminNewsList';
 
 
 const AdminMenuForm = () => {
+    console.log("called in admin menu form")
     return (
-        <AdminNewsList props={"DaVinch_News"}></AdminNewsList>
+        <>
+            <AdminNewsList props={"DaVinch_News"}></AdminNewsList>
+        </>
     );
 }
 

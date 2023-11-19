@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { auth, provider } from "@src/firebase/client";
 import { signInWithPopup } from "@firebase/auth";
 import Link from "next/link";
-import AdminTop from "@src/pages/AdminTop";
+import AdminTop from "@src/pages/adminpages/AdminTop";
 import router from 'next/router'
 
 const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string) 
@@ -48,9 +48,9 @@ function GlobalNavBar() {
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-gray-400 p-4 shadow-lg">
+      <div className="flex items-center justify-between p-4 shadow-lg">
         <button className="pl-5 text-xl font-bold italic" onClick={()=>{router.push('/')}}>
-            N cafe
+            DA VINCI HALL
         </button>
         <nav>
           <section className="MOBILE-MENU flex lg:hidden">
@@ -87,21 +87,6 @@ function GlobalNavBar() {
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#news')}}>
-                    News
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#infomation')}}>
-                    Restaurant Info
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{setIsNavOpen(false), router.push('/#access')}}>
-                    Access
-                  </button>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
                   <button onClick={()=>{router.push('/signin')}}>
                   マイページ
                   </button>
@@ -124,12 +109,6 @@ function GlobalNavBar() {
           </section>
 
           <ul className="DESKTOP-MENU hidden space-x-8 lg:flex ">
-            <li>
-              <Link href="/#news">News</Link>
-            </li>
-            <li>
-              <Link href="/#infomation">Restaurant Info</Link>
-            </li>
             <li className="flex text-xs top-0 justify-center ">
               <button onClick={()=>{router.push('/signin')}}>
               マイページ
@@ -139,6 +118,9 @@ function GlobalNavBar() {
               <button onClick={() => { setIsNavOpen(false); signIn();}}>
                 管理者ログイン
               </button>
+            </li>
+            <li>
+              <Link href="/adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
             </li>
           </ul>
         </nav>
