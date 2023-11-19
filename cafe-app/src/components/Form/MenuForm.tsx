@@ -22,6 +22,15 @@ type FormMenuProps = {
     P: number;
     F: number;
     C: number;
+    shrimp: boolean;
+    crab: boolean;
+    walnut: boolean;
+    wheat: boolean;
+    soba: boolean;
+    egg: boolean;
+    dairy: boolean;
+    peanut: boolean;
+    text: string;
     imageURL: string;
 }
 
@@ -41,6 +50,8 @@ const MenuForm = (props: any) => {
             starStorage: [],
             stars: 0,
             nutrition: {kcal: data.kcal, P: data.P, F: data.F, C: data.C},
+            allergens: {shrimp: data.shrimp, crab: data.crab, walnut: data.walnut, wheat: data.wheat, soba: data.soba, egg: data.egg, dairy: data.dairy, peanut: data.peanut},
+            text: data.text,
             imageURL: data.imageURL,
         }
         console.log(`newData: ${newData}`);
@@ -61,6 +72,8 @@ const MenuForm = (props: any) => {
         console.log(url);
         if(url) setValue('imageURL', url);
     }
+
+    const checkboxStyle = ""
 
     return(
         <div>
@@ -132,6 +145,54 @@ const MenuForm = (props: any) => {
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                         <ErrorMessage errors={errors} name="C" />
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">えび</label>
+                        <input type="checkbox" {...register('shrimp',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">かに</label>
+                        <input type="checkbox" {...register('crab',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">くるみ</label>
+                        <input type="checkbox" {...register('walnut',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+                    
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">小麦</label>
+                        <input type="checkbox" {...register('wheat',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">そば</label>
+                        <input type="checkbox" {...register('soba',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">卵</label>
+                        <input type="checkbox" {...register('egg',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">乳</label>
+                        <input type="checkbox" {...register('dairy',{ required: false,})}
+                        className={checkboxStyle}></input>
+                        </div>
+
+                    <div className="flex flex-col w-24 mx-auto py-2">
+                        <label className="text-sm font-bold">落花生</label>
+                        <input type="checkbox" {...register('peanut',{ required: false,})}
+                        className={checkboxStyle}></input>
                         </div>
 
                     <div className="flex flex-col w-64 mx-auto py-2">

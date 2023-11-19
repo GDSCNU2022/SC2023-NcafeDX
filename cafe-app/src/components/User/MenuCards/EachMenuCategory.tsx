@@ -55,7 +55,7 @@ const EachMenuCategory = (props: Props) => {
       <section className="text-gray-900 border-t border-gray-200">
             <>
               <div id="menu-card" className="container mx-auto">
-                <div className="flex flex-wrap justify-center">
+                <div className="flex grid grid-cols-2 justify-center">
                   {list.map((menu, index) => {
                     return (
                       <>
@@ -64,42 +64,34 @@ const EachMenuCategory = (props: Props) => {
                           console.log(menu.category)
                           if (props.category === menu.category) {
                             return (
-                              <>
+                              <div className="flex">
                                 <div
-                                  className="aspect-[1/1] w-1/2 md:w-1/2 p-6 mx-auto"
+                                  className="w-full p-6 mx-auto"
                                   key={index}
                                 >
-                                  <div className="object-left-top bg-white rounded-lg shadow-lg ">
-                                    <div className="aspect-[8/5]">
-                                      <div
-                                        className={`w-full ${stylecolor} rounded-t-lg h-1/5 `}
-                                      ></div>
-                                      <div
-                                        className={`w-full ${stylecolor} rounded-b-full h-4/5`}
-                                      ></div>
-                                    </div>
-                                    <div className="relative">
-                                      <div className="absolute w-10/12 top-3/5 left-1/2 transform -translate-x-1/2 -translate-y-3/4">
+                                  <div className="bg-white rounded-lg shadow-lg">
+                                    <div className="">
+                                      <div className="">
                                         <img
-                                          className="rounded-lg bg-clip-padding"
+                                          className="rounded-t-lg bg-clip-padding"
                                           src={menu.imageURL}
                                         />{" "}
                                       </div>
                                     </div>
-                                    <div className="relative p-2 md:p-4">
-                                      <div className="flex-col items-center pt-10 md:pt-20 mb-1">
+                                    <div className="w-full p-2 md:p-4">
+                                      <div className="mb-1">
                                         <MenuStarRatings
                                           ratings={menu.stars ? menu.stars : 0}
                                         />
-                                        <h2 className="text-gray-900 text-md font-medium">
+                                        <h2 className="text-gray-900 text-md md:text-md sm:text-md font-medium">
                                           {menu.name}
                                         </h2>
-                                        <h2 className="text-gray-900 text-3xl font-medium">
+                                        <h2 className="text-gray-900 text-2xl md:text-xl sm:text-xl font-medium">
                                           ¥{menu.price}
                                         </h2>
                                       </div>
                                       <a href={menu.url}>
-                                        <div className="absolute bottom-5 right-5 w-1/4 mx-auto">
+                                        <div className="flex">
                                           <ModalMenuInfo
                                             restaurant={props.restaurant}
                                             name={menu.name}
@@ -110,7 +102,7 @@ const EachMenuCategory = (props: Props) => {
                                     </div>
                                   </div>
                                 </div>
-                              </>
+                              </div>
                             );
                           }
                         })()}

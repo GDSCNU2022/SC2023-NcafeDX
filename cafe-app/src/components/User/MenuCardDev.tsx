@@ -76,14 +76,7 @@ const MenuCardDev = (props: Props) => {
                                   key={index}
                                 >
                                   <div className="object-left-top bg-white rounded-lg shadow-lg ">
-                                    <div className="aspect-[8/5]">
-                                      <div
-                                        className={`w-full ${stylecolor} rounded-t-lg h-1/5 `}
-                                      ></div>
-                                      <div
-                                        className={`w-full ${stylecolor} rounded-b-full h-4/5`}
-                                      ></div>
-                                    </div>
+                                  
                                     <div className="relative">
                                       <div className="absolute w-10/12 top-3/5 left-1/2 transform -translate-x-1/2 -translate-y-3/4">
                                         <img

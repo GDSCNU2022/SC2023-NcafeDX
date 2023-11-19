@@ -53,6 +53,7 @@ const ModalMenuInfo = (props: Props) => {
       F: 0,
       C: 0,
     },
+    text:""
   };
   const path = props.restaurant + "/" + props.name;
   const [menu, setMenus] = useState<MenuProps>(initMenu);
@@ -164,7 +165,7 @@ const ModalMenuInfo = (props: Props) => {
                         ¥{menu.price}
                       </h2>
                     </div>
-                    <div className="absolute bottom-5 right-5 w-1/4 mx-auto">
+                    <div className="flex pb-4 content-end justify-end">
                       <ModalStarWindow
                         restaurant={props.restaurant}
                         menuName={props.name}

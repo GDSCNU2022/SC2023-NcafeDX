@@ -27,6 +27,7 @@ const NutritionCard = (props: Props) => {
       F: 0,
       C: 0,
     },
+    text: ""
   };
   const [menus, setMenus] = useState<MenuProps>(initMenu);
 

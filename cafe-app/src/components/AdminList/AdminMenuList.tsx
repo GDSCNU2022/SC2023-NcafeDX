@@ -8,6 +8,9 @@ import InputCheckbox from './InputCheckbox';
 import MenuForm, {gender} from '../Form/MenuForm';
 import Image from 'next/image';
 import ModalImageGrid from '../Modal/ModalImageGrid';
+import ModalTextboxPanel from '../Modal/ModalTextboxPanel';
+import ModalTextboxWindow from '../Modal/ModalTextboxWindow';
+import BoolCheckbox from '../Utils/BoolCheckBox';
 
 type Props = {
     restaurant: RestaurantType;
@@ -21,6 +24,15 @@ type NewProps = {
   P: number;
   F: number;
   C: number;
+  shrimp: boolean;
+  crab: boolean;
+  walnut: boolean;
+  wheat: boolean;
+  soba: boolean;
+  egg: boolean;
+  dairy: boolean;
+  peanut: boolean;
+  text: string;
   id: any;
 }
 
@@ -93,6 +105,8 @@ const AdminMenuList = (props: Props) => {
       console.log(`name:${name}`);
       const field = name.split('-')[0];
 
+      const allergens = ['shrimp', 'crab', 'walnut', 'wheat', 'soba', 'egg', 'dairy', 'peanut']
+
       setList((l: any) => {
         const newList = [...l];
         newList.map((obj: any , i: number) => {
@@ -104,7 +118,17 @@ const AdminMenuList = (props: Props) => {
               nutrition: {...obj.nutrition, [field]: value}
             };
             updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+          } else if (allergens.includes(field)) {
+            console.log("Edit Allergens")
+            console.log({...obj})
+            const newObj = {
+              ...obj,
+              allergens: {...obj.allergens, [field]: value === "on" ? true : false}
+            };
+            console.log(newObj.allergens)
+            updateMenu(db, `${props.restaurant}/${obj.id}`, newObj)
           } else {
+            console.log("Edit Misc props")
             console.log(`${obj[field]} => ${value}`);
             const newObj = {
               ...obj,
@@ -140,7 +164,7 @@ const AdminMenuList = (props: Props) => {
               <thead
                 className="border-b  bg-neutral-200 font-medium">
                 <tr>
-                  {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C', '登録画像'].map((inp: string) => (
+                  {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C', 'えび', 'かに', 'くるみ', '小麦', 'そば', '卵', '乳', '落花生', '紹介文', '登録画像'].map((inp: string) => (
                   <th scope="col" className="px-4 py-2">{inp}</th>
                   ))}
                   <th scope="col" className="px-4 py-2 flex justify-center">
@@ -228,6 +252,95 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
+
+                      <td scope="col" className="px-4 py-2">
+                        <BoolCheckbox
+                          className="w-14 bg-neutral-200"
+                          targetName="shrimp"
+                          targetValue={data.shrimp}
+                          register={register}
+                          i={i}
+                          onChangeInput={onChangeInput}
+                        />
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`crab-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.crab
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`walnut-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.walnut
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`wheat-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.wheat
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`soba-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.soba
+                        }
+                          )}/>
+                      </td>
+
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`egg-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.egg
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`dairy-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.dairy
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <input
+                          className="w-14 bg-neutral-200"
+                          type="checkbox"
+                          {...register(`peanut-${i}`, {
+                          onChange: (e: any) => onChangeInput(e, i),
+                          value: data.peanut
+                        }
+                          )}/>
+                      </td>
+                      <td scope="col" className="px-4 py-2">
+                        <ModalTextboxWindow
+                        parentObj={data} targetId={data.id} restaurant={props.restaurant}/>
+                      </td>
+
+                      
+                      
                       <td scope="col" className="px-4 py-2 inline-grid">
                           <ModalImageGrid parentHandlerSubmit={handleImageEdit} src={data.imageURL} index={i}/>
 
