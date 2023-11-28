@@ -41,7 +41,7 @@ export type MenuProps = {
   category: string;
   nutrition: Nutrition;
   allergens?: Allergens;
-  text: string;
+  text?: string;
   price: number;
   starStorage: number[];
   stars?: number | null;

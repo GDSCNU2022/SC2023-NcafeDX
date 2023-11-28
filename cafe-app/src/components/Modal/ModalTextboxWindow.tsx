@@ -3,11 +3,13 @@ import { db } from "../../firebase/client";
 import ModalTextboxPanel from "./ModalTextboxPanel";
 import Modal, { setAppElement } from "react-modal";
 import { is } from "date-fns/locale";
+import { SubmitHandler, Field } from "react-hook-form";
 
 type Props = {
     parentObj?: any;
     restaurant: string;
     targetId: string;
+    handleSubmit: any;
 }
 
 const customStyles = {
@@ -65,6 +67,7 @@ const ModalTextboxWindow = (props: Props) => {
             restaurant={props.restaurant}
             targetId={props.targetId}
             close={closeModal}
+            handleSubmit={props.handleSubmit}
             />
             </Modal>
 </div> 

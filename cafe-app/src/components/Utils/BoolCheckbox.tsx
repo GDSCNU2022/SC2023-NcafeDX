@@ -15,7 +15,7 @@ const BoolCheckbox = (props: Props) => {
   <input type="checkbox" checked={props.checked} className={props.className} 
   {...props.register(`${props.targetName}-${props.i}`, {
                           onChange: (e: any) => props.onChangeInput(e, props.i),
-                          value: props.targetValue
+                          value: {checked === "on" ? true : false}
                         }
                           )}/>
   )

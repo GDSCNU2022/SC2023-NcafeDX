@@ -76,12 +76,14 @@ const MenuForm = (props: any) => {
     const checkboxStyle = ""
 
     return(
-        <div>
-            <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit} text="Register Image"/>
+        <div className="flex justify-center grid">
+            <div className="">
+                <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit} text="商品画像を登録"/>
+            </div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="p-4 overflow-auto">
-                <div className="inline-flex w-128">
+                <div className="grid grid-rows-4 grid-cols-1 border m-4 p-2">
+                    <div className="inline-flex w-full">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
                         <input {...register('name',{required: true, maxLength: 20})} 
@@ -146,7 +148,9 @@ const MenuForm = (props: any) => {
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                         <ErrorMessage errors={errors} name="C" />
                         </div>
-
+                    </div>
+                    
+                    <div id="allergens" className="w-full inline-flex">
                     <div className="flex flex-col w-24 mx-auto py-2">
                         <label className="text-sm font-bold">えび</label>
                         <input type="checkbox" {...register('shrimp',{ required: false,})}
@@ -194,21 +198,30 @@ const MenuForm = (props: any) => {
                         <input type="checkbox" {...register('peanut',{ required: false,})}
                         className={checkboxStyle}></input>
                         </div>
+                    </div>
+                    
+                    <div id="text" className="w-1/3">
+                        <div className="grid py-2">
+                            <label className="text-sm font-bold">テキスト</label>
+                            <textarea className="border" {...register('text', {required: false, disabled: false})}/>
+                            </div>
+                    </div>
 
-                    <div className="flex flex-col w-64 mx-auto py-2">
-                        <label className="text-sm font-bold">Image URL</label>
-                        <input {...register('imageURL',{ required: false, disabled: true})}
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-300 rounded-md shadow-sm
-                        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
-                        <ErrorMessage errors={errors} name="imageURL" />
-                        </div>
+                    <div id="image-registration" className="">
+                        <div className="w-64 py-2">
+                            <label className="text-sm font-bold">登録した画像パス</label>
+                            <input {...register('imageURL',{ required: false, disabled: true})}
+                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-300 rounded-md shadow-sm
+                            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
+                            <ErrorMessage errors={errors} name="imageURL" />
+                            </div>
+                    </div>
 
-                </div>
-                        <div className="">
+                        <div className="p-4">
                         <button type="submit"
                         className="py-2 mt-6 w-24 bg-blue-500 text-white rounded-md shadow-sm 
                         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                        focus:ring-offset-2 h-10">Submit</button>
+                        focus:ring-offset-2 h-10">商品登録</button>
                         </div>
             </div>
         </form>

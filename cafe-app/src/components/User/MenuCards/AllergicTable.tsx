@@ -28,11 +28,30 @@ const AllergicTable = (props: Props) => {
           </tr>
         </thead>
         <tbody>
-          {Object.values(allergicBool).map((value: boolean, i: number) => (
-              <td scope="col" className="px=4 py-2 border text-center">
-                <a>{value ? '○': '-'}</a>
-              </td>
-          ))}
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.shrimp ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.crab ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.walnut ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.wheat ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.soba ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.egg ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.dairy ? '○' : '-'}</a>
+            </td>
+            <td scope="col" className="px=4 py-2 border text-center">
+              <a>{allergicBool.peanut ? '○' : '-'}</a>
+            </td>
         </tbody>
       </table>
     </>

@@ -66,7 +66,7 @@ const ModalImageGrid = (props: Props) => {
         <div className="relative aspect-square flex justify-center">
         <img src={props.src} className="p-0.5 object-cover"/>
         </div></button> : <button onClick={openModal} className={props.index !== undefined ?
-        "px-1 h-6 text-center bg-slate-600 align-middle shadow-md rounded-md text-white m-1" 
+        "px-1 h-6 w-16 text-center bg-slate-600 align-middle shadow-md rounded-md text-white m-1" 
         : "p-2 justify-start bg-slate-600 align-middle h-10 shadow-md rounded-md text-white m-4"}>
         {props.text}</button>}
         <Modal
