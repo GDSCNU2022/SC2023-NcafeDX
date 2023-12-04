@@ -34,9 +34,14 @@ export const GoogleLogin = () => {
         const user = result.user
         console.log(user)
         console.log(user.uid)
-        console.log('login as user');
-        router.push('/mypages/MyPage')
-
+        user.getIdTokenResult(true).then((idTokenResult) => {
+          if (idTokenResult.claims.admin) {
+            console.log('login as admin');
+            router.push('/adminpages/AdminTop');
+          } else {
+            console.log('admin login failed');
+          }
+        })
       }
     }).catch((err) => {
       console.error(err)
@@ -55,21 +60,28 @@ export const GoogleLogin = () => {
     </>  )
 }
 
-export const SignIn: FC<NextPage> = () => {
+export const AdminSignin: FC<NextPage> = () => {
   const [error, setError] = useState('')
   const _auth = auth
 
   useEffect(() => {
-    checkLogin()
+    // checkLogin()
   }, [])
 
   const isValid = async (data: LoginForm) => {
     try {
-      await signInWithEmailAndPassword(_auth, data.email, data.password).then(() => {
-        console.log('login as user');
-        router.push('/mypages/MyPage');
+      await signInWithEmailAndPassword(_auth, data.email, data.password).then((userCredential) => {
+        userCredential.user.getIdTokenResult(true).then((idTokenResult) => {
+          console.log("loginning as admin");
+          console.log(idTokenResult);
+          if (idTokenResult.claims.admin) {
+            console.log('login as admin');
+            router.push('/adminpages/AdminTop');
+          } else {
+            console.log('admin login failed');
+          }
+        })
       })
-
     } catch (e) {
       if (e instanceof FirebaseError) {
         console.log(e)
@@ -89,13 +101,12 @@ export const SignIn: FC<NextPage> = () => {
   const checkLogin = () => {
   onAuthStateChanged(_auth, (user) => {
     if (user) {
-      const uid = user.uid
-      const email = user.email
-      console.log(uid)
-      console.log(email)
-      router.push('/mypages/MyPage')
-    } else {
-      console.log("signed out")
+    user.getIdTokenResult(true).then((idTokenResult) => {
+      if(idTokenResult.claims.admin) {
+        router.push('/adminpages/AdminTop');
+      }
+    })} else {
+      console.log('signed out');
     }
   })
   }
@@ -109,7 +120,7 @@ export const SignIn: FC<NextPage> = () => {
     <>
       <div className='flex'>
         <div className='mx-auto flex w-full flex-col items-center md:w-3/5 lg:w-2/3'>
-          <h1 className='my-10 text-2xl font-bold '> ログイン </h1>
+          <h1 className='my-10 text-2xl font-bold '> 管理者ログイン </h1>
           <form className='mt-2 flex w-8/12 flex-col lg:w-1/2' onSubmit={handleSubmit(isValid)}>
             <div className='mb-4'>
               <label className='mb-1 block'>メールアドレス</label>
@@ -149,11 +160,8 @@ export const SignIn: FC<NextPage> = () => {
           
           <GoogleLogin/>
           
-          <button className='mt-4 w-full text-center' onClick={() => router.push('/signup')}>
-            新規登録はこちら
-          </button>
-          <button className='mt-4 w-full text-center' onClick={() => router.push('/adminpages/AdminSignin')}>
-            管理者ログイン
+          <button className='mt-4 w-full text-center' onClick={() => router.push('/signin')}>
+            ユーザーログインはこちら
           </button>
           <div className='mt-1 text-sm text-red-300'>{error ? <>{error}</> : <></>}</div>
         </div>
@@ -161,16 +169,16 @@ export const SignIn: FC<NextPage> = () => {
     </>
   )
 }
-export default SignIn
+export default AdminSignin
 
 export const logOut = async () => {
   const _auth = auth
   await signOut(_auth)
     .then(() => {
-      router.push('/signin')
+      router.push('/adminpages/AdminSignin');
     })
     .catch((e) => {
-      alert('ログアウトに失敗しました')
+      alert('ログアウトに失敗しました');
       console.log(e)
     })
 }

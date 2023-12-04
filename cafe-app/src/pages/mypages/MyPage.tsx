@@ -28,6 +28,7 @@ const Mypage = () => {
   const [userInfo, setUserInfo] = useState<UserProps>(initInfo)
 
   useEffect(() => {
+    console.log("Called Mypage component")
     onAuthStateChanged(auth, (_user) => {
       if (_user) {
         console.log(_user.uid)
