@@ -1,17 +1,45 @@
-import * as functions from "firebase-functions";
+// @ts-nocheck
+// firebase functions can't read type definitions with ':'.
 
-// // Start writing functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+admin.initializeApp({
+  databaseURL: "https://gdsc-nu-sc2023-default-rtdb.firebaseio.com",
+});
 
-// const functions = require('firebase-functions')
-const admin = require('firebase-admin')
+/* USAGE in your arbitrary page
+firebase.auth().onAuthStateChanged((user) => {
+  
+  // call getIdTokenResult()
+  user.getIdTokenResult(true).then((idTokenResult) => {
+    if (idTokenResult.claims.admin) {
+      commit("userRights");
+    }
+  })
+})
+*/
 
-admin.initializeApp({databaseURL:"MY_DATABASE_URL"})
+const modifyAdmin = (uid, isAdmin) => {
+  admin.auth().setCustmoUserClaims(uid, { admin: isAdmin }).then();
+};
 
 // assign administrator right
-exports.addAdminClaim = functions.firestore.document('')
+exports.addAdminClaim = functions.firestore
+  .document("admin_users/{docID}")
+  .onCreate((snap) => {
+    const newAdminUser = snap.data();
+    if (newAdminUser === undefined) {
+      return;
+    }
+    modifyAdmin(newAdminUser.uid, true);
+  });
+
+exports.removeAdminClaim = functions.firestore
+  .document("admin_users/{docID}")
+  .onCreate((snap) => {
+    const deletedAdminUser = snap.data();
+    if (deletedAdminUser === undefined) {
+      return;
+    }
+    modifyAdmin(deletedAdminUser.uid, false);
+  });

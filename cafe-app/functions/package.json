@@ -2,7 +2,7 @@
   "name": "functions",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run lint && tsc",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
@@ -10,10 +10,13 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
+  "functions": {
+    "predeploy": "npm --prefix functions run build"
+  },
   "engines": {
     "node": "16"
   },
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "dependencies": {
     "@google-cloud/storage": "^6.9.4",
     "firebase-admin": "^11.5.0",

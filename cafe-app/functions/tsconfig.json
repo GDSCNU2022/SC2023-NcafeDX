@@ -1,4 +1,9 @@
 {
+  // other settings...
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitReturns": true,
@@ -9,7 +14,5 @@
     "target": "es2017"
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src", "**/**.ts"]
 }
