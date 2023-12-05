@@ -1,10 +1,11 @@
 import AdminMenuList from '@src/components/AdminList/AdminMenuList';
-
+import AdminNavBar from './AdminNavBar';
 
 const AdminMenuForm = () => {
     return (
         <div>
-        <AdminMenuList restaurant={"DaVinch"}></AdminMenuList>
+            <AdminNavBar/>
+            <AdminMenuList restaurant={"DaVinch"}></AdminMenuList>
         </div>
 
     );

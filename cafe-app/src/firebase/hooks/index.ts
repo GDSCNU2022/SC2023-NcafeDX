@@ -6,7 +6,7 @@ export const signIn = () => {
   const _auth = auth
   const unsubscribed = _auth.onAuthStateChanged(async (user) => {
     if (user === null) {
-      await router.push('/signin')
+      await router.push('/')
     }
     unsubscribed()
   })

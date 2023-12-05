@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged((user) => {
 */
 
 const modifyAdmin = (uid, isAdmin) => {
-  admin.auth().setCustmoUserClaims(uid, { admin: isAdmin }).then();
+  admin.auth().setCustomUserClaims(uid, { admin: isAdmin }).then();
 };
 
 // assign administrator right
@@ -36,7 +36,7 @@ exports.addAdminClaim = functions.firestore
 
 exports.removeAdminClaim = functions.firestore
   .document("admin_users/{docID}")
-  .onCreate((snap) => {
+  .onDelete((snap) => {
     const deletedAdminUser = snap.data();
     if (deletedAdminUser === undefined) {
       return;

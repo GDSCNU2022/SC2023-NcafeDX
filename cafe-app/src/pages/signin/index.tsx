@@ -8,7 +8,7 @@ import {
         onAuthStateChanged,
         } from 'firebase/auth'
 import { NextPage } from 'next'
-import { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { FirebaseError } from 'firebase/app'
 import router from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -60,6 +60,7 @@ export const SignIn: FC<NextPage> = () => {
   const _auth = auth
 
   useEffect(() => {
+    console.log("displaying user signin page.")
     checkLogin()
   }, [])
 
@@ -93,7 +94,7 @@ export const SignIn: FC<NextPage> = () => {
       const email = user.email
       console.log(uid)
       console.log(email)
-      router.push('/mypages/MyPage')
+      // router.push('/mypages/MyPage')
     } else {
       console.log("signed out")
     }
@@ -167,10 +168,11 @@ export const logOut = async () => {
   const _auth = auth
   await signOut(_auth)
     .then(() => {
-      router.push('/signin')
+      console.log("logout now")
+      router.push('/signin');
     })
     .catch((e) => {
-      alert('ログアウトに失敗しました')
-      console.log(e)
+      alert('ログアウトに失敗しました');
+      console.log(e);
     })
 }

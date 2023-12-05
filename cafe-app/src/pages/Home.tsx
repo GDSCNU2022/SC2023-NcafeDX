@@ -13,9 +13,11 @@ import Link from "next/link";
 import CategoryCard from "@src/components/User/CategoryCard ";
 import Swiper from "swiper";
 import CategorySwiper from "@src/components/User/CategorySwiper";
+import { useEffect } from 'react';
 
 const headstytle = "text-xl underline text-center pt-10 pb-3";
 const UserHome = () => {
+  useEffect(() => {console.log("displaying root home page")}, [])
   return (
     <div className="bg-color-zinc-50">
       <GlobalNavBar />

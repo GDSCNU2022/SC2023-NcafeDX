@@ -60,43 +60,44 @@ export const GoogleLogin = () => {
     </>  )
 }
 
-export const AdminSignin: FC<NextPage> = () => {
+const AdminSignin: FC<NextPage> = () => {
   const [error, setError] = useState('')
   const _auth = auth
 
   useEffect(() => {
-    // checkLogin()
+    console.log("displaying admin sign in page")
+    checkLogin()
   }, [])
 
   const isValid = async (data: LoginForm) => {
-    try {
-      await signInWithEmailAndPassword(_auth, data.email, data.password).then((userCredential) => {
+      signInWithEmailAndPassword(_auth, data.email, data.password).then((userCredential) => {
         userCredential.user.getIdTokenResult(true).then((idTokenResult) => {
           console.log("loginning as admin");
-          console.log(idTokenResult);
+          console.log(idTokenResult.claims)
+          console.log(`admin claims => ${idTokenResult.claims.admin}`);
           if (idTokenResult.claims.admin) {
             console.log('login as admin');
             router.push('/adminpages/AdminTop');
           } else {
             console.log('admin login failed');
+            router.push('/adminpages/AdminSignin')
+            setError('指定された管理者が見つかりません')
           }
         })
-      })
-    } catch (e) {
-      if (e instanceof FirebaseError) {
+      }).catch((e) => {
+        if (e instanceof FirebaseError) {
         console.log(e)
         if (e.code === 'auth/invalid-email') {
-          setError('メールアドレスがまちがっています')
+          setError('メールアドレス・パスワードが一致しません')
         } else if (e.code === 'auth/user-disabled') {
           setError('指定されたメールアドレスのユーザーは無効です')
         } else if (e.code === 'auth/user-not-found') {
           setError('指定されたメールアドレスにユーザーが見つかりません')
         } else if (e.code === 'auth/wrong-password') {
-          setError('パスワードがまちがっています')
+          setError('メールアドレス・パスワードが一致しません')
       }
       }
-    }
-  }
+      })}
 
   const checkLogin = () => {
   onAuthStateChanged(_auth, (user) => {
@@ -149,7 +150,7 @@ export const AdminSignin: FC<NextPage> = () => {
             </div>
             <div className='mb-6'>
               <button
-                className='mt-4 w-full rounded bg-pink-400 py-4 text-center font-sans 
+                className='mt-4 w-full rounded bg-sky-400 py-4 text-center font-sans 
                 text-xl font-bold leading-tight md:px-12 md:py-4 md:text-base text-white'
                 type='submit'
               >
@@ -157,8 +158,6 @@ export const AdminSignin: FC<NextPage> = () => {
               </button>
             </div>
           </form>
-          
-          <GoogleLogin/>
           
           <button className='mt-4 w-full text-center' onClick={() => router.push('/signin')}>
             ユーザーログインはこちら
@@ -175,7 +174,7 @@ export const logOut = async () => {
   const _auth = auth
   await signOut(_auth)
     .then(() => {
-      router.push('/adminpages/AdminSignin');
+      // router.push('/adminpages/AdminSignin');
     })
     .catch((e) => {
       alert('ログアウトに失敗しました');

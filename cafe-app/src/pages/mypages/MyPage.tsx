@@ -36,7 +36,8 @@ const Mypage = () => {
         updateInfo(_user)
       }
     })
-
+    const cleanUp = () => {clickLogout();}
+    // return cleanUp();
   }, [])
 
   const updateUser = async (user: any) => {

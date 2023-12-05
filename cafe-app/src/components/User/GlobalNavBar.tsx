@@ -88,40 +88,25 @@ function GlobalNavBar() {
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
                   <button onClick={()=>{router.push('/signin')}}>
-                  マイページ
+                  ログイン
                   </button>
                 </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
+                <li className="border-b border-gray-400 my-8">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
-                </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
-                  <button
-                    onClick={() => {
-                      setIsNavOpen(false);
-                      signIn();
-                    }}
-                  >
-                    管理者ログイン
-                  </button>
                 </li>
               </ul>
             </div>
           </section>
 
           <ul className="DESKTOP-MENU hidden space-x-8 lg:flex ">
-            <li className="flex text-xs top-0 justify-center ">
+            <li className="flex text top-0 justify-center ">
               <button onClick={()=>{router.push('/signin')}}>
-              マイページ
+              ログイン
               </button>
             </li>
-            <li className="flex text-xs top-0 justify-center ">
-              <button onClick={() => { setIsNavOpen(false); signIn();}}>
-                管理者ログイン
-              </button>
-            </li>
-            <li>
-              <Link href="/adminpages/AdminTop">メンテ用管理ページ遷移ボタン</Link>
-            </li>
+            <li className="border-b border-gray-400">
+              <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
+              </li>
           </ul>
         </nav>
         <style>{`
