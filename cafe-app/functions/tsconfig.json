@@ -1,6 +1,12 @@
 {
+  // other settings...
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  },
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
@@ -9,7 +15,5 @@
     "target": "es2017"
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

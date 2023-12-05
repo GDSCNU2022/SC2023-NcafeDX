@@ -17,8 +17,8 @@
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"],
-    }
+    },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/User/MenuCards/EachMenuCategory.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/User/MenuCards/EachMenuCategory.tsx", "functions/src/index.ts"],
   "exclude": ["node_modules"]
 }

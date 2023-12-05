@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm,  SubmitHandler, Field } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { db } from '../../firebase/client';
 import { Textarea } from '@material-tailwind/react';
@@ -11,6 +11,7 @@ type Props = {
     close?: () => void;
     parentObj: any;
     targetId: string;
+    handleSubmit: SubmitHandler<Field>;
 }
 const ModalTextboxPanel = (props: Props) => {
     const { setValue, reset, register, handleSubmit, formState: { errors } } = useForm();
@@ -32,7 +33,7 @@ const ModalTextboxPanel = (props: Props) => {
 
     return (
         <div className="w-[40rem] md:w-[30rem] sm:w-[20rem]">
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(props.handleSubmit)}>
         <div className="flex flex-col mx-auto py-2">
         <label className="text-sm font-bold">本文</label>
         <textarea {...register('text',{required: true, value: props.parentObj.text})} 

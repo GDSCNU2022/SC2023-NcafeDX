@@ -10,7 +10,7 @@ import Image from 'next/image';
 import ModalImageGrid from '../Modal/ModalImageGrid';
 import ModalTextboxPanel from '../Modal/ModalTextboxPanel';
 import ModalTextboxWindow from '../Modal/ModalTextboxWindow';
-import BoolCheckbox from '../Utils/BoolCheckBox';
+import BoolCheckbox from '@src/components/Utils/BoolCheckbox';
 
 type Props = {
     restaurant: RestaurantType;
@@ -36,11 +36,35 @@ type NewProps = {
   id: any;
 }
 
+type AllergenProps = {
+  shrimp: boolean;
+  crab: boolean;
+  walnut: boolean;
+  wheat: boolean;
+  soba: boolean;
+  egg: boolean;
+  dairy: boolean;
+  peanut: boolean;
+}
+
 const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
     const [checkedData, setCheckedData] = useState<Array<string>>([]);
     const [inputCheckedList, setInputCheckedList] = useState<boolean[]>([]);
+
+    const initAllergenObj: AllergenProps = {
+      shrimp: false,
+      crab: false,
+      walnut: false,
+      wheat: false,
+      soba: false,
+      egg: false,
+      dairy: false,
+      peanut: false,
+    }
+
+    const [isAllergenObj, setIsAllergenObj] = useState<AllergenProps>(initAllergenObj);
 
     const updateList = (doc: any) => {
         const docData = doc.data();
@@ -83,15 +107,28 @@ const AdminMenuList = (props: Props) => {
         }
         const newList = [...d];
         newList[i] = newObj;
-        console.log('here');
-        console.log(i);
-        console.log(obj);
         updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
         reset();
         console.log(`Updated URL: ${obj.imageURL}`);
         return newList;
       })
 
+    };
+    
+    const handleTextEdit = (text: string, i: number) => {
+      setList((d: any) => {
+        const obj = d[i];
+        const newObj = {
+          ...obj,
+          text: text
+        }
+        const newList = [...d];
+        newList[i] = newObj;
+        updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+        reset();
+        console.log(`Updated text: ${obj.text}`);
+        return newList;
+      })
     };
 
     // stateはイベント処理が終わるまで更新されないことに注意
@@ -105,12 +142,11 @@ const AdminMenuList = (props: Props) => {
       console.log(`name:${name}`);
       const field = name.split('-')[0];
 
-      const allergens = ['shrimp', 'crab', 'walnut', 'wheat', 'soba', 'egg', 'dairy', 'peanut']
-
       setList((l: any) => {
         const newList = [...l];
         newList.map((obj: any , i: number) => {
         if(targetId && (targetId === obj.id) && field) {
+          console.log(field)
           if(field === "kcal"|| field === "P"|| field === "F"|| field === "C"){
             console.log("Edit Nutrition");
             const newObj = {
@@ -118,15 +154,6 @@ const AdminMenuList = (props: Props) => {
               nutrition: {...obj.nutrition, [field]: value}
             };
             updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
-          } else if (allergens.includes(field)) {
-            console.log("Edit Allergens")
-            console.log({...obj})
-            const newObj = {
-              ...obj,
-              allergens: {...obj.allergens, [field]: value === "on" ? true : false}
-            };
-            console.log(newObj.allergens)
-            updateMenu(db, `${props.restaurant}/${obj.id}`, newObj)
           } else {
             console.log("Edit Misc props")
             console.log(`${obj[field]} => ${value}`);
@@ -141,8 +168,37 @@ const AdminMenuList = (props: Props) => {
         )
         return newList;
           })
-      
     }
+
+    const onChangeAllergens = (e:any, id:number) => {
+      const targetId = list[id].id;
+      const targetName = list[id].name;
+      const {name, value} = e.target;
+      const field = name.split('-')[0];
+      const isAllergens = ['shrimp', 'crab', 'walnut', 'wheat', 'soba', 'egg', 'dairy', 'peanut']
+
+      console.log("Edit Allergens");
+      isAllergenObj[field] = !isAllergenObj[field]
+      setIsAllergenObj(() => isAllergenObj);
+      const newList = [...list];
+      const newObj = {
+        ...newList[id],
+        allergens: isAllergenObj,
+      }
+      newList.map((obj: any, i: number) => {
+        if(targetId && (targetId === obj.id) && field) {
+          updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+        }
+      })
+
+      setList(() => {
+        newList[id].allergens = isAllergenObj
+        return newList
+      });
+
+      return ;
+    }
+
     useEffect(() => {
         // strictModeのせいでマウント時に2回レンダリングされる
         getAllMenus(db, updateList, props.restaurant)
@@ -254,22 +310,25 @@ const AdminMenuList = (props: Props) => {
                       </td>
 
                       <td scope="col" className="px-4 py-2">
-                        <BoolCheckbox
+                        <input
                           className="w-14 bg-neutral-200"
-                          targetName="shrimp"
-                          targetValue={data.shrimp}
-                          register={register}
-                          i={i}
-                          onChangeInput={onChangeInput}
-                        />
+                          type="checkbox"
+                          defaultChecked={data.allergens?.shrimp}
+                          {...register(`shrimp-${i}`, {
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: isAllergenObj.shrimp,
+                        }
+                          )}/>
                       </td>
                       <td scope="col" className="px-4 py-2">
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.crab}
+                          value={data.allergens?.crab}
                           {...register(`crab-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.crab
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.crab
                         }
                           )}/>
                       </td>
@@ -277,9 +336,11 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.walnut}
+                          value={data.allergens?.walnut}
                           {...register(`walnut-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.walnut
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.walnut
                         }
                           )}/>
                       </td>
@@ -287,9 +348,11 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.wheat}
+                          value={data.allergens?.wheat}
                           {...register(`wheat-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.wheat
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.wheat
                         }
                           )}/>
                       </td>
@@ -297,9 +360,11 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.soba}
+                          value={data.allergens?.soba}
                           {...register(`soba-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.soba
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.soba
                         }
                           )}/>
                       </td>
@@ -308,9 +373,11 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.egg}
+                          value={data.allergens?.egg}
                           {...register(`egg-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.egg
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.egg
                         }
                           )}/>
                       </td>
@@ -318,9 +385,11 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.dairy}
+                          value={data.allergens?.dairy}
                           {...register(`dairy-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.dairy
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.dairy
                         }
                           )}/>
                       </td>
@@ -328,19 +397,19 @@ const AdminMenuList = (props: Props) => {
                         <input
                           className="w-14 bg-neutral-200"
                           type="checkbox"
+                          defaultChecked={data.allergens?.peanut}
+                          value={data.allergens?.peanut}
                           {...register(`peanut-${i}`, {
-                          onChange: (e: any) => onChangeInput(e, i),
-                          value: data.peanut
+                          onChange: (e: any) => onChangeAllergens(e, i),
+                          value: data.allergens?.peanut
                         }
                           )}/>
                       </td>
                       <td scope="col" className="px-4 py-2">
                         <ModalTextboxWindow
-                        parentObj={data} targetId={data.id} restaurant={props.restaurant}/>
+                        parentObj={data} targetId={data.id} restaurant={props.restaurant} handleSubmit={handleTextEdit}/>
                       </td>
 
-                      
-                      
                       <td scope="col" className="px-4 py-2 inline-grid">
                           <ModalImageGrid parentHandlerSubmit={handleImageEdit} src={data.imageURL} index={i}/>
 

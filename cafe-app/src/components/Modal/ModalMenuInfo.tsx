@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import MenuStarRatings from "../Examples/MenuStarRatings";
 import ModalStarWindow from "./ModalStarWindow";
 import NutritionCard from "../User/NutritionCard";
+import AllergicTable from "../User/MenuCards/AllergicTable";
 
 type Props = {
   restaurant: string;
@@ -146,26 +147,29 @@ const ModalMenuInfo = (props: Props) => {
           </button>
         </div>
 
-        <div className={"m-auto w-96 my-auto max-w-screen-md"}>
-          <section className="flex-col container mx-auto text-gray-900 border-gray-200 w-full">
-            <div className="flex flex-wrap">
+        <div className="w-96">
+          <section className="text-gray-900 border-gray-200">
+            <div className="flex justify-center">
                 <div className="bg-white rounded-t-lg">
-                  <div className="flex justify-center content-border">
-                    <div className="w-fit">
+                  <div className="">
+                    <div className="">
                       <img className="rounded-t-lg" src={imageURL} />
                     </div>
                   </div>
-                  <div className="relative pt-2 px-2 md:pt-4">
-                    <div className="items-center md:pt-4 mb-1">
+                  <div className="pt-2 px-2 md:pt-4">
+                    <div className="mb-1 grid">
                       <MenuStarRatings ratings={menu.stars ? menu.stars : 0} />
-                      <h2 className="text-gray-900 text-md font-medium">
+                      <h2 className="justify-start text-gray-900 text-md font-medium">
                         {menu.name}
                       </h2>
-                      <h2 className="text-gray-900 text-3xl font-medium">
+                      <h2 className="justify-start text-gray-900 text-3xl font-medium">
                         ¥{menu.price}
                       </h2>
+                      <h2 className="p-2 pt-4 flex justify-center">
+                        <AllergicTable value={menu.allergens}/>
+                      </h2>
                     </div>
-                    <div className="flex pb-4 content-end justify-end">
+                    <div className="pb-4 place-content-end flex justify-end">
                       <ModalStarWindow
                         restaurant={props.restaurant}
                         menuName={props.name}

@@ -28,6 +28,7 @@ const Mypage = () => {
   const [userInfo, setUserInfo] = useState<UserProps>(initInfo)
 
   useEffect(() => {
+    console.log("Called Mypage component")
     onAuthStateChanged(auth, (_user) => {
       if (_user) {
         console.log(_user.uid)
@@ -35,7 +36,8 @@ const Mypage = () => {
         updateInfo(_user)
       }
     })
-
+    const cleanUp = () => {clickLogout();}
+    // return cleanUp();
   }, [])
 
   const updateUser = async (user: any) => {

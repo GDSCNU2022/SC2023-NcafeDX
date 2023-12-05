@@ -3,22 +3,24 @@ import CreateQR from "@src/components/Examples/CreateQR";
 import ModalStarWindow from "@src/components/Modal/ModalStarWindow";
 import PFCRadarChart from "@src/components/Examples/PFCRaderChart";
 import MenuCard from "@src/components/Examples/MenuCard";
+import GlobalNavBar from "@src/components/User/GlobalNavBar";
 
 const AdminTop = () => {
   return (
-    <div className="flex flex-col h-80 bg-gray-300">
-      <p className="text-2xl text-center pb-10">Admin Form</p>
-      <div className="grid grid-cols-2">
-        <div className="py-20 m-2 text-neutral-800 hover:text-blue-500 flex justify-center 
-        text-xl border border-gray-900 rounded">
+    <div className="">
+      <GlobalNavBar />
+      <p className="pt-10 text-2xl text-center pb-10">管理者画面</p>
+      <div className="">
+        <div className="mx-auto py-20 my-10 w-1/3 text-neutral-800 hover:text-blue-500 flex justify-center 
+        text-xl border border-gray-900 rounded hover:bg-sky-100">
         <Link href="./AdminMenuForm">
-          Edit Menus
+          メニュー編集フォーム
         </Link>
         </div>
-        <div className="py-20 m-2 text-neutral-800 hover:text-blue-500
-        flex justify-center text-xl  border border-gray-900 rounded">
+        <div className="mx-auto py-20 w-1/3 text-neutral-800 hover:text-blue-500
+        flex justify-center text-xl  border border-gray-900 rounded hover:bg-sky-100">
         <Link href="./AdminNewsForm">
-          Edit News
+          お知らせ編集フォーム
         </Link>
         </div>
       </div>
