@@ -9,6 +9,7 @@ type Props = {
     restaurant: string;
     menuName: string;
     id: string;
+    userID: string;
 }
 const SubmitStarRating = (props: Props) => {
     const ratingSubmit = (newRating: number) => {
@@ -26,12 +27,15 @@ const SubmitStarRating = (props: Props) => {
             newObj.starStorage.push(newRating);
             console.log(newObj);
             console.log(path);
-      
             updateMenu(db, `${props.restaurant}/${props.id}`, newObj);
             if(props.parentCloseHandler) props.parentCloseHandler();
         }
         )
     };
+
+    // TODO: ユーザーの評価履歴にメニューIDを登録
+    const registerSubmitStarRatings = () => {};
+    
     return (
         <div>
             <h2>Star Ratings</h2>

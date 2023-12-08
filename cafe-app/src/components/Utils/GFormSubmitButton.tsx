@@ -1,9 +1,9 @@
 import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
 import react from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const GFormSubmitButton = (props: {formURL: string}
-  ) => {
+const GFormSubmitButton = (props: {formURL: string}) => {
+    useEffect(() => {console.log(`registered url is ${props.formURL}`)}, [props.formURL])
     return (
     <div className="bg-sky-200 rounded-lg p-2">
       <a className="hover:cursor-pointer" href={props.formURL}>アンケート</a>

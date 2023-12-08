@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import handler from "@src/pages/api/hello";
 import SubmitStarRating from "./SubmitStarRating";
 import { auth } from "@src/firebase/client";
+import firebase from 'firebase/app';
 
 type Props = {
   restaurant: string;
@@ -33,10 +34,20 @@ const ModalStarWindow = (props: Props) => {
     <ModalStarWindow restaurant={"RestaurantName"} menuName={TargetMenuName}>
     */
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<any>(undefined);
+  const [isCheckIn, setIsCheckIn] = useState(false);
 
   const openModal = () => {
     // ログイン状態を確認
-
+    auth.onAuthStateChanged( async (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setIsCheckIn(() => true);
+      } else {
+        setIsCheckIn(() => false);
+      }
+    })
+    console.log(isCheckIn);
     setIsOpenModal(() => true);
   };
 
@@ -67,12 +78,19 @@ const ModalStarWindow = (props: Props) => {
         contentLabel="News Form"
       >
         <div className="w-40">
+          { isCheckIn ?
           <SubmitStarRating
             parentCloseHandler={closeModal}
             restaurant={props.restaurant}
             menuName={props.menuName}
             id={props.id}
+            userID={props.userID}
           />
+        :
+        <div className="flex justify-center">
+          <p>ログインが必要です</p>
+        </div>
+        }
         </div>
       </Modal>
     </>
