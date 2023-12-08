@@ -3,6 +3,8 @@ import ReactStars from 'react-stars';
 type Props ={
     ratings: number
 }
+
+//　連投できるのでできなくしたい
 const MenuStarRatings = (props: Props) => {
 
     return (

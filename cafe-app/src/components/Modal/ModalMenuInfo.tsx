@@ -6,11 +6,13 @@ import MenuStarRatings from "../Examples/MenuStarRatings";
 import ModalStarWindow from "./ModalStarWindow";
 import NutritionCard from "../User/NutritionCard";
 import AllergicTable from "../User/MenuCards/AllergicTable";
+import GFormSubmitButton from "../Utils/GFormSubmitButton";
 
 type Props = {
   restaurant: string;
   name: string;
   id: string;
+  formURL: string;
 };
 
 function cafecolor(prop: string) {
@@ -65,6 +67,8 @@ const ModalMenuInfo = (props: Props) => {
     getMenu(db, path).then((value: any) => {
       setMenus(() => value);
     });
+    console.log("test");
+    console.log(props.formURL);
   }, []);
   let imageURL: string = menu.imageURL!;
   const stylecolor = cafecolor(props.restaurant);
@@ -175,6 +179,9 @@ const ModalMenuInfo = (props: Props) => {
                         menuName={props.name}
                         id={props.id}
                       />
+                    </div>
+                    <div className="pb-4 place-content-end flex justify-end bg-gray">
+                      <GFormSubmitButton formURL={props.formURL}/>
                     </div>
                   </div>
               </div>

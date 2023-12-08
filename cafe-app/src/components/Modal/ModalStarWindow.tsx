@@ -3,11 +3,13 @@ import ModalNewsPanel from "./ModalNewsPanel";
 import Modal from "react-modal";
 import handler from "@src/pages/api/hello";
 import SubmitStarRating from "./SubmitStarRating";
+import { auth } from "@src/firebase/client";
 
 type Props = {
   restaurant: string;
   menuName: string;
   id: string;
+  userID?: string;
 };
 
 const customStyles = {
@@ -33,6 +35,8 @@ const ModalStarWindow = (props: Props) => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
 
   const openModal = () => {
+    // ログイン状態を確認
+
     setIsOpenModal(() => true);
   };
 

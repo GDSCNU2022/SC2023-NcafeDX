@@ -8,6 +8,7 @@ import {
 import MenuStarRatings from "../Examples/MenuStarRatings";
 import ModalMenuInfo from "../Modal/ModalMenuInfo";
 import ReactStarRatings from "@src/components/Examples/ReactStarRatings";
+import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
@@ -28,6 +29,7 @@ function cafecolor(prop: string) {
 
 const MenuCardDev = (props: Props) => {
   const [list, setList] = useState<Array<any>>([]);
+  const [formURL, setFormURL] = useState<string>("");
 
   const updateList = (doc: any) => {
     const docData = doc.data();
@@ -39,6 +41,13 @@ const MenuCardDev = (props: Props) => {
       return [...list, newObj];
     });
   };
+
+  const getGFormURL = (category: any, menuName: string) => {
+    const _formURL = getGFormURLWithInitValue(category, menuName);
+
+    return _formURL;
+  };
+
   // ignite when mounted
   useEffect(() => {
     // strictModeのせいでマウント時に2回レンダリングされる
@@ -69,6 +78,7 @@ const MenuCardDev = (props: Props) => {
                       <>
                         {(() => {
                           if (category.nameid === menu.category) {
+                            getGFormURL(menu.category, menu.name).then((url) => setFormURL(() => url))
                             return (
                               <>
                                 <div
@@ -105,10 +115,12 @@ const MenuCardDev = (props: Props) => {
                                       </div>
                                       <a href={menu.url}>
                                         <div className="absolute bottom-5 right-5 w-1/4 mx-auto">
-                                          <ModalMenuInfo
+
+                                            <ModalMenuInfo
                                             restaurant={props.restaurant}
                                             name={menu.name}
                                             id={menu.id}
+                                            formURL={formURL}
                                           />
                                         </div>
                                       </a>
