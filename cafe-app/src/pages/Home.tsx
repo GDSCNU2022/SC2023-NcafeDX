@@ -1,17 +1,10 @@
 import CafeAccess from "@src/components/User/CafeAccess";
-import CafeInfo from "@src/components/User/CafeInfo";
 import GlobalNavBar from "@src/components/User/GlobalNavBar";
-import NavUnderbar from "@src/components/User/NavUnderbar";
 import UserNewsList from "@src/components/User/UserNewsList";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
-import MenuCardDev from "@src/components/User/MenuCardDev";
 import ImageCarouselBar from "@src/components/Utils/ImageCarouselBar";
 import { SwiperSlide } from "swiper/react";
-
-import Link from "next/link";
 import CategoryCard from "@src/components/User/CategoryCard ";
-import Swiper from "swiper";
 import CategorySwiper from "@src/components/User/CategorySwiper";
 import { useEffect } from 'react';
 

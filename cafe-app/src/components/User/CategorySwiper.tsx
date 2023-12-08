@@ -19,6 +19,9 @@ const CategorySwiper = ({children}) => {
           : width/height < 1.2 ? 2 
           : 4}
         spaceBetween={30}
+        mousewheel={true}
+        scrollbar={true}
+        autoplay={true}
         >
           {children}
         </Swiper>

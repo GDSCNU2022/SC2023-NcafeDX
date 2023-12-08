@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { auth, provider } from "@src/firebase/client";
-import { signInWithPopup } from "@firebase/auth";
+import { signInWithPopup, signOut } from "@firebase/auth";
 import Link from "next/link";
 import AdminTop from "@src/pages/adminpages/AdminTop";
 import router from 'next/router'
@@ -46,6 +46,18 @@ function GlobalNavBar() {
     signInWithPopup(auth, provider);
   };
 
+    const clickLogout = async () => {
+      console.log(user);
+
+    signOut(auth).then(() => {
+      console.log("ログアウトしました")
+      router.push('/')
+    })
+    .catch((err) => {
+      console.log(`エラーが発生しました (${err})`)
+    })
+  }
+
   return (
     <>
       <div className="flex items-center justify-between p-4 shadow-lg">
@@ -87,9 +99,17 @@ function GlobalNavBar() {
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
                 <li className="border-b border-gray-400 my-8 uppercase">
-                  <button onClick={()=>{router.push('/signin')}}>
-                  ログイン
-                  </button>
+                  {
+                    user ?
+                    <button onClick={()=>clickLogout()}>
+                    ログアウト
+                    </button>
+                    :
+                    <button onClick={()=>{router.push('/signin')}}>
+                    ログイン
+                    </button>
+                    
+                  }
                 </li>
                 <li className="border-b border-gray-400 my-8">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
@@ -100,9 +120,16 @@ function GlobalNavBar() {
 
           <ul className="DESKTOP-MENU hidden space-x-8 lg:flex ">
             <li className="flex text top-0 justify-center ">
-              <button onClick={()=>{router.push('/signin')}}>
-              ログイン
-              </button>
+              {
+                user ?
+                <button onClick={()=>clickLogout()}>
+                ログアウト
+                </button>
+                :
+                <button onClick={()=>{router.push('/signin')}}>
+                ログイン
+                </button>
+              }
             </li>
             <li className="border-b border-gray-400">
               <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
@@ -129,26 +156,8 @@ function GlobalNavBar() {
         }
       `}</style>
       </div>
-      {user ? (
-        <div className="">
-          <AdminTop />
-          <button
-            className="flex -mt-10 mx-auto text-2xl text-center pb-10  hover:text-blue-500"
-            onClick={() => {
-              auth.signOut();
-            }}
-          >
-            Log out
-          </button>
-        </div>
-      ) : null}
     </>
   );
-  // return (
-  //   <div>
-  //
-  //   </div>
-  // );
 }
 
 export default GlobalNavBar;

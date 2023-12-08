@@ -42,7 +42,7 @@ const NutritionCard = (props: Props) => {
   return (
     <div className="flex justify-between w-full">
       <div className="">
-        <h2 className="text-gray-900 underline text-left pl-2 text-lg">Nutrition</h2>
+        <h2 className="text-gray-900 underline text-left pl-2 text-lg">栄養成分表</h2>
         <div id="table" className="flex flex-row">
           <div className="w-0">
             <PFCRadarChart

@@ -8,6 +8,8 @@ import {
 import MenuStarRatings from "@src/components/Examples/MenuStarRatings";
 import ModalMenuInfo from "@src/components/Modal/ModalMenuInfo";
 import ReactStarRatings from "@src/components/Examples/ReactStarRatings";
+import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
+import AllergicTable from "./AllergicTable";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
@@ -40,6 +42,17 @@ const EachMenuCategory = (props: Props) => {
       return [...list, newObj];
     });
   };
+
+  const getGFormURL = (category: any, menuName: string) => {
+    const _formURL = category 
+                      &&
+                      menuName ? getGFormURLWithInitValue(category, menuName) 
+                      : 
+                      "https://docs.google.com/forms/d/e/1FAIpQLScDyGluCCHPhD6ij4gqdUmfixnstnD1DJzFtz0Y4Zsda1533g/viewform";
+    
+    return _formURL;
+  };
+
   // ignite when mounted
   useEffect(() => {
     // strictModeのせいでマウント時に2回レンダリングされる
@@ -63,6 +76,7 @@ const EachMenuCategory = (props: Props) => {
                           console.log(props.category)
                           console.log(menu.category)
                           if (props.category === menu.category) {
+                            const url = getGFormURL(menu.category, menu.name);
                             return (
                               <div className="flex">
                                 <div
@@ -89,6 +103,9 @@ const EachMenuCategory = (props: Props) => {
                                         <h2 className="text-gray-900 text-2xl md:text-xl sm:text-xl font-medium">
                                           ¥{menu.price}
                                         </h2>
+                                        <h2 className="text-gray-900 text-md font-medium border rounded-lg p-2 mt-2">
+                                          {menu.text}
+                                        </h2>
                                       </div>
                                       <a href={menu.url}>
                                         <div className="flex">
@@ -96,6 +113,7 @@ const EachMenuCategory = (props: Props) => {
                                             restaurant={props.restaurant}
                                             name={menu.name}
                                             id={menu.id}
+                                            formURL={url}
                                           />
                                         </div>
                                       </a>

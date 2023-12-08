@@ -6,11 +6,13 @@ import MenuStarRatings from "../Examples/MenuStarRatings";
 import ModalStarWindow from "./ModalStarWindow";
 import NutritionCard from "../User/NutritionCard";
 import AllergicTable from "../User/MenuCards/AllergicTable";
+import GFormSubmitButton from "../Utils/GFormSubmitButton";
 
 type Props = {
   restaurant: string;
   name: string;
   id: string;
+  formURL: string;
 };
 
 function cafecolor(prop: string) {
@@ -66,6 +68,7 @@ const ModalMenuInfo = (props: Props) => {
       setMenus(() => value);
     });
   }, []);
+
   let imageURL: string = menu.imageURL!;
   const stylecolor = cafecolor(props.restaurant);
   /*
@@ -78,7 +81,7 @@ const ModalMenuInfo = (props: Props) => {
   };
 
   const afterOpenModal = () => {
-    console.log(isOpenModal);
+    console.log("Modal being opened");
     // references are now sync'd and can be accessed.
   };
 
@@ -130,20 +133,6 @@ const ModalMenuInfo = (props: Props) => {
             data-te-modal-dismiss
             onClick={closeModal}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="h-10 w-10"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
           </button>
         </div>
 
@@ -175,6 +164,9 @@ const ModalMenuInfo = (props: Props) => {
                         menuName={props.name}
                         id={props.id}
                       />
+                    </div>
+                    <div className="pb-4 place-content-end flex justify-end bg-gray">
+                      <GFormSubmitButton formURL={props.formURL}/>
                     </div>
                   </div>
               </div>

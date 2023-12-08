@@ -23,9 +23,13 @@ const Mypage = () => {
     points: 0, 
     couponID: [], 
     boolDay: [false, false, false], 
-    votedCategoryPerDay: [false, false, false, false]}
+    votedCategoryPerDay: [false, false, false, false],
+    registeredRatingMenuID: [],
+    }
   const [user, setUser] = useState<any>({displayName: ''})
   const [userInfo, setUserInfo] = useState<UserProps>(initInfo)
+
+  // TODO: ユーザーデータ生成前にページがレンダリングされてエラーを吐く
 
   useEffect(() => {
     console.log("Called Mypage component")
@@ -36,8 +40,6 @@ const Mypage = () => {
         updateInfo(_user)
       }
     })
-    const cleanUp = () => {clickLogout();}
-    // return cleanUp();
   }, [])
 
   const updateUser = async (user: any) => {
@@ -66,7 +68,8 @@ const Mypage = () => {
         points: 0,
         couponID:[],
         boolDay: boolDay,
-        votedCategoryPerDay: votedCategoryPerDay
+        votedCategoryPerDay: votedCategoryPerDay,
+        registeredRatingMenuID: [],
       }
       if (newObj != undefined){
         newUser(db, user.uid, newObj)

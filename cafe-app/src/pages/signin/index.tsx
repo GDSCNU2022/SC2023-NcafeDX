@@ -35,7 +35,8 @@ export const GoogleLogin = () => {
         console.log(user)
         console.log(user.uid)
         console.log('login as user');
-        router.push('/mypages/MyPage')
+        router.push('/');
+        // router.push('/mypages/MyPage')
 
       }
     }).catch((err) => {
@@ -68,7 +69,8 @@ export const SignIn: FC<NextPage> = () => {
     try {
       await signInWithEmailAndPassword(_auth, data.email, data.password).then(() => {
         console.log('login as user');
-        router.push('/mypages/MyPage');
+        router.push('/');
+        // router.push('/mypages/MyPage');
       })
 
     } catch (e) {
