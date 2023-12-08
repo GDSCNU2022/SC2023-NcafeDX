@@ -3,7 +3,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from 'firebase/auth'
-import { auth } from '@src/firebase/client'
+import { auth, db } from '@src/firebase/client'
 import { NextPage } from 'next'
 import { FC } from 'react'
 import { FirebaseError } from 'firebase/app'
@@ -11,6 +11,7 @@ import router from 'next/router'
 import { useForm } from 'react-hook-form'
 import { LoginForm } from '@src/features/common/types'
 import { useState } from 'react'
+import { newUser } from '@src/pages/api/get-user';
 
 export const SignUp: FC<NextPage> = () => {
   const [error, setError] = useState('')
@@ -23,6 +24,7 @@ export const SignUp: FC<NextPage> = () => {
         displayName: data.username,
       })
       await sendEmailVerification(userCredential.user)
+
       // route mypage after login
       router.push('/mypages/MyPage')
     } catch (e) {

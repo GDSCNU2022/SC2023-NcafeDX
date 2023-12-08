@@ -73,8 +73,8 @@ const EachMenuCategory = (props: Props) => {
                     return (
                       <>
                         {(() => {
-                          console.debug(props.category)
-                          console.debug(menu.category)
+                          console.log(props.category)
+                          console.log(menu.category)
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (

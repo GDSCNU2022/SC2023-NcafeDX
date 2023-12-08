@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactStars from 'react-stars';
 import { getMenu, updateMenu } from '../../pages/api/get-menu';
+import { getUser, updateUser } from '@src/pages/api/get-user';
 import { db } from '../../firebase/client';
 
 // ref https://www.geeksforgeeks.org/how-to-add-star-rating-in-nextjs/
@@ -31,10 +32,17 @@ const SubmitStarRating = (props: Props) => {
             if(props.parentCloseHandler) props.parentCloseHandler();
         }
         )
-    };
 
-    // TODO: ユーザーの評価履歴にメニューIDを登録
-    const registerSubmitStarRatings = () => {};
+        // update user data in registeredRatingMenuID array.
+        getUser(db, props.userID).then((loadedUserData) => {
+            const newUserObj = {...loadedUserData}
+            if(newUserObj){
+                newUserObj.registeredRatingMenuID.push(props.id);
+                updateUser(db, props.userID, newUserObj)
+            }
+        });
+
+    };
     
     return (
         <div>

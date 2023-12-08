@@ -47,6 +47,8 @@ function GlobalNavBar() {
   };
 
     const clickLogout = async () => {
+      console.log(user);
+
     signOut(auth).then(() => {
       console.log("ログアウトしました")
       router.push('/')
@@ -99,13 +101,14 @@ function GlobalNavBar() {
                 <li className="border-b border-gray-400 my-8 uppercase">
                   {
                     user ?
-                    <button onClick={()=>{router.push('/signin')}}>
-                    ログイン
-                    </button>
-                    :
                     <button onClick={()=>clickLogout()}>
                     ログアウト
                     </button>
+                    :
+                    <button onClick={()=>{router.push('/signin')}}>
+                    ログイン
+                    </button>
+                    
                   }
                 </li>
                 <li className="border-b border-gray-400 my-8">
@@ -119,12 +122,12 @@ function GlobalNavBar() {
             <li className="flex text top-0 justify-center ">
               {
                 user ?
-                <button onClick={()=>{router.push('/signin')}}>
-                ログイン
-                </button>
-                :
                 <button onClick={()=>clickLogout()}>
                 ログアウト
+                </button>
+                :
+                <button onClick={()=>{router.push('/signin')}}>
+                ログイン
                 </button>
               }
             </li>
@@ -153,26 +156,8 @@ function GlobalNavBar() {
         }
       `}</style>
       </div>
-      {user ? (
-        <div className="">
-          <AdminTop />
-          <button
-            className="flex -mt-10 mx-auto text-2xl text-center pb-10  hover:text-blue-500"
-            onClick={() => {
-              auth.signOut();
-            }}
-          >
-            Log out
-          </button>
-        </div>
-      ) : null}
     </>
   );
-  // return (
-  //   <div>
-  //
-  //   </div>
-  // );
 }
 
 export default GlobalNavBar;
