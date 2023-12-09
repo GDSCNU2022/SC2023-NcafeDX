@@ -8,7 +8,7 @@ import {
 import MenuStarRatings from "@src/components/Examples/MenuStarRatings";
 import ModalMenuInfo from "@src/components/Modal/ModalMenuInfo";
 import ReactStarRatings from "@src/components/Examples/ReactStarRatings";
-import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
+import { getGFormURLWithInitValue } from "@src/pages/api/getGFormURL";
 import AllergicTable from "./AllergicTable";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
