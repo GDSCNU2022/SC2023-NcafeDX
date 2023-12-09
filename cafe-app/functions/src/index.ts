@@ -43,3 +43,5 @@ exports.removeAdminClaim = functions.firestore
     }
     modifyAdmin(deletedAdminUser.uid, false);
   });
+
+export {};

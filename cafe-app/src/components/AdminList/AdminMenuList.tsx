@@ -10,7 +10,6 @@ import Image from 'next/image';
 import ModalImageGrid from '../Modal/ModalImageGrid';
 import ModalTextboxPanel from '../Modal/ModalTextboxPanel';
 import ModalTextboxWindow from '../Modal/ModalTextboxWindow';
-import BoolCheckbox from '@src/components/Utils/BoolCheckbox';
 
 type Props = {
     restaurant: RestaurantType;

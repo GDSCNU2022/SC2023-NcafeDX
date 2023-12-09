@@ -12,6 +12,7 @@ type Props = {
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(50,50,50, 0.8)",
+    zIndex: 100,
   },
   content: {
     top: "50%",
@@ -22,7 +23,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     background: "rgba(50,50,50, 0.0)",
     border: "none",
-    width: "50%"
+    width: "100%",
   },
 };
 

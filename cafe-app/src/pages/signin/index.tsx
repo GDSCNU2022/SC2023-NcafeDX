@@ -14,6 +14,7 @@ import router from 'next/router'
 import { useForm } from 'react-hook-form'
 import { LoginForm } from '@src/features/common/types'
 import { auth, provider } from '@src/firebase/client'
+import { sendEmailToCheck, submitPasswordResetEmail } from '../api/verifications'
 
 export const GoogleLogin = () => {
   const _provider = provider
@@ -154,6 +155,9 @@ export const SignIn: FC<NextPage> = () => {
           
           <button className='mt-4 w-full text-center' onClick={() => router.push('/signup')}>
             新規登録はこちら
+          </button>
+          <button className='mt-4 w-full text-center' onClick={() => router.push('/misc/CheckEmail')}>
+            パスワードを忘れた方はこちら
           </button>
           <button className='mt-4 w-full text-center' onClick={() => router.push('/adminpages/AdminSignin')}>
             管理者ログイン

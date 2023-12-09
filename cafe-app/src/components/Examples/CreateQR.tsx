@@ -18,7 +18,7 @@ const CreateQR = (props: Props) => {
     <Canvas
       text={props.text}
       options={{
-        level: "H",
+        errorCorrectionLevel: "H",
         margin: 3,
         scale: 4,
         width: 200,

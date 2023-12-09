@@ -34,7 +34,7 @@ const PFCRadarChart = (props: Props) => {
 
   return (
     <RadarChart
-      cx={270}
+      cx={200}
       cy={100}
       outerRadius={80}
       width={400}

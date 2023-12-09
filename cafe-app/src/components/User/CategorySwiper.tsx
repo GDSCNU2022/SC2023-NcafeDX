@@ -11,7 +11,7 @@ const CategorySwiper = ({children}) => {
   const [width, height]= useWindowSize();
 
   return (
-    <div className="w-screen px-10 ">
+    <div className="w-screen px-10">
       <div className="bg-zinc-50">
         <Swiper
         modules={[Navigation, Pagination, Mousewheel]}

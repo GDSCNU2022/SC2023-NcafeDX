@@ -23,7 +23,7 @@ const DisplayQR = (props: Props) => {
         <Canvas
           text={props.couponCode}
           options={{
-            level: "H",
+            errorCorrectionLevel: "H",
             margin: 3,
             scale: 4,
             width: 200,

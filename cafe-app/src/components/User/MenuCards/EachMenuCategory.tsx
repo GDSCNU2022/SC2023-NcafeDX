@@ -8,7 +8,7 @@ import {
 import MenuStarRatings from "@src/components/Examples/MenuStarRatings";
 import ModalMenuInfo from "@src/components/Modal/ModalMenuInfo";
 import ReactStarRatings from "@src/components/Examples/ReactStarRatings";
-import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
+import { getGFormURLWithInitValue } from "@src/pages/api/getGFormURL";
 import AllergicTable from "./AllergicTable";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
@@ -43,10 +43,15 @@ const EachMenuCategory = (props: Props) => {
     });
   };
 
-  const getGFormURL = (category: any, menuName: string) => {
+  const getGFormURL = (category: "teishoku" | "noodle" | "don" | "curry", menuName: string) => {
+    const convetedCategory = category === "teishoku" ? "定食" 
+    : category === "noodle" ? "麺類"
+    : category === "don" ? "丼"
+    : category === "curry" ? "カレー"
+    : undefined
     const _formURL = category 
                       &&
-                      menuName ? getGFormURLWithInitValue(category, menuName) 
+                      menuName ? getGFormURLWithInitValue(convetedCategory, menuName) 
                       : 
                       "https://docs.google.com/forms/d/e/1FAIpQLScDyGluCCHPhD6ij4gqdUmfixnstnD1DJzFtz0Y4Zsda1533g/viewform";
     
@@ -68,7 +73,7 @@ const EachMenuCategory = (props: Props) => {
       <section className="text-gray-900 border-t border-gray-200">
             <>
               <div id="menu-card" className="container mx-auto">
-                <div className="flex grid grid-cols-2 justify-center">
+                <div className="flex grid md:grid-cols-2 grid-cols-1 justify-center">
                   {list.map((menu, index) => {
                     return (
                       <>
@@ -78,16 +83,16 @@ const EachMenuCategory = (props: Props) => {
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (
-                              <div className="flex">
+                              <div className="flex bg-slate-50">
                                 <div
-                                  className="w-full p-6 mx-auto"
+                                  className="p-6 mx-auto"
                                   key={index}
                                 >
-                                  <div className="bg-white rounded-lg shadow-lg">
+                                  <div id="menu-card" className="bg-white rounded-lg shadow-lg h-full">
                                     <div className="">
                                       <div className="">
                                         <img
-                                          className="rounded-t-lg bg-clip-padding"
+                                          className="h-60 w-full object-cover rounded-t-lg bg-clip-padding"
                                           src={menu.imageURL}
                                         />{" "}
                                       </div>
@@ -109,7 +114,7 @@ const EachMenuCategory = (props: Props) => {
                                       </div>
                                       <a href={menu.url}>
                                         <div className="flex">
-                                          <ModalMenuInfo
+                                          <ModalMenuInfo 
                                             restaurant={props.restaurant}
                                             name={menu.name}
                                             id={menu.id}
