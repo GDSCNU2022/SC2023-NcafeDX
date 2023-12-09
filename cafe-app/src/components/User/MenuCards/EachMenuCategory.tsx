@@ -68,7 +68,7 @@ const EachMenuCategory = (props: Props) => {
       <section className="text-gray-900 border-t border-gray-200">
             <>
               <div id="menu-card" className="container mx-auto">
-                <div className="flex grid grid-cols-2 justify-center">
+                <div className="flex grid md:grid-cols-2 grid-cols-1 justify-center">
                   {list.map((menu, index) => {
                     return (
                       <>

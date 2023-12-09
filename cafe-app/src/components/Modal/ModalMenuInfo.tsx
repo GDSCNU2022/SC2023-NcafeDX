@@ -29,6 +29,8 @@ function cafecolor(prop: string) {
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(50,50,50, 0.8)",
+    zIndex: 100,
+    overflow: "auto",
   },
   content: {
     top: "50%",
@@ -38,6 +40,8 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     background: "white",
+    width: "auto",
+    height: "90%"
   },
 };
 
@@ -125,7 +129,7 @@ const ModalMenuInfo = (props: Props) => {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <div className="bg-orange-300 p-2 rounded-md w-128">
+        <div className="bg-orange-300 p-2 rounded-md sm:w-96">
         <div className="flex flex-shrink-0 items-center justify-end md:pt-0">
           <button
             type="button"
@@ -136,7 +140,8 @@ const ModalMenuInfo = (props: Props) => {
           </button>
         </div>
 
-        <div className="w-96">
+        <div className="">
+          <button onClick={closeModal}>閉じる</button>
           <section className="text-gray-900 border-gray-200">
             <div className="flex justify-center">
                 <div className="bg-white rounded-t-lg">
