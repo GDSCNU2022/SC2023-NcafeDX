@@ -1,5 +1,4 @@
-import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
-import react from 'react';
+
 import { useState, useEffect } from 'react';
 
 const GFormSubmitButton = (props: {formURL: string}) => {

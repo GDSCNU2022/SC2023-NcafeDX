@@ -43,10 +43,15 @@ const EachMenuCategory = (props: Props) => {
     });
   };
 
-  const getGFormURL = (category: any, menuName: string) => {
+  const getGFormURL = (category: "teishoku" | "noodle" | "don" | "curry", menuName: string) => {
+    const convetedCategory = category === "teishoku" ? "定食" 
+    : category === "noodle" ? "麺類"
+    : category === "don" ? "丼"
+    : category === "curry" ? "カレー"
+    : undefined
     const _formURL = category 
                       &&
-                      menuName ? getGFormURLWithInitValue(category, menuName) 
+                      menuName ? getGFormURLWithInitValue(convetedCategory, menuName) 
                       : 
                       "https://docs.google.com/forms/d/e/1FAIpQLScDyGluCCHPhD6ij4gqdUmfixnstnD1DJzFtz0Y4Zsda1533g/viewform";
     
