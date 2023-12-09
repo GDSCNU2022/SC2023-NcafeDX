@@ -4,3 +4,7 @@ export type LoginForm = {
   password: string
 }
 
+export type CheckEmail = {
+  email: string
+}
+

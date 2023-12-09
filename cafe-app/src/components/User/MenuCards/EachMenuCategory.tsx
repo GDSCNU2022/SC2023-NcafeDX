@@ -78,16 +78,16 @@ const EachMenuCategory = (props: Props) => {
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (
-                              <div className="flex">
+                              <div className="flex bg-slate-100">
                                 <div
-                                  className="w-full p-6 mx-auto"
+                                  className="p-6 mx-auto"
                                   key={index}
                                 >
-                                  <div className="bg-white rounded-lg shadow-lg">
+                                  <div id="menu-card" className="bg-white rounded-lg shadow-lg h-full">
                                     <div className="">
                                       <div className="">
                                         <img
-                                          className="rounded-t-lg bg-clip-padding"
+                                          className="h-60 w-full object-cover rounded-t-lg bg-clip-padding"
                                           src={menu.imageURL}
                                         />{" "}
                                       </div>
@@ -109,7 +109,7 @@ const EachMenuCategory = (props: Props) => {
                                       </div>
                                       <a href={menu.url}>
                                         <div className="flex">
-                                          <ModalMenuInfo
+                                          <ModalMenuInfo 
                                             restaurant={props.restaurant}
                                             name={menu.name}
                                             id={menu.id}
