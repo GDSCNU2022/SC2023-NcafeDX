@@ -22,6 +22,7 @@ const CategorySwiper = ({children}) => {
         mousewheel={true}
         scrollbar={true}
         autoplay={true}
+        pagination={true}
         >
           {children}
         </Swiper>
