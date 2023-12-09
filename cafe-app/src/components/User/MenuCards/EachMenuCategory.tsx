@@ -78,7 +78,7 @@ const EachMenuCategory = (props: Props) => {
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (
-                              <div className="flex bg-slate-100">
+                              <div className="flex bg-slate-50">
                                 <div
                                   className="p-6 mx-auto"
                                   key={index}
