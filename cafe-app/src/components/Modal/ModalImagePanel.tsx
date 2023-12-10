@@ -11,6 +11,10 @@ const Panel = (props: Props) => {
     const [selectedUrl, setSelectedUrl] = useState<string>('');
     const [imgSrcList, setImgSrcList] = useState<string[]>([]);
 
+    const customStyle = {
+        overlay
+    };
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
 

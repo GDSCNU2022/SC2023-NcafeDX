@@ -15,7 +15,7 @@ const nextConfig = {
     domains: ["firebasestorage.googleapis.com"],
   },
   webpack(config, options) {
-    config.resolve.alias["@src"] = path.join(__dirname, "./src/");
+    config.resolve.alias["@src"] = path.join(__dirname, "src");
     return config;
   },
 };

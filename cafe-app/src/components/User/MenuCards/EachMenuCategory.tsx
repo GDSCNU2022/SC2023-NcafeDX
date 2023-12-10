@@ -15,7 +15,7 @@ import AllergicTable from "./AllergicTable";
 // Users/
 type Props = {
   restaurant: RestaurantType;
-  category: string;
+  category: string; 
 };
 
 function cafecolor(prop: string) {
@@ -28,7 +28,7 @@ function cafecolor(prop: string) {
   }
   return bgcolor;
 }
-
+ 
 const EachMenuCategory = (props: Props) => {
   const [list, setList] = useState<Array<any>>([]);
 
