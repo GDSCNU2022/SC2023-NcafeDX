@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import { LoginForm } from '@src/features/common/types'
 import { useState } from 'react'
 import { newUser } from '@src/pages/api/get-user';
+import NavUnderbar from '@src/components/User/NavUnderbar'
 
 export const SignUp: FC<NextPage> = () => {
   const [error, setError] = useState('')
@@ -107,6 +108,7 @@ export const SignUp: FC<NextPage> = () => {
             <div className='mt-1 text-sm text-red-300'>{error ? <>{error}</> : <></>}</div>
         </div>
       </div>
+      <NavUnderbar/>
     </>
   )
 }

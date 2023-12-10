@@ -1,5 +1,6 @@
 import GlobalNavBar from '@src/components/User/GlobalNavBar';
 import EachMenuCategory from '@src/components/User/MenuCards/EachMenuCategory';
+import NavUnderbar from '@src/components/User/NavUnderbar';
 import 'react';
 
 const PageCurry = () => {
@@ -14,6 +15,7 @@ const PageCurry = () => {
       restaurant='DaVinch'
       category='curry'
       />
+      <NavUnderbar/>
     </div>
   );
 };
