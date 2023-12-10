@@ -1,10 +1,7 @@
 import { useState } from "react";
-import ModalNewsPanel from "./ModalNewsPanel";
 import Modal from "react-modal";
-import handler from "@src/pages/api/hello";
 import SubmitStarRating from "./SubmitStarRating";
 import { auth, db } from "@src/firebase/client";
-import firebase from 'firebase/app';
 import { getUser } from '@src/pages/api/get-user';
 
 type Props = {

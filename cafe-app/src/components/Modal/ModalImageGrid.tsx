@@ -15,6 +15,8 @@ type Props = {
 const customStyles = {
   overlay: {
     backgroundColor: "rgba(50,50,50, 0.8)",
+    zIndex: 1000,
+    overflow: "auto"
   },
   content: {
     top: "50%",
@@ -24,6 +26,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     background: "gray",
+    width: "100%"
   },
 };
 

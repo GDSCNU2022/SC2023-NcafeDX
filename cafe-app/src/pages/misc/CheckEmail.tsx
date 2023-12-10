@@ -1,8 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { CheckEmail } from '@src/features/common/types';
 import router from 'next/router';
-import handler from '../api/hello';
 import { submitPasswordResetEmail } from '../api/verifications';
 
 const CheckEmail = () => {
