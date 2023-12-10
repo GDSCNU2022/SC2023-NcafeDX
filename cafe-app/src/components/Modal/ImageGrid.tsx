@@ -23,14 +23,14 @@ const ImageGrid = (props: Props) => {
 
     return (
         <div className="h-full flex justify-around">
-        <div className="p-1 grid md:grid-cols-4 sm:grid-cols-3 gap-2 rounded-md shadow-md bg-slate-600 overflow-auto h-96">
+        <div className="p-1 grid grid-cols-3 sm:grid-cols-4 gap-2 rounded-md shadow-md bg-slate-600 overflow-auto h-96">
         {props.srcList?.map((url: string, i) => (
             <button className="m-0.5 p-2 bg-gray-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
-                        focus:ring-offset-2 w-32 hover:bg-slate-800"
+                        focus:ring-offset-2 w-24 sm:w-32 hover:bg-slate-800"
                     onClick={() => handlerOnClick(url)} key={i}>
                 <div className="relative aspect-square flex justify-items-center">
-                <img src={url} alt="画像URLがありません"
-                className="bg-slate-600 rounded-md shadow-md bg-clip-padding object-cover p-1"/>
+                    <img src={url} alt="画像URLがありません"
+                    className="bg-slate-600 rounded-md shadow-md bg-clip-padding object-cover p-1"/>
                 </div>
             </button>
         ))

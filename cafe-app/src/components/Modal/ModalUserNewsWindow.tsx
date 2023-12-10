@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ModalUserNewsPanel from "./ModalUserNewsPanel";
 import Modal from "react-modal";
-import handler from "@src/pages/api/hello";
 
 type Props = {
   restaurant: string;
