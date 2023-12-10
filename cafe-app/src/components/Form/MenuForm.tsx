@@ -81,9 +81,9 @@ const MenuForm = (props: any) => {
                 <ModalImageGrid parentHandlerSubmit={gridHandlerSubmit} text="商品画像を登録"/>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid grid-rows-4 grid-cols-1 border m-4 p-2">
-                    <div className="inline-flex w-full">
+            <form onSubmit={handleSubmit(onSubmit)} className="overflow-auto border border-8">
+                <div className="grid grid-rows-4 grid-cols-1 m-4 p-2 w-fit">
+                    <div className="inline-flex w-fit">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
                         <input {...register('name',{required: true, maxLength: 20})} 
@@ -92,15 +92,15 @@ const MenuForm = (props: any) => {
                         <ErrorMessage errors={errors} name="name" />
                     </div>
 
-                    <div className="flex flex-col w-24 mx-auto py-2">
-                        <label className="text-sm font-bold">価格</label>
+                    <div className="flex flex-col mx-auto py-2 w-24">
+                        <label className="text-sm font-boldw-24">価格</label>
                         <input {...register('price',{required: true, maxLength: 20})} 
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
                         <ErrorMessage errors={errors} name="price" />
                         </div>
 
-                    <div className="flex flex-col w-24 mx-auto py-2">
+                    <div className="flex flex-col w-32 mx-auto py-2">
                         <label  htmlFor="dropdown" className="text-sm font-bold">種類</label>
                         <select {...register('category', { required: true })}
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm
