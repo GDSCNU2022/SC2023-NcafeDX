@@ -37,7 +37,7 @@ const UserHome = () => {
       </div>
       <div>
         <div className="text-center">
-          <h1 className="pt-10 pb-3 text-2xl font-bold ">メニュー</h1>
+          <h1 id="main-menu-swiper" className="pt-10 pb-3 text-2xl font-bold ">メニュー</h1>
       <CategorySwiper>
         <SwiperSlide>
           <CategoryCard src="/img/teisyoku_haizen.png" link="/menupages/PageTeishoku" 

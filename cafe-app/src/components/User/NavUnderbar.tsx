@@ -3,9 +3,9 @@ import Link from "next/link";
 function NavUnderbar() {
   return (
     <>
-      <div className="shadow fixed bottom-0 bg-white mx-auto text-center w-full">
-        <nav className="grid pb-2 grid-cols-3 font-medium text-gray-900 items-center place-content-stretch">
-          <div className="hover:bg-yellow-300 duration-300">
+      <div className="shadow fixed bottom-0 bg-white mx-auto text-center w-full z-50">
+        <nav className="grid pb-2 grid-cols-4 font-medium text-gray-900 place-items-center">
+          <div className="w-fit hover:bg-yellow-300 duration-300">
             <Link href="/">
               <div className="mt-1 inline-block">
                 <svg
@@ -26,8 +26,8 @@ function NavUnderbar() {
             </Link>
             <div className="text-xs text-gray-900">ホーム</div>
           </div>
-          <div className="text-green-400 mr-5 hover:text-white hover:bg-yellow-300 duration-300">
-            <Link href="restaurantpages/DaVinch">
+          <div className="w-fit text-green-400 mr-5 hover:text-white hover:bg-yellow-300 duration-300">
+            <Link href="#main-menu-swiper">
               <div
                 className="
               text-2xl "
@@ -37,7 +37,7 @@ function NavUnderbar() {
             </Link>
             <div className="text-xs text-gray-900">メニュー</div>
           </div>
-          <div className="hover:bg-yellow-300 duration-300">
+          <div className="hover:bg-yellow-300 duration-300 w-fit">
             <a href="https://forms.gle/rZGWi9MzH7somHkF6" target="_blank" rel="noopner noreferrer">
               <div className="mt-1 inline-block">
                 <svg
@@ -72,6 +72,13 @@ function NavUnderbar() {
               </div>
               <div className="text-xs text-gray-900">アンケート</div>
             </a>
+          </div>
+          <div className="w-fit">
+            <Link href="/signin">
+              <img src="/svg/mypage-icon.svg"
+              className="w-10"/>
+            </Link>
+            <div className="text-xs text-gray-900 w-fit">ログイン</div>
           </div>
         </nav>
       </div>

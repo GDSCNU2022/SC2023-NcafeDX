@@ -20,10 +20,16 @@ function GlobalNavBar() {
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
       if (user) {
         setUser(user);
-        setIsAdmin(() => false);
+        
+        user.getIdTokenResult(true).then((idTokenResult) => {
+        if(idTokenResult.claims.admin) {
+          setIsAdmin(() => true);
+        } else {
+          setIsAdmin(() => false);
+        }
+      });
       } else {
         setUser(undefined);
-        setIsAdmin(() => false);
         setMessage("");
       }
     });
@@ -102,6 +108,13 @@ function GlobalNavBar() {
                     
                   }
                 </li>
+                <li className="border-b border-gray-400 my-8 uppercase">
+                  {
+                    isAdmin ?
+                    <button onClick={() => router.push('/adminpages/AdminTop')}>管理ページ</button>
+                    : <></>
+                  }
+                </li>
                 <li className="border-b border-gray-400 my-8">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
                 </li>
@@ -122,14 +135,12 @@ function GlobalNavBar() {
                 </button>
               }
             </li>
-            <li className="flex text top-0 justify-center">
+            <li className="border-b border-gray-400 my-8 uppercase">
               {
-              isAdmin ?
-              <button onClick={() => router.push('/adminpages/AdminTop')}>
-                管理者編集ページ
-              </button>
-              : <></>
-            }
+                isAdmin ?
+                <button onClick={() => router.push('/adminpages/AdminTop')}>管理ページ</button>
+                : <></>
+              }
             </li>
             <li className="border-b border-gray-400">
               <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>

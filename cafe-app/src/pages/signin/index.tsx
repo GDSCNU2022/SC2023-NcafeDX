@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import { LoginForm } from '@src/features/common/types'
 import { auth, provider } from '@src/firebase/client'
 import { sendEmailToCheck, submitPasswordResetEmail } from '../api/verifications'
+import NavUnderbar from '@src/components/User/NavUnderbar'
 
 export const GoogleLogin = () => {
   const _provider = provider
@@ -165,6 +166,7 @@ export const SignIn: FC<NextPage> = () => {
           <div className='mt-1 text-sm text-red-300'>{error ? <>{error}</> : <></>}</div>
         </div>
       </div>
+      <NavUnderbar/>
     </>
   )
 }
