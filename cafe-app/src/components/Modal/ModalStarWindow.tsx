@@ -108,7 +108,7 @@ const ModalStarWindow = (props: Props) => {
         ariaHideApp={false}
         contentLabel="News Form"
       >
-        <div className="w-40">
+        <div className="">
           { 
           isRated ?
             <div className="flex justify-center">
@@ -125,7 +125,7 @@ const ModalStarWindow = (props: Props) => {
           />
           :
           <div className="flex justify-center">
-            <p>ログインが必要です</p>
+            <p>ユーザーログインが必要です</p>
           </div>
           }
         </div>

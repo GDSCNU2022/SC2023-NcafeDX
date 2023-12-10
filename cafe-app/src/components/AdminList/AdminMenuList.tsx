@@ -213,9 +213,9 @@ const AdminMenuList = (props: Props) => {
   <div className="">
     <div className="flex flex-col">
       <div className="sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+        <div className="inline-block py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden">
-            <table className="table-auto min-w-full text-left text-sm font-light">
+            <table className="table-auto text-left text-sm font-light">
               <thead
                 className="border-b  bg-neutral-200 font-medium">
                 <tr>

@@ -18,17 +18,8 @@ function GlobalNavBar() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user: any) => {
-      if (user && user.email 
-        &&  allowedEmails.includes(user.email)
-        ) {
+      if (user) {
         setUser(user);
-        setMessage("Authorized");
-        setIsAdmin(() => true);
-      } else if (user && user.email 
-        && !allowedEmails.includes(user.email)
-        ) {
-        setUser(undefined);
-        setMessage("Could not Authorize");
         setIsAdmin(() => false);
       } else {
         setUser(undefined);
