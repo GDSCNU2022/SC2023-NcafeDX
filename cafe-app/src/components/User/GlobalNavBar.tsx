@@ -122,6 +122,15 @@ function GlobalNavBar() {
                 </button>
               }
             </li>
+            <li className="flex text top-0 justify-center">
+              {
+              isAdmin ?
+              <button onClick={() => router.push('/adminpages/AdminTop')}>
+                管理者編集ページ
+              </button>
+              : <></>
+            }
+            </li>
             <li className="border-b border-gray-400">
               <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
               </li>

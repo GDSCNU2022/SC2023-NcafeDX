@@ -7,6 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import CategoryCard from "@src/components/User/CategoryCard ";
 import CategorySwiper from "@src/components/User/CategorySwiper";
 import { useEffect } from 'react';
+import NavUnderbar from "@src/components/User/NavUnderbar";
 
 const headstytle = "text-xl underline text-center pt-10 pb-3";
 const UserHome = () => {
@@ -69,7 +70,7 @@ const UserHome = () => {
         </div>
       </div>
       
-      {/*<NavUnderbar />*/}
+      <NavUnderbar />
   </div>
   );
 };
