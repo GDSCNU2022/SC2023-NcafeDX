@@ -66,12 +66,12 @@ const UserNewsList = (props: NewsProps) => {
   }, []);
 
   return (
-    <div className="h-128 bg-cover bg-no-repeat bg-center">
+    <div className="bg-cover bg-no-repeat bg-center">
       {/* <div className="overflow-scroll h-128"> */}
-      <div className="overflow-auto px-12 pt-4">
-        <div className="flex flex-col">
-          <div className="overflow-hidden overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+      <div className="px-2 pt-4">
+        <div id="news-content" className="">
+          <div className="overflow-x-auto">
+            <div className="inline-block py-2 bg-slate-400">
               {list ? (
                 list.map((data: Data, i) => {
                   return (
@@ -80,7 +80,7 @@ const UserNewsList = (props: NewsProps) => {
                         className="flex flex-row justify-between border-b bg-neutral-100 dark:border-neutral-300"
                         key={i}
                       >
-                        <div className=" px-3 py-2 truncate">
+                        <div id="news-text" className="px-3 py-2 truncate">
                           <p className="text-left text-xs">
                             {data.date ? formatDate(data.date.toDate()) : ""}
                           </p>

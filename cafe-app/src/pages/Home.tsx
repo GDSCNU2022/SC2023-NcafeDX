@@ -29,7 +29,7 @@ const UserHome = () => {
         </SwiperSlide>
       </ImageCarouselBar>
 
-      <div className="container md:w-1/2 mx-auto">
+      <div className="mx-auto">
         <div className="text-center">
           <h1 className="pt-10 pb-3 text-2xl font-bold ">お知らせ</h1>
           <UserNewsList props="DaVinch_News"/>

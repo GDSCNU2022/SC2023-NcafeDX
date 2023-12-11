@@ -49,6 +49,8 @@ function GlobalNavBar() {
     signOut(auth).then(() => {
       console.log("ログアウトしました")
       router.push('/')
+      setIsAdmin(() => false);
+      setUser(() => undefined);
     })
     .catch((err) => {
       console.log(`エラーが発生しました (${err})`)
@@ -95,7 +97,7 @@ function GlobalNavBar() {
                 </div>
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
-                <li className="border-b border-gray-400 my-8 uppercase">
+                <li className="border-b border-gray-400 uppercase">
                   {
                     user ?
                     <button onClick={()=>clickLogout()}>
@@ -108,14 +110,14 @@ function GlobalNavBar() {
                     
                   }
                 </li>
-                <li className="border-b border-gray-400 my-8 uppercase">
+                <li className="border-b border-gray-400 uppercase">
                   {
                     isAdmin ?
                     <button onClick={() => router.push('/adminpages/AdminTop')}>管理ページ</button>
                     : <></>
                   }
                 </li>
-                <li className="border-b border-gray-400 my-8">
+                <li className="border-b border-gray-400">
                   <a href="https://forms.gle/rZGWi9MzH7somHkF6">アンケート</a>
                 </li>
               </ul>
@@ -135,7 +137,7 @@ function GlobalNavBar() {
                 </button>
               }
             </li>
-            <li className="border-b border-gray-400 my-8 uppercase">
+            <li className="border-b border-gray-400 uppercase">
               {
                 isAdmin ?
                 <button onClick={() => router.push('/adminpages/AdminTop')}>管理ページ</button>

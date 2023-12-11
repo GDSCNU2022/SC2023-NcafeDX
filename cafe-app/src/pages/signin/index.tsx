@@ -17,47 +17,6 @@ import { auth, provider } from '@src/firebase/client'
 import { sendEmailToCheck, submitPasswordResetEmail } from '../api/verifications'
 import NavUnderbar from '@src/components/User/NavUnderbar'
 
-export const GoogleLogin = () => {
-  const _provider = provider
-  const _auth = auth
-
-  // Google login
-  const clicklogin = () => {
-    signInWithRedirect(_auth, _provider)
-    getRedirectResult(_auth)
-    .then((result) => {
-      console.log(result)
-      if(result !== null){
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-        const token = credential ? credential.accessToken : null
-        console.log(token)
-
-        // signed-in user info.
-        const user = result.user
-        console.log(user)
-        console.log(user.uid)
-        console.log('login as user');
-        router.push('/');
-        // router.push('/mypages/MyPage')
-
-      }
-    }).catch((err) => {
-      console.error(err)
-      // error handlings
-      const errorCode = err.code
-      const errorMessage = err.message
-      const email = err.email
-      console.error(errorCode)
-      console.error(errorMessage)
-      console.error(email)
-    })
-}
-  return (
-    <>
-    <button onClick={() => clicklogin()}>Googleログイン</button>
-    </>  )
-}
-
 export const SignIn: FC<NextPage> = () => {
   const [error, setError] = useState('')
   const _auth = auth
@@ -100,7 +59,7 @@ export const SignIn: FC<NextPage> = () => {
       console.log(email)
       // router.push('/mypages/MyPage')
     } else {
-      console.log("signed out")
+      console.log("signed out");
     }
   })
   }
@@ -152,7 +111,8 @@ export const SignIn: FC<NextPage> = () => {
             </div>
           </form>
           
-          <GoogleLogin/>
+          <button className='mt-4 w-full text-center'
+          onClick={() => router.push('/signin/redirect')}>Googleログインはこちら</button>
           
           <button className='mt-4 w-full text-center' onClick={() => router.push('/signup')}>
             新規登録はこちら
