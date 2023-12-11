@@ -116,8 +116,9 @@ a {
   posotion: fixed;
 }
 #menu-card {
-  height: 60%;
+  height: 100%;
   max-width: 1000px;
+  width: 100%;
 }
 #menu-card-img {
   width: 100%;

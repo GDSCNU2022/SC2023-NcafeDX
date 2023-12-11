@@ -1,8 +1,4 @@
 import Link from "next/link";
-import CreateQR from "@src/components/Examples/CreateQR";
-import ModalStarWindow from "@src/components/Modal/ModalStarWindow";
-import PFCRadarChart from "@src/components/Examples/PFCRaderChart";
-import MenuCard from "@src/components/Examples/MenuCard";
 import GlobalNavBar from "@src/components/User/GlobalNavBar";
 
 const AdminTop = () => {

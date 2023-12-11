@@ -50,7 +50,7 @@ export type MenuProps = {
   category: string;
   nutrition: Nutrition;
   allergens?: Allergens;
-  dayOfWeek: DayOfWeek;
+  dayOfWeek?: DayOfWeek;
   text?: string;
   price: number;
   starStorage: number[];

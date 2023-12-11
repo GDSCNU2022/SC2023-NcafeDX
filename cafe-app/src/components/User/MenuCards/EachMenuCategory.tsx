@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "@src/firebase/client";
 import {
   categories,
@@ -26,8 +26,8 @@ function cafecolor(prop: string) {
   }
   return bgcolor;
 }
- 
-const EachMenuCategory = (props: Props) => {
+
+const EachMenuCategory = React.memo((props: Props) => {
   const [list, setList] = useState<Array<any>>([]);
 
   const updateList = (doc: any) => {
@@ -81,7 +81,7 @@ const EachMenuCategory = (props: Props) => {
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (
-                              <div className="flex bg-slate-50">
+                              <div className="bg-slate-50">
                                 <div
                                   className="p-6 mx-auto"
                                   key={index}
@@ -106,7 +106,7 @@ const EachMenuCategory = (props: Props) => {
                                         <h2 className="text-gray-900 text-2xl md:text-xl sm:text-xl font-medium">
                                           ¥{menu.price}
                                         </h2>
-                                        <h2 className="text-gray-900 text-md font-medium border rounded-lg p-2 mt-2">
+                                        <h2 className="text-gray-900 h-24 text-md font-medium border rounded-lg p-2 mt-2 w-full break-all overflow-auto">
                                           {menu.text}
                                         </h2>
                                       </div>
@@ -136,5 +136,6 @@ const EachMenuCategory = (props: Props) => {
       </section>
     </>
   );
-};
+}
+);
 export default EachMenuCategory;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { db } from '@src/firebase/client';
 import { getAllMenus } from '@src/pages/api/get-menu';
 import { getGFormURLWithInitValue } from '@src/pages/api/getGFormUrl';
@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation, Mousewheel, EffectCards, EffectCreative, EffectFlip }  from 'swiper/modules';
 import { useWindowSize } from "@src/components/Utils/useWindowSize";
 
-const ChangingEveryDayMenu = (props: {restaurant: string}) => {
+const ChangingEveryDayMenu = React.memo((props: {restaurant: string}) => {
   const [list, setList] = useState<Array<any>>([]);
   const [today, setToday] = useState<string>();
   const [width, height]= useWindowSize();
@@ -56,7 +56,7 @@ const ChangingEveryDayMenu = (props: {restaurant: string}) => {
     <>
         <section className="text-gray-900 p-10">
             <h1 className="text-2xl font-bold m-4 mt-20">今日の日替わりメニュー</h1>
-              <div id="menu-card" className="mx-auto">
+              <div className="mx-auto">
                   <Swiper
                     modules={[Navigation, Pagination, Mousewheel, EffectCards, EffectCreative, EffectFlip]}
                     pagination={{clickable: true}}
@@ -71,17 +71,26 @@ const ChangingEveryDayMenu = (props: {restaurant: string}) => {
                     if(menu && menu.dayOfWeek && menu.dayOfWeek[today] && !menu.dayOfWeek["everyDay"]){
                       return (
                         <SwiperSlide>
-                          <MenuCard menu={menu} index={index} restaurant={props.restaurant} formUrl={url}/>
+                          <MenuCard domID="CED-menu-card" menu={menu} index={index} restaurant={props.restaurant} formUrl={url}/>
                         </SwiperSlide>
                       );
                     }
                   })}
                   </Swiper>
+                  {() => {
+                  if (typeof document !== undefined) {
+                    if (document?.getElementById("CED-menu-card") == null){
+                      return <p id="no-CED-menus" className=''>今日の日替わりメニューはありません．</p>
+                    }}  
+                  return  <></>
+                  }
+                  }
               </div>
       </section>
     </>
   );
 
-};
+}
+);
 
 export default ChangingEveryDayMenu;

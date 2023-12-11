@@ -4,6 +4,8 @@ import { signInWithPopup, signOut } from "@firebase/auth";
 import Link from "next/link";
 import AdminTop from "@src/pages/adminpages/AdminTop";
 import router from 'next/router'
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
 const admin = JSON.parse(process.env.NEXT_PUBLIC_ACCOUNT_KEY as string) 
 
@@ -70,9 +72,7 @@ function GlobalNavBar() {
                 className="HAMBURGER-ICON space-y-2"
                 onClick={() => setIsNavOpen((prev) => !prev)}
               >
-                <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-                <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
-                <span className="block h-0.5 w-8 animate-pulse bg-gray-600"></span>
+                <MenuIcon/>
               </div>
             </button>
 
@@ -82,18 +82,7 @@ function GlobalNavBar() {
                   className="absolute top-0 right-0 px-8 py-8"
                   onClick={() => setIsNavOpen(false)}
                 >
-                  <svg
-                    className="h-8 w-8 text-gray-600"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+                  <CloseIcon/>
                 </div>
               </button>
               <ul className="flex flex-col items-center justify-between min-h-[250px]">
