@@ -8,6 +8,7 @@ import {
 import MenuStarRatings from "@src/components/Examples/MenuStarRatings";
 import ModalMenuInfo from "@src/components/Modal/ModalMenuInfo";
 import { getGFormURLWithInitValue } from "@src/pages/api/getGFormUrl";
+import MenuCard from "./MenuCard";
 // Data Structure
 // Collection{DaVinch}/Doc{Menu}/Collection{Teishoku, Noodle, Don}/Doc{MenuName}/Field{MenuProps}
 // Users/
@@ -70,8 +71,8 @@ const EachMenuCategory = React.memo((props: Props) => {
     <>
       <section className="text-gray-900 border-t border-gray-200">
             <>
-              <div id="menu-card" className="container mx-auto">
-                <div className="flex grid md:grid-cols-2 grid-cols-1 justify-center">
+              <div id="" className="">
+                <div className="grid sm:grid-cols-2 grid-cols-1">
                   {list.map((menu, index) => {
                     return (
                       <>
@@ -81,48 +82,8 @@ const EachMenuCategory = React.memo((props: Props) => {
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (
-                              <div className="bg-slate-50">
-                                <div
-                                  className="p-6 mx-auto"
-                                  key={index}
-                                >
-                                  <div id="menu-card" className="bg-white rounded-lg shadow-lg h-full">
-                                    <div className="">
-                                      <div className="">
-                                        <img
-                                          className="h-60 w-full object-cover rounded-t-lg bg-clip-padding"
-                                          src={menu.imageURL}
-                                        />{" "}
-                                      </div>
-                                    </div>
-                                    <div className="w-full p-2 md:p-4">
-                                      <div className="mb-1">
-                                        <MenuStarRatings
-                                          ratings={menu.stars ? menu.stars : 0}
-                                        />
-                                        <h2 className="text-gray-900 text-md md:text-md sm:text-md font-medium">
-                                          {menu.name}
-                                        </h2>
-                                        <h2 className="text-gray-900 text-2xl md:text-xl sm:text-xl font-medium">
-                                          ¥{menu.price}
-                                        </h2>
-                                        <h2 className="text-gray-900 h-24 text-md font-medium border rounded-lg p-2 mt-2 w-full break-all overflow-auto">
-                                          {menu.text}
-                                        </h2>
-                                      </div>
-                                      <a href={menu.url}>
-                                        <div className="flex">
-                                          <ModalMenuInfo 
-                                            restaurant={props.restaurant}
-                                            name={menu.name}
-                                            id={menu.id}
-                                            formURL={url}
-                                          />
-                                        </div>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
+                              <div className="my-2">
+                                <MenuCard domID="menu-card-category" menu={menu} index={index} restaurant={props.restaurant} formUrl={url}/>
                               </div>
                             );
                           }

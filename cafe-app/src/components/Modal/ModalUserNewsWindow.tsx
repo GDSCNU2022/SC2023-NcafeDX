@@ -46,8 +46,8 @@ const ModalUserNewsWindow = (props: Props) => {
     <>
       <button
         onClick={openModal}
-        className="mt-4 px-1 text-xs bg-slate-300 align-middle
-        h-6 shadow-md rounded-md text-gray-900"
+        className="mt-2 px-1 text-xs bg-slate-300 align-middle
+        h-6 mb-1 shadow-md rounded-md text-gray-900"
       >
         詳細
       </button>

@@ -12,7 +12,7 @@ const CategorySwiper = ({children}) => {
 
   return (
     <div className="w-screen px-10">
-      <div className="bg-zinc-50">
+      <div className="">
         <Swiper
         modules={[Navigation, Pagination, Mousewheel]}
         slidesPerView={width/height < 0.65 ? 1 
@@ -23,6 +23,7 @@ const CategorySwiper = ({children}) => {
         scrollbar={true}
         autoplay={true}
         pagination={{clickable: true}}
+        centeredSlides
         >
           {children}
         </Swiper>

@@ -65,6 +65,7 @@ const ChangingEveryDayMenu = React.memo((props: {restaurant: string}) => {
                     slidesPerView={width/height < 0.65 ? 1 
                       : width/height < 1.2 ? 2
                       : 3}
+                    centeredSlides
                     >
                   {list.map((menu, index) => {
                     const url = getGFormURL(menu.category, menu.name);

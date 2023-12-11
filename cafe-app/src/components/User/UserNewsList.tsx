@@ -71,7 +71,7 @@ const UserNewsList = (props: NewsProps) => {
       <div className="px-2 pt-4">
         <div id="news-content" className="">
           <div className="overflow-x-auto">
-            <div className="inline-block py-2 bg-slate-400">
+            <div className="inline-block py-2 w-2/3 mx-auto px-4 rounded bg-slate-200">
               {list ? (
                 list.map((data: Data, i) => {
                   return (

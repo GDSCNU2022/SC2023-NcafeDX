@@ -115,15 +115,22 @@ a {
 .ReactModal__Body--open {
   posotion: fixed;
 }
-#menu-card {
-  height: 100%;
-  max-width: 1000px;
-  width: 100%;
-}
 #menu-card-img {
-  width: 100%;
+  width: 100vw;
   height: 25vh;
 }
+#CED-menu-card {
+  width: 90%;
+  margin: auto;
+}
+#menu-card-category{
+  width: 80%;
+  margin: auto;
+}
+#menu-card-text{
+  width: 100%;
+}
+
 
 
 @tailwind base;

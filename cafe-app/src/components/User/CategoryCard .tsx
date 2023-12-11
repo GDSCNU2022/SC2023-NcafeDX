@@ -10,7 +10,7 @@ const CategoryCard = (props: Props) => {
 
   return (
     <a href={props.link}>
-    <div className='flex justify-center grid grid-rows-1'>
+    <div className='flex justify-center grid grid-rows-1 border border-4'>
       <div className="">
         <img className="h-64" src={props.src}/>
       </div>

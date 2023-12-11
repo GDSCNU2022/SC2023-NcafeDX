@@ -97,10 +97,10 @@ const ModalMenuInfo = (props: Props) => {
   };
 
   return (
-    <>
+    <div className="flex justify-center">
       <button
         onClick={openModal}
-        className="text-white w-14 bg-orange-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 mx-auto text-center"
+        className="text-white w-14 bg-orange-400 rounded-full hover:bg-gray-200 hover:text-gray-900 duration-300 text-center"
       >
       <MoreHorizIcon/>
       </button>
@@ -175,7 +175,7 @@ const ModalMenuInfo = (props: Props) => {
         </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 export default ModalMenuInfo;
