@@ -11,29 +11,25 @@ type Props = {
     close?: () => void;
     parentObj: any;
     targetId: string;
-    handleSubmit: SubmitHandler<Field>;
+    index:number;
+    parentHandlerSubmit: Function;
 }
 const ModalTextboxPanel = (props: Props) => {
     const { setValue, reset, register, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (d: any) => {
-        if(props.parentObj){
-          console.log("Edit Text")
-          const newObj = {
-            ...props.parentObj,
-            text: d.text
-          };
-          updateMenu(db, `${props.restaurant}/${props.targetId}`, newObj)
+    const handlerSubmit = (d: any) => {
+        console.log("called handlerSubmit in ModalImageGrid");
+        // 0<number>が undefined扱いになるので注意
+        if(props.parentHandlerSubmit && (props.index !== undefined)){
+            props.parentHandlerSubmit(d.text, props.index);
+        } else if (props.parentHandlerSubmit) {
+            props.parentHandlerSubmit(d.text);
         }
-
-        if(props.close){
-            props.close();
-        }
-    }
-
+        if(props.close) props.close();
+    };
     return (
         <div className="w-[40rem] md:w-[30rem] sm:w-[20rem]">
-        <form onSubmit={handleSubmit(props.handleSubmit)}>
+        <form onSubmit={handleSubmit(handlerSubmit)}>
         <div className="flex flex-col mx-auto py-2">
         <label className="text-sm font-bold">本文</label>
         <textarea {...register('text',{required: true, value: props.parentObj.text})} 

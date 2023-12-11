@@ -53,6 +53,7 @@ type DayOfWeekProps = {
   thur: boolean;
   fri: boolean;
   sat: boolean;
+  everyDay: boolean;
 }
 
 const AdminMenuList = (props: Props) => {
@@ -79,6 +80,7 @@ const AdminMenuList = (props: Props) => {
       thur: false,
       fri: false,
       sat: false,
+      everyDay: false,
     }
 
     const [isAllergenObj, setIsAllergenObj] = useState<AllergenProps>(initAllergenObj);
@@ -130,12 +132,17 @@ const AdminMenuList = (props: Props) => {
         console.log(`Updated URL: ${obj.imageURL}`);
         return newList;
       })
-
     };
     
     const handleTextEdit = (text: string, i: number) => {
       setList((d: any) => {
+        if(!text) return;
+
+        console.log(d,i);
         const obj = d[i];
+        console.log("Edit Text");
+        console.log(text);
+
         const newObj = {
           ...obj,
           text: text
@@ -144,7 +151,7 @@ const AdminMenuList = (props: Props) => {
         newList[i] = newObj;
         updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
         reset();
-        console.log(`Updated text: ${obj.text}`);
+        console.log(`Updated text: ${obj.text.text}`);
         return newList;
       })
     };
@@ -195,7 +202,7 @@ const AdminMenuList = (props: Props) => {
       const field = name.split('-')[0];
 
       console.log("Edit Allergens");
-      isAllergenObj[field] = !isAllergenObj[field]
+      isAllergenObj[field] = e.target.checked;
       setIsAllergenObj(() => isAllergenObj);
       const newList = [...list];
       const newObj = {
@@ -216,14 +223,19 @@ const AdminMenuList = (props: Props) => {
       return ;
     }
 
+    //TODO: everyDayフラグがtrueの時，他の曜日を全て無視する
     const onChangeDayOfWeek = (e:any, id:number) => {
       const targetId = list[id].id;
       const {name, value} = e.target;
       const field = name.split('-')[0];
 
-      console.log("Edit Allergens");
-      isDayOfWeekObj[field] = !isDayOfWeekObj[field]
+      console.log("Edit DayOfWeek");
+
+      isDayOfWeekObj[field] = e.target.checked;
       setIsDayOwWeekObj(() => isDayOfWeekObj);
+
+      console.log(e.target.checked);
+
       const newList = [...list];
       const newObj = {
         ...newList[id],
@@ -237,7 +249,7 @@ const AdminMenuList = (props: Props) => {
 
       setList(() => {
         newList[id].dayOfWeek = isDayOfWeekObj;
-        return newList
+        return newList;
       });
 
       return ;
@@ -270,7 +282,7 @@ const AdminMenuList = (props: Props) => {
                   {['えび', 'かに', 'くるみ', '小麦', 'そば', '卵', '乳', '落花生'].map((inp: string) => (
                   <th scope="col" className="px-1">{inp}</th>
                   ))}
-                  {['月', '火', '水', '木', '金', '土'].map((inp: string) => (
+                  {['月', '火', '水', '木', '金', '土', '全日'].map((inp: string) => (
                   <th scope="col" className="px-1">{inp}</th>
                   ))}
                   {['紹介文', '登録画像'].map((inp: string) => (
@@ -382,7 +394,7 @@ const AdminMenuList = (props: Props) => {
                         </td>)
                       })}
 
-                      {['mon', 'tues', 'wed', 'thu', 'fri', 'sat'].map((day: string) => {
+                      {['mon', 'tues', 'wed', 'thur', 'fri', 'sat', 'everyDay'].map((day: string) => {
                         const valueRoot = data.dayOfWeek ? data.dayOfWeek : undefined;
                         let value = false;
                         if (valueRoot) {
@@ -397,14 +409,17 @@ const AdminMenuList = (props: Props) => {
                             {...register(`${day}-${i}`, {
                             onChange: (e: any) => onChangeDayOfWeek(e, i),
                             value: value
+
                           }
                             )}/>
                         </td>)
                       })}
 
+
                       <td scope="col" className="px-4 py-2 border">
                         <ModalTextboxWindow
-                        parentObj={data} targetId={data.id} restaurant={props.restaurant} handleSubmit={handleTextEdit}/>
+                        parentObj={data} targetId={data.id} restaurant={props.restaurant} handleSubmit={handleTextEdit}
+                        index={i}/>
                       </td>
 
                       <td scope="col" className="px-4 py-2 inline-grid">

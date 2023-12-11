@@ -8,6 +8,7 @@ import CategoryCard from "@src/components/User/CategoryCard ";
 import CategorySwiper from "@src/components/User/CategorySwiper";
 import { useEffect } from 'react';
 import NavUnderbar from "@src/components/User/NavUnderbar";
+import ChangingEveryDayMenu from "@src/components/User/MenuCards/ChangingEveryDayMenu";
 
 const headstytle = "text-xl underline text-center pt-10 pb-3";
 const UserHome = () => {
@@ -56,6 +57,8 @@ const UserHome = () => {
           text="カレー"/>
         </SwiperSlide>
       </CategorySwiper>
+      <ChangingEveryDayMenu restaurant="DaVinch"/>
+      
           {/*<MenuCardDev restaurant="DaVinch" />*/}
         </div>
         <div className="container mx-auto text-center mt-4">

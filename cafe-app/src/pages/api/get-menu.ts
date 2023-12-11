@@ -42,6 +42,7 @@ export type DayOfWeek = {
   thur: boolean;
   fri: boolean;
   sat: boolean;
+  everyDay: boolean;
 };
 export type MenuProps = {
   name: string;

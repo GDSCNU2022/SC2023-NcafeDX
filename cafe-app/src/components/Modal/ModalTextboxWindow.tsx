@@ -10,6 +10,7 @@ type Props = {
     restaurant: string;
     targetId: string;
     handleSubmit: any;
+    index: number;
 }
 
 const customStyles = {
@@ -67,7 +68,8 @@ const ModalTextboxWindow = (props: Props) => {
             restaurant={props.restaurant}
             targetId={props.targetId}
             close={closeModal}
-            handleSubmit={props.handleSubmit}
+            index={props.index}
+            parentHandlerSubmit={props.handleSubmit}
             />
             </Modal>
 </div> 

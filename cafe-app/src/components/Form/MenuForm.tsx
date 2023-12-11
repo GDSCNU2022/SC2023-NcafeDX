@@ -51,7 +51,7 @@ const MenuForm = (props: any) => {
                 stars: 0,
                 nutrition: {kcal: data.kcal, P: data.P, F: data.F, C: data.C},
                 allergens: {shrimp: data.shrimp, crab: data.crab, walnut: data.walnut, wheat: data.wheat, soba: data.soba, egg: data.egg, dairy: data.dairy, peanut: data.peanut},
-                dayOfWeek: {mon: data.mon, tues: data.tues, wed: data.wed, thur: data.thur, fri: data.fri, sat: data.sat},
+                dayOfWeek: {mon: data.mon, tues: data.tues, wed: data.wed, thur: data.thur, fri: data.fri, sat: data.sat, everyDay: data.everyDay},
                 text: data.text,
                 imageURL: data.imageURL,
             }
@@ -203,13 +203,14 @@ const MenuForm = (props: any) => {
                     </div>
 
                     <div className="flex">
-                        {['mon', 'tues', 'wed', 'thur', 'fri', 'sat'].map((day: string) => {
+                        {['mon', 'tues', 'wed', 'thur', 'fri', 'sat', "everyDay"].map((day: string) => {
                             const label = day === "mon" ? "月"
                             : day === "tues" ? "火"
                             : day === "wed" ? "水"
                             : day === "thur" ? "木"
                             : day === "fri" ? "金"
-                            : "土";
+                            : day === "sat" ? "土"
+                            : "全日";
                         return (
                         <div className="flex flex-col w-24 mx-auto py-2">
                             <label className="text-sm font-bold">{label}</label>
