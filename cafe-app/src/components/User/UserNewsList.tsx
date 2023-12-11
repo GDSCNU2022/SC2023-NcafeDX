@@ -69,9 +69,9 @@ const UserNewsList = (props: NewsProps) => {
     <div className="bg-cover bg-no-repeat bg-center">
       {/* <div className="overflow-scroll h-128"> */}
       <div className="px-2 pt-4">
-        <div id="news-content" className="">
+        <div id="news-content" className="mx-auto">
           <div className="overflow-x-auto">
-            <div className="inline-block py-2 w-2/3 mx-auto px-4 rounded bg-slate-200">
+            <div className="inline-block py-2 w-fit mx-auto px-4 rounded bg-slate-200">
               {list ? (
                 list.map((data: Data, i) => {
                   return (

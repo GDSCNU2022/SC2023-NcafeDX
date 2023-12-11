@@ -16,7 +16,7 @@ function NavUnderbar() {
           </div>
           <div className="w-fit text-green-400 mr-5 hover:text-white hover:bg-yellow-300 duration-300
           hover:cursor-pointer">
-            <Link href="#main-menu-swiper">
+            <Link href="/Home/#main-menu-swiper">
               <div
                 className="
               text-2xl "
