@@ -34,13 +34,22 @@ export type Allergens = {
   egg: boolean;
   dairy: boolean;
   peanut: boolean;
-}
+};
+export type DayOfWeek = {
+  mon: boolean;
+  tues: boolean;
+  wed: boolean;
+  thur: boolean;
+  fri: boolean;
+  sat: boolean;
+};
 export type MenuProps = {
   name: string;
   id: string;
   category: string;
   nutrition: Nutrition;
   allergens?: Allergens;
+  dayOfWeek: DayOfWeek;
   text?: string;
   price: number;
   starStorage: number[];

@@ -42,18 +42,19 @@ const MenuForm = (props: any) => {
     const onSubmit = async (data: any) => {
         console.log(data);
         if(data.imageURL){
-        const newData: MenuProps = {
-            name: data.name,
-            id: data.id,
-            category: data.category,
-            price: data.price,
-            starStorage: [],
-            stars: 0,
-            nutrition: {kcal: data.kcal, P: data.P, F: data.F, C: data.C},
-            allergens: {shrimp: data.shrimp, crab: data.crab, walnut: data.walnut, wheat: data.wheat, soba: data.soba, egg: data.egg, dairy: data.dairy, peanut: data.peanut},
-            text: data.text,
-            imageURL: data.imageURL,
-        }
+            const newData: MenuProps = {
+                name: data.name,
+                id: data.id,
+                category: data.category,
+                price: data.price,
+                starStorage: [],
+                stars: 0,
+                nutrition: {kcal: data.kcal, P: data.P, F: data.F, C: data.C},
+                allergens: {shrimp: data.shrimp, crab: data.crab, walnut: data.walnut, wheat: data.wheat, soba: data.soba, egg: data.egg, dairy: data.dairy, peanut: data.peanut},
+                dayOfWeek: {mon: data.mon, tues: data.tues, wed: data.wed, thur: data.thur, fri: data.fri, sat: data.sat},
+                text: data.text,
+                imageURL: data.imageURL,
+            }
         console.log(`newData: ${newData}`);
         console.log(newData);
         // firebaseへ入力データをアップロード
@@ -61,9 +62,10 @@ const MenuForm = (props: any) => {
         setList((list: Array<any>) => [...list, newData]);
         reset();
         console.log("reset imageUrl");
-    } else {
-        console.log("Url is undefined!");
-    }
+        } else {
+            console.log("Url is undefined!");
+            reset();
+        }
         
     };
 
@@ -198,6 +200,25 @@ const MenuForm = (props: any) => {
                         <input type="checkbox" {...register('peanut',{ required: false,})}
                         className={checkboxStyle}></input>
                         </div>
+                    </div>
+
+                    <div className="flex">
+                        {['mon', 'tues', 'wed', 'thur', 'fri', 'sat'].map((day: string) => {
+                            const label = day === "mon" ? "月"
+                            : day === "tues" ? "火"
+                            : day === "wed" ? "水"
+                            : day === "thur" ? "木"
+                            : day === "fri" ? "金"
+                            : "土";
+                        return (
+                        <div className="flex flex-col w-24 mx-auto py-2">
+                            <label className="text-sm font-bold">{label}</label>
+                            <input
+                            className={checkboxStyle}
+                            type="checkbox"
+                            {...register(`${day}`, {required: false,})}/>
+                        </div>)
+                        })}
                     </div>
                     
                     <div id="text" className="w-1/3">

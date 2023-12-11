@@ -46,6 +46,15 @@ type AllergenProps = {
   peanut: boolean;
 }
 
+type DayOfWeekProps = {
+  mon: boolean;
+  tues: boolean;
+  wed: boolean;
+  thur: boolean;
+  fri: boolean;
+  sat: boolean;
+}
+
 const AdminMenuList = (props: Props) => {
     const {register, formState: { errors }, handleSubmit, reset, setValue } = useForm();
     const [list, setList] = useState<Array<any>>([]);
@@ -63,7 +72,17 @@ const AdminMenuList = (props: Props) => {
       peanut: false,
     }
 
+    const initDayOfWeekObj: DayOfWeekProps = {
+      mon: false,
+      tues: false,
+      wed: false,
+      thur: false,
+      fri: false,
+      sat: false,
+    }
+
     const [isAllergenObj, setIsAllergenObj] = useState<AllergenProps>(initAllergenObj);
+    const [isDayOfWeekObj, setIsDayOwWeekObj] = useState<DayOfWeekProps>(initDayOfWeekObj);
 
     const updateList = (doc: any) => {
         const docData = doc.data();
@@ -174,7 +193,6 @@ const AdminMenuList = (props: Props) => {
       const targetName = list[id].name;
       const {name, value} = e.target;
       const field = name.split('-')[0];
-      const isAllergens = ['shrimp', 'crab', 'walnut', 'wheat', 'soba', 'egg', 'dairy', 'peanut']
 
       console.log("Edit Allergens");
       isAllergenObj[field] = !isAllergenObj[field]
@@ -192,6 +210,33 @@ const AdminMenuList = (props: Props) => {
 
       setList(() => {
         newList[id].allergens = isAllergenObj
+        return newList
+      });
+
+      return ;
+    }
+
+    const onChangeDayOfWeek = (e:any, id:number) => {
+      const targetId = list[id].id;
+      const {name, value} = e.target;
+      const field = name.split('-')[0];
+
+      console.log("Edit Allergens");
+      isDayOfWeekObj[field] = !isDayOfWeekObj[field]
+      setIsDayOwWeekObj(() => isDayOfWeekObj);
+      const newList = [...list];
+      const newObj = {
+        ...newList[id],
+        dayOfWeek: isDayOfWeekObj,
+      };
+      newList.map((obj: any, i: number) => {
+        if(targetId && (targetId === obj.id) && field) {
+          updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
+        }
+      })
+
+      setList(() => {
+        newList[id].dayOfWeek = isDayOfWeekObj;
         return newList
       });
 
@@ -217,13 +262,22 @@ const AdminMenuList = (props: Props) => {
           <div className="overflow-hidden">
             <table className="table-auto text-left text-sm font-light">
               <thead
-                className="border-b  bg-neutral-200 font-medium">
+                className="mx-auto border-b bg-neutral-200 font-medium">
                 <tr>
-                  {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C', 'えび', 'かに', 'くるみ', '小麦', 'そば', '卵', '乳', '落花生', '紹介文', '登録画像'].map((inp: string) => (
+                  {['名前', '価格', '種類', 'kcal', 'P', 'F', 'C'].map((inp: string) => (
                   <th scope="col" className="px-4 py-2">{inp}</th>
                   ))}
-                  <th scope="col" className="px-4 py-2 flex justify-center">
-                    <button onClick={handleDelete} className="py-1 px-4 bg-blue-500 text-white rounded-md shadow-sm 
+                  {['えび', 'かに', 'くるみ', '小麦', 'そば', '卵', '乳', '落花生'].map((inp: string) => (
+                  <th scope="col" className="px-1">{inp}</th>
+                  ))}
+                  {['月', '火', '水', '木', '金', '土'].map((inp: string) => (
+                  <th scope="col" className="px-1">{inp}</th>
+                  ))}
+                  {['紹介文', '登録画像'].map((inp: string) => (
+                  <th scope="col" className="px-4 py-2">{inp}</th>
+                  ))}
+                  <th scope="col" className="px-4 py-2">
+                    <button onClick={handleDelete} className="px-4 bg-blue-500 text-white rounded-md shadow-sm 
         hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
         focus:ring-offset-2">Delete</button>
                   </th>
@@ -307,104 +361,48 @@ const AdminMenuList = (props: Props) => {
                         }
                           )}/>
                       </td>
+                      
+                      {['shrimp', 'crab', 'walnut', 'wheat', 'soba', 'egg', 'dairy', 'peanut'].map((inp: string) => {
+                        const valueRoot = data.allergens ? data.allergens : undefined;
+                        let value = false;
+                        if (valueRoot) {
+                          value = valueRoot[inp];
+                        }
+                        return (
+                        <td scope="col" className="px-4 border">
+                          <input
+                            className="w-fit bg-neutral-200"
+                            type="checkbox"
+                            defaultChecked={value}
+                            {...register(`${inp}-${i}`, {
+                            onChange: (e: any) => onChangeAllergens(e, i),
+                            value: value
+                          }
+                            )}/>
+                        </td>)
+                      })}
 
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.shrimp}
-                          {...register(`shrimp-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: isAllergenObj.shrimp,
+                      {['mon', 'tues', 'wed', 'thu', 'fri', 'sat'].map((day: string) => {
+                        const valueRoot = data.dayOfWeek ? data.dayOfWeek : undefined;
+                        let value = false;
+                        if (valueRoot) {
+                          value = valueRoot[day];
                         }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.crab}
-                          value={data.allergens?.crab}
-                          {...register(`crab-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.crab
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.walnut}
-                          value={data.allergens?.walnut}
-                          {...register(`walnut-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.walnut
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.wheat}
-                          value={data.allergens?.wheat}
-                          {...register(`wheat-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.wheat
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.soba}
-                          value={data.allergens?.soba}
-                          {...register(`soba-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.soba
-                        }
-                          )}/>
-                      </td>
+                        return (
+                        <td scope="col" className="p-1 border">
+                          <input
+                            className="w-fit bg-neutral-200"
+                            type="checkbox"
+                            defaultChecked={value}
+                            {...register(`${day}-${i}`, {
+                            onChange: (e: any) => onChangeDayOfWeek(e, i),
+                            value: value
+                          }
+                            )}/>
+                        </td>)
+                      })}
 
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.egg}
-                          value={data.allergens?.egg}
-                          {...register(`egg-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.egg
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.dairy}
-                          value={data.allergens?.dairy}
-                          {...register(`dairy-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.dairy
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
-                        <input
-                          className="w-14 bg-neutral-200"
-                          type="checkbox"
-                          defaultChecked={data.allergens?.peanut}
-                          value={data.allergens?.peanut}
-                          {...register(`peanut-${i}`, {
-                          onChange: (e: any) => onChangeAllergens(e, i),
-                          value: data.allergens?.peanut
-                        }
-                          )}/>
-                      </td>
-                      <td scope="col" className="px-4 py-2">
+                      <td scope="col" className="px-4 py-2 border">
                         <ModalTextboxWindow
                         parentObj={data} targetId={data.id} restaurant={props.restaurant} handleSubmit={handleTextEdit}/>
                       </td>
@@ -413,7 +411,7 @@ const AdminMenuList = (props: Props) => {
                           <ModalImageGrid parentHandlerSubmit={handleImageEdit} src={data.imageURL} index={i}/>
 
                         </td>
-                      <td scope="col" className="px-6 py-4">
+                      <td scope="col" className="px-6 py-4 border">
                       <InputCheckbox props={[setCheckedData, data.id, inputCheckedList, setInputCheckedList, i]}/>
             
                         </td>
