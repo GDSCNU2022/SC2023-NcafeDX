@@ -74,10 +74,8 @@ export const getMenu: any = async (db: any, targetPath: string) => {
   // docSnap は要素1, 条件検索のためqueryを使用
   docSnap.forEach((doc) => {
     if (doc.exists()) {
-      console.log("Document data:", doc.data());
       newData = doc.data();
     } else {
-      console.log("No such document.");
     }
   });
   return newData;
@@ -96,10 +94,8 @@ export const getAllMenus: any = async (
   const querySnapshot = await getDocs(collRef);
   querySnapshot.forEach((doc) => {
     if (doc.exists()) {
-      console.log("Document data:", doc.data());
       setFunc(doc);
     } else {
-      console.log("No such document.");
     }
   });
 };
@@ -125,10 +121,8 @@ export const getMenusInCategory: any = async (
 
   querySnapshot.forEach((doc) => {
     if (doc.exists()) {
-      console.log("Document data:", doc.data());
       setFunc(doc);
     } else {
-      console.log("No such document.");
     }
   });
 };
@@ -190,9 +184,7 @@ export const deleteMenuWithName = async (
     if (d.exists()) {
       const docRef = doc(db, targetRestaurant, d.id);
       deleteDoc(docRef);
-      console.log("Document data:", d.data());
     } else {
-      console.log("No such document.");
     }
   });
 };
@@ -210,10 +202,8 @@ export const listenMenus = (
       querySnapshot.forEach((doc) => {
         setFunc(doc);
       });
-      console.log(`Current Document in ${targetRestaurant} Called`);
     },
     (error) => {
-      console.log(`Errors founded: ${error}`);
     }
   );
 
@@ -227,19 +217,14 @@ export const listenMenusChange = (db: any, targetRestaurant: string) => {
     (querySnapshot) => {
       querySnapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
-          console.log("New Data: ", change.doc.data());
         }
         if (change.type === "modified") {
-          console.log("Modified Data: ", change.doc.data());
         }
         if (change.type === "removed") {
-          console.log("Removed Data: ", change.doc.data());
         }
       });
-      console.log(`Current Document in ${targetRestaurant} Called`);
     },
     (error) => {
-      console.log(`Errors founded: ${error}`);
     }
   );
 
@@ -251,7 +236,6 @@ export const detachMenu = (db: any, targetRestaurant: string) => {
     // Respond to data
     // ...
   });
-  console.log(`Detached Menus in ${targetRestaurant}`);
 
   return unsubscribe;
 };

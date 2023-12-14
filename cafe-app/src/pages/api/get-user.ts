@@ -38,10 +38,8 @@ export const checkUser: any = async (db: any, uid: string) => {
 
   docSnap.forEach((doc) => {
     if (doc.exists()) {
-      console.log("user was found");
       return true;
     } else {
-      console.log("No such document.");
       return false;
     }
   });
@@ -55,7 +53,6 @@ export const getUser: any = async (
   /* Usage
     getUser(db, uid).then((value) => {your processing})
     */
-  console.log(`loading data at ${uid}`);
   const docRef = doc(db, "Users", uid);
   const docSnap = await getDoc(docRef);
 
@@ -63,7 +60,6 @@ export const getUser: any = async (
     if (setFunc) setFunc(docSnap.data());
     return docSnap.data();
   } else {
-    console.log("No such document.");
   }
 };
 
@@ -74,7 +70,6 @@ export const newUser = async (db: any, uid: string, saveUser: UserProps) => {
   const _saveUser = saveUser;
   const d = doc(db, "Users", uid);
   await setDoc(d, _saveUser);
-  console.log(`Document uploaded at ${uid}`);
 };
 
 export const updateUser = async (

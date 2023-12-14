@@ -15,7 +15,6 @@ export const submitPasswordResetEmail = async (email: string) => {
     })
     .catch((e) => {
       // failure
-      console.log(e);
     });
 };
 
@@ -26,7 +25,6 @@ export const sendEmailToCheck = async () => {
       // succeed
     }).catch((e) => {
       // failure
-      console.log(e);
     })
 };
 
@@ -37,6 +35,5 @@ export const setNewEmail = async () => {
       // succeed
     }).catch((e) => {
       // failure
-      console.log(e)
     })
 };

@@ -16,10 +16,8 @@ export const getAllNews = async (db: any, setFunc: Function) => {
     // docSnap は要素1, 条件検索のためqueryを使用
     docSnap.forEach((doc) => {
         if (doc.exists()) {
-            console.log("Document data:", doc.data());
             setFunc(doc.data());
         } else {
-            console.log("No such document.");
         } 
     })
 
@@ -31,7 +29,6 @@ export const newNews = async (db: any, saveMenu: NewsProps) => {
     */
     const collRef = collection(db, "News");
     await addDoc(collRef, saveMenu);
-    console.log(`Document uploaded at ${collRef.id}`);
 }
 
 export const deleteNews = async (db: any, targetMenuName: string) => {
@@ -42,9 +39,7 @@ export const deleteNews = async (db: any, targetMenuName: string) => {
         if(d.exists()) {
             const docRef = doc(db, "News", d.id);
             deleteDoc(docRef);
-            console.log("Document deleted.");
         } else {
-            console.log("No such document.");
         }
     })
 }
@@ -56,8 +51,6 @@ export const listenNews = (db: any, setFunc: Function) => {
         querySnapshot.forEach((doc) => {
             setFunc(doc);
         })
-        console.log(`Current Document in News Called`);
-    }, (error) => { console.log(`Errors founded: ${error}`)})
     
     return unsubscribe;
 }

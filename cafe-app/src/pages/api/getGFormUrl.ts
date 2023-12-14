@@ -10,7 +10,6 @@ export const getGFormURLWithInitValue = (
   const entryURL = `&entry.${entryCategoryID}=${category}&entry.${entryID}=${menuName}`;
   const rootURL = `https://docs.google.com/forms/d/e/${formID}/viewform?usp=pp_url`;
   const mainURL = encodeURI(rootURL + entryURL);
-  console.log(`re-direct to ${mainURL}`);
 
   return mainURL;
 };

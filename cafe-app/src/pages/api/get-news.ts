@@ -15,10 +15,8 @@ export const getAllNews = async (db: any, setFunc: Function, targetCollection: s
     
     querySnapshot.forEach((doc) => {
         if (doc.exists()) {
-            console.log("Document data:", doc.data());
             setFunc(doc);
         } else {
-            console.log("No such document.");
         } 
     })
 }
@@ -36,7 +34,6 @@ export const newNews = async (db: any, targetCollection: string, saveNews: NewsP
 
     const collRef = collection(db, targetCollection);
     await addDoc(collRef, saveObj);
-    console.log(`Document uploaded at ${collRef.id}`);
 }
 
 export const updateNewsWithDate = async (db: any, targetCollection: string, updateNews: {title: string, content: string, date: Timestamp}) => {
@@ -53,7 +50,6 @@ export const updateNewsWithDate = async (db: any, targetCollection: string, upda
             const docRef = doc(db, targetCollection, d.id);
             updateDoc(docRef, saveObj);
         } else {
-            console.log("No such document.");
         }
     })
 }
@@ -74,9 +70,7 @@ export const deleteNewsWithDate = async (db: any, targetRestaurant: string, news
         if (d.exists()) {
             const docRef = doc(db, targetRestaurant, d.id);
             deleteDoc(docRef);
-            console.log("Document data:", d.data());
         } else {
-            console.log("No such document.");
         } 
     })
 }
@@ -88,8 +82,6 @@ export const listenNews = (db: any, setFunc: Function, targetCollection: string)
         querySnapshot.forEach((doc) => {
             setFunc(doc);
         })
-        console.log(`Current Document in News Called`);
-    }, (error) => { console.log(`Errors founded: ${error}`)})
     
     return unsubscribe;
 }
