@@ -34,7 +34,6 @@ const ModalUserNewsWindow = (props: Props) => {
   };
 
   const afterOpenModal = () => {
-    console.log(isOpenModal);
     // references are now sync'd and can be accessed.
   };
 

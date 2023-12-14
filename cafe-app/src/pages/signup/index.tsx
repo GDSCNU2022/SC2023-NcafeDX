@@ -30,7 +30,6 @@ export const SignUp: FC<NextPage> = () => {
       router.push('/mypages/MyPage')
     } catch (e) {
       if (e instanceof FirebaseError) {
-        console.log(e)
         if(e.code === 'auth/invalid-email') {
           setError('メールアドレスが間違っています')
         } else if (e.code === 'auth/user-disabled') {

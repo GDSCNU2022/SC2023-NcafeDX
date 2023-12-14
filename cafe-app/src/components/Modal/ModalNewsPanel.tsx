@@ -41,7 +41,6 @@ const Panel = (props: Props) => {
 
         }
 
-        console.log(updateData);
 
         if(props.close){
             props.close();

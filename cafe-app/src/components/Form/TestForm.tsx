@@ -6,7 +6,6 @@ const JobForm = () => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
     const onSubmit = async (data: any) => {
         const fields = { fields: data };
-        console.log(fields);
         reset();
     };
 

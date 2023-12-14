@@ -32,10 +32,8 @@ const Mypage = () => {
   // TODO: ユーザーデータ生成前にページがレンダリングされてエラーを吐く
 
   useEffect(() => {
-    console.log("Called Mypage component")
     onAuthStateChanged(auth, (_user) => {
       if (_user) {
-        console.log(_user.uid)
         setUser(() => _user)
         updateInfo(_user)
       }
@@ -50,13 +48,11 @@ const Mypage = () => {
     if (docSnap.exists() && docSnap.data()){
       return docSnap.data()
     } else {
-        console.log("No such document.");
     }
   }
 
   const updateInfo = (user:any) => {
     updateUser(user).then((data) => {
-      console.log(data)
       setUserInfo(data as UserProps)
 
       // make new user documents
@@ -73,7 +69,6 @@ const Mypage = () => {
       }
       if (newObj != undefined){
         newUser(db, user.uid, newObj)
-        console.log("New user has been added")
       }
       // setUserInfo(() => newObj)
 
@@ -84,16 +79,12 @@ const Mypage = () => {
 
     const clickLogout = async () => {
     signOut(auth).then(() => {
-      console.log("ログアウトしました")
       router.push('/')
     })
     .catch((err) => {
-      console.log(`エラーが発生しました (${err})`)
     })
   }
 
-    console.log(`in updateInfo`)
-    console.log(userInfo)
 
     // boolDay: boolean[morning, day, night]
     // votedCategoryPerDay: boolean[teishoku, noodle, don, curry]

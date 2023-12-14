@@ -105,7 +105,6 @@ const AdminMenuList = (props: Props) => {
         setList((prevState: any[]) => prevState.filter((obj: NewProps) => obj.id !== id));
         reset();
       })
-      console.log(inputCheckedList);
       inputCheckedList?.forEach((b) => {
         setInputCheckedList((list: Array<boolean>) => list.filter((bool: boolean) => !bool));
       })
@@ -129,7 +128,6 @@ const AdminMenuList = (props: Props) => {
         newList[i] = newObj;
         updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
         reset();
-        console.log(`Updated URL: ${obj.imageURL}`);
         return newList;
       })
     };
@@ -138,11 +136,7 @@ const AdminMenuList = (props: Props) => {
       setList((d: any) => {
         if(!text) return;
 
-        console.log(d,i);
         const obj = d[i];
-        console.log("Edit Text");
-        console.log(text);
-
         const newObj = {
           ...obj,
           text: text
@@ -151,7 +145,6 @@ const AdminMenuList = (props: Props) => {
         newList[i] = newObj;
         updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
         reset();
-        console.log(`Updated text: ${obj.text.text}`);
         return newList;
       })
     };
@@ -161,27 +154,19 @@ const AdminMenuList = (props: Props) => {
       const targetId = list[id].id;
       const targetName = list[id].name;
       const {name, value} = e.target;
-      console.log(id);
-      console.log(targetId);
-      console.log(targetName);
-      console.log(`name:${name}`);
       const field = name.split('-')[0];
 
       setList((l: any) => {
         const newList = [...l];
         newList.map((obj: any , i: number) => {
         if(targetId && (targetId === obj.id) && field) {
-          console.log(field)
           if(field === "kcal"|| field === "P"|| field === "F"|| field === "C"){
-            console.log("Edit Nutrition");
             const newObj = {
               ...obj,
               nutrition: {...obj.nutrition, [field]: value}
             };
             updateMenu(db, `${props.restaurant}/${obj.id}`, newObj);
           } else {
-            console.log("Edit Misc props")
-            console.log(`${obj[field]} => ${value}`);
             const newObj = {
               ...obj,
               [field]: value
@@ -201,7 +186,6 @@ const AdminMenuList = (props: Props) => {
       const {name, value} = e.target;
       const field = name.split('-')[0];
 
-      console.log("Edit Allergens");
       isAllergenObj[field] = e.target.checked;
       setIsAllergenObj(() => isAllergenObj);
       const newList = [...list];
@@ -229,12 +213,8 @@ const AdminMenuList = (props: Props) => {
       const {name, value} = e.target;
       const field = name.split('-')[0];
 
-      console.log("Edit DayOfWeek");
-
       isDayOfWeekObj[field] = e.target.checked;
       setIsDayOwWeekObj(() => isDayOfWeekObj);
-
-      console.log(e.target.checked);
 
       const newList = [...list];
       const newObj = {
@@ -260,7 +240,6 @@ const AdminMenuList = (props: Props) => {
         getAllMenus(db, updateList, props.restaurant)
 
         return () => {
-          console.log("unmounting...");
           setList((list) => [])};
 
     }, [])

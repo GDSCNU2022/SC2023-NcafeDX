@@ -24,34 +24,24 @@ export const GoogleLogin = () => {
     signInWithRedirect(_auth, _provider)
     getRedirectResult(_auth)
     .then((result) => {
-      console.log(result)
       if(result !== null){
         const credential = GoogleAuthProvider.credentialFromResult(result)
         const token = credential ? credential.accessToken : null
-        console.log(token)
 
         // signed-in user info.
         const user = result.user
-        console.log(user)
-        console.log(user.uid)
         user.getIdTokenResult(true).then((idTokenResult) => {
           if (idTokenResult.claims.admin) {
-            console.log('login as admin');
             router.push('/adminpages/AdminTop');
           } else {
-            console.log('admin login failed');
           }
         })
       }
     }).catch((err) => {
-      console.error(err)
       // error handlings
       const errorCode = err.code
       const errorMessage = err.message
       const email = err.email
-      console.error(errorCode)
-      console.error(errorMessage)
-      console.error(email)
     })
 }
   return (
@@ -65,28 +55,21 @@ const AdminSignin: FC<NextPage> = () => {
   const _auth = auth
 
   useEffect(() => {
-    console.log("displaying admin sign in page")
     checkLogin()
   }, [])
 
   const isValid = async (data: LoginForm) => {
       signInWithEmailAndPassword(_auth, data.email, data.password).then((userCredential) => {
         userCredential.user.getIdTokenResult(true).then((idTokenResult) => {
-          console.log("loginning as admin");
-          console.log(idTokenResult.claims)
-          console.log(`admin claims => ${idTokenResult.claims.admin}`);
           if (idTokenResult.claims.admin) {
-            console.log('login as admin');
             router.push('/adminpages/AdminTop');
           } else {
-            console.log('admin login failed');
             router.push('/adminpages/AdminSignin')
             setError('指定された管理者が見つかりません')
           }
         })
       }).catch((e) => {
         if (e instanceof FirebaseError) {
-        console.log(e)
         if (e.code === 'auth/invalid-email') {
           setError('メールアドレス・パスワードが一致しません')
         } else if (e.code === 'auth/user-disabled') {
@@ -107,7 +90,6 @@ const AdminSignin: FC<NextPage> = () => {
         router.push('/adminpages/AdminTop');
       }
     })} else {
-      console.log('signed out');
     }
   })
   }
@@ -178,6 +160,5 @@ export const logOut = async () => {
     })
     .catch((e) => {
       alert('ログアウトに失敗しました');
-      console.log(e)
     })
 }

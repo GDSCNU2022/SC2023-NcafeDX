@@ -22,21 +22,18 @@ export const SignIn: FC<NextPage> = () => {
   const _auth = auth
 
   useEffect(() => {
-    console.log("displaying user signin page.")
     checkLogin()
   }, [])
 
   const isValid = async (data: LoginForm) => {
     try {
       await signInWithEmailAndPassword(_auth, data.email, data.password).then(() => {
-        console.log('login as user');
         router.push('/');
         // router.push('/mypages/MyPage');
       })
 
     } catch (e) {
       if (e instanceof FirebaseError) {
-        console.log(e)
         if (e.code === 'auth/invalid-email') {
           setError('メールアドレスがまちがっています')
         } else if (e.code === 'auth/user-disabled') {
@@ -55,11 +52,8 @@ export const SignIn: FC<NextPage> = () => {
     if (user) {
       const uid = user.uid
       const email = user.email
-      console.log(uid)
-      console.log(email)
       // router.push('/mypages/MyPage')
     } else {
-      console.log("signed out");
     }
   })
   }
@@ -136,11 +130,9 @@ export const logOut = async () => {
   const _auth = auth
   await signOut(_auth)
     .then(() => {
-      console.log("logout now")
       router.push('/signin');
     })
     .catch((e) => {
       alert('ログアウトに失敗しました');
-      console.log(e);
     })
 }

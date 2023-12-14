@@ -84,4 +84,4 @@ export const listenNews = (db: any, setFunc: Function, targetCollection: string)
         })
     
     return unsubscribe;
-}
+})}

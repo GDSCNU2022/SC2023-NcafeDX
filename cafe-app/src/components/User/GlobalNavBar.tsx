@@ -46,16 +46,13 @@ function GlobalNavBar() {
   };
 
     const clickLogout = async () => {
-      console.log(user);
 
     signOut(auth).then(() => {
-      console.log("ログアウトしました")
       router.push('/')
       setIsAdmin(() => false);
       setUser(() => undefined);
     })
     .catch((err) => {
-      console.log(`エラーが発生しました (${err})`)
     })
   }
 

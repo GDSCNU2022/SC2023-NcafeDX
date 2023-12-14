@@ -60,7 +60,6 @@ const UserNewsList = (props: NewsProps) => {
     getAllNews(db, updateList, props.props);
 
     return () => {
-      console.log("unmounting...");
       setList(() => []);
     };
   }, []);

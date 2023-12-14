@@ -15,16 +15,12 @@ const InputCheckbox = forwardRef((props: CheckboxProps, ref: any) => {
     const index = props.props[4];
 
     const handleChange = (checked: boolean) => {
-        console.log(inputCheckedList);
-        console.log(index);
         if (checked){
             setCheckedData((list: Array<any>) => {
-                console.log(list ? [...list, docQuery] : [docQuery]);
                 return list ? [...list, docQuery] : [docQuery]}
                 );
         } else { 
             setCheckedData ((list: Array<any>) => {
-                console.log(list)
                 list ? list.filter((id) => id !== docQuery) : [];
                 
         });}

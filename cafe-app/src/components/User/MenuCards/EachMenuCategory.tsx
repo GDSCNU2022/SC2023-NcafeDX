@@ -62,7 +62,6 @@ const EachMenuCategory = React.memo((props: Props) => {
     // strictModeのせいでマウント時に2回レンダリングされる
     getAllMenus(db, updateList, props.restaurant);
     return () => {
-      console.log("unmounting...");
       setList((list) => []);
     };
   }, []);
@@ -77,8 +76,6 @@ const EachMenuCategory = React.memo((props: Props) => {
                     return (
                       <>
                         {(() => {
-                          console.log(props.category)
-                          console.log(menu.category)
                           if (props.category === menu.category) {
                             const url = getGFormURL(menu.category, menu.name);
                             return (

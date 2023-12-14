@@ -88,7 +88,6 @@ const ModalMenuInfo = (props: Props) => {
   };
 
   const afterOpenModal = () => {
-    console.log("Modal being opened");
     // references are now sync'd and can be accessed.
   };
 

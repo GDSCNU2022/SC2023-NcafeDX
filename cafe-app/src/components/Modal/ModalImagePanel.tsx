@@ -16,8 +16,6 @@ const Panel = (props: Props) => {
 
         // ...process
         if(props.parentHandlerSubmit && selectedUrl){
-            console.log("called handlerSubmit in ModalPanel");
-            console.log(selectedUrl);
             props.parentHandlerSubmit(selectedUrl);
         }
 
@@ -35,15 +33,12 @@ const Panel = (props: Props) => {
 
     const handlerImageForm = (url: string) => {
         if(url){
-            console.log("In Form Handler")
-            console.log(url);
             setImgSrcList((list: any) => [...list, url]);
         }
     }
 
     const handlerClose = () => {
         if(props.close){
-            console.log("call in handlerClose");
             props.close();
         }
 

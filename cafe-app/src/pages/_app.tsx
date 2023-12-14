@@ -8,7 +8,6 @@ import { useEffect } from 'react'
 export default function App({ Component, pageProps }: AppProps) {
   const auth = getAuth()
   useEffect(() => {
-    console.log("called in App")
   }, [auth])
   
   

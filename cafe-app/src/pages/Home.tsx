@@ -12,7 +12,6 @@ import ChangingEveryDayMenu from "@src/components/User/MenuCards/ChangingEveryDa
 
 const headstytle = "text-xl underline text-center pt-10 pb-3";
 const UserHome = () => {
-  useEffect(() => {console.log("displaying root home page")}, [])
   return (
     <div className="bg-color-zinc-50">
       <GlobalNavBar />

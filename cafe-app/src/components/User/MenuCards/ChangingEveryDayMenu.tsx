@@ -32,7 +32,6 @@ const ChangingEveryDayMenu = React.memo((props: {restaurant: string}) => {
     setToday(() => dayOfWeekItem[week]);
     
     return () => {
-      console.log("unmounting...");
       setList((list) => []);
     };
   }, []);

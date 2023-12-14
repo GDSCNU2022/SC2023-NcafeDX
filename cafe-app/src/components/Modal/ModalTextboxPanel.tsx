@@ -18,7 +18,6 @@ const ModalTextboxPanel = (props: Props) => {
     const { setValue, reset, register, handleSubmit, formState: { errors } } = useForm();
 
     const handlerSubmit = (d: any) => {
-        console.log("called handlerSubmit in ModalImageGrid");
         // 0<number>が undefined扱いになるので注意
         if(props.parentHandlerSubmit && (props.index !== undefined)){
             props.parentHandlerSubmit(d.text, props.index);

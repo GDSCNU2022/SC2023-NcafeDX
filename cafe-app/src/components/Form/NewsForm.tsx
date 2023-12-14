@@ -16,7 +16,6 @@ const NewsForm = (props: any) => {
     const {register, formState: { errors }, handleSubmit, reset } = useForm();
     const setList = props.parentProps;
     const onSubmit = async (data: any) => {
-        console.log(data);
         const newData = {
             title: data.title,
             content: data.content,

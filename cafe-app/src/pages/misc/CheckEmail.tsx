@@ -14,7 +14,6 @@ const CheckEmail = () => {
   const submitHandler = async (data: CheckEmail) => {
     submitPasswordResetEmail(data.email);
     router.push('/misc/ResetPassword');
-    console.log("reset password with email")
   };
   
   return (

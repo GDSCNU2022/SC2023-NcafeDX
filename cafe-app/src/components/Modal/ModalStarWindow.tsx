@@ -45,7 +45,6 @@ const ModalStarWindow = (props: Props) => {
         user.getIdTokenResult(true).then((idTokenResult) => {
           if (idTokenResult.claims.admin) {
             setIsCheckIn(() => false);
-            console.log(" You are an administrator.")
           } else {
             setCurrentUser(user);
             setIsCheckIn(() => true);
@@ -54,12 +53,10 @@ const ModalStarWindow = (props: Props) => {
         }) 
       } 
     })
-    console.log(isCheckIn);
     setIsOpenModal(() => true);
   };
 
   const afterOpenModal = () => {
-    console.log(isOpenModal);
     // references are now sync'd and can be accessed.
   };
 
@@ -69,21 +66,14 @@ const ModalStarWindow = (props: Props) => {
 
   // TODO: ユーザーの評価履歴にメニューIDを登録
   const isRegisterSubmitStarRatings = (userID, menuID) => {
-    console.trace("isRegisterSubmitRatings called")
-    console.log(`uid: ${userID}, mid: ${menuID}`);
         if(userID && menuID) {
           getUser(db, userID).then((d) => {
-            console.log(d);
             if(d.registeredRatingMenuID){
               if(d.registeredRatingMenuID.includes(menuID)) {
                   setIsRated(() => true);
-                  console.log(`isRated: ${isRated}`)
-              } else { console.log("user has not submitted star ratings yet.")}
-            } else { console.log("user does not have registeredRatingMenuID.")
           }
-          })
+          }})
         } else {
-          console.log("userID or menuID are undefined")
         }
       
   };

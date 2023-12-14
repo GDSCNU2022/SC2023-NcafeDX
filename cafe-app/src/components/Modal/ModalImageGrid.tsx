@@ -37,12 +37,8 @@ const ModalImageGrid = (props: Props) => {
 
 
     const handlerSubmit = (url: string) => {
-        console.log("called handlerSubmit in ModalImageGrid");
-        console.log(props.index);
         // 0<number>が undefined扱いになるので注意
         if(props.parentHandlerSubmit && (props.index !== undefined)){
-            console.log(url);
-            console.log(props.index);
             props.parentHandlerSubmit(url, props.index);
         } else if (props.parentHandlerSubmit) {
             props.parentHandlerSubmit(url);
@@ -55,7 +51,6 @@ const ModalImageGrid = (props: Props) => {
   };
 
   const afterOpenModal = () => {
-    console.log(isOpenModal);
     // references are now sync'd and can be accessed.
   };
 

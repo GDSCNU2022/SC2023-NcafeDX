@@ -11,13 +11,10 @@ type Props = {
 const ImageGrid = (props: Props) => {
 
     const handlerOnClick = (url: string) => {
-        console.log(url);
         props.parentHandler(() => url)
     };
 
     useEffect(() => {
-        getAllImages(props.setSrcList).then(() => console.log(props.srcList)).catch((err) => console.log(`Error: ${err}`));
-        console.log(props.srcList);
 
     }, [])
 

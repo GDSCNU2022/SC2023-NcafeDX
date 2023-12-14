@@ -32,21 +32,16 @@ const CouponCard = (props: CouponCardProps) => {
 
   const openModal = () => {
     setIsOpenModal((b) => {
-      console.log(b)
-      console.log("call openModal handler")
       return true
       });
   };
 
   const afterOpenModal = () => {
-    console.log(isOpenModal);
     // references are now sync'd and can be accessed.
   };
 
   const closeModal = () => {
     setIsOpenModal((b) => {
-      console.log(b)
-      console.log("call closeModal handler")
       return false
     }
       );

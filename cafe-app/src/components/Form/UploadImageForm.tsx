@@ -16,28 +16,21 @@ const UploadImageForm = (props: Props) => {
     }
 
     const imageUpload = (file: any): void => {
-        console.log("call in imageUpload");
         try {
             const imageRef = ref(storage, `images/${file.name}`);
             uploadBytes(imageRef, file).then((snapshot) => {
-                console.log("Uploaded a file.");
-                console.log(snapshot);
             
             getDownloadURL(imageRef).then((url: string) => {
                 if(url && props.setValue){ props.setValue('imageURL', url);
                 } else if (props.setValue){ props.setValue('imageURL', "");}
-                console.log("upload data URL");
-                console.log(url);
             
             if(props.onClick && url) {
                 props.onClick(url);
             }
         });
-            }).catch((err) => console.log(err));
 
             }
         catch(err) {
-            console.log(err);
         }
 
     }

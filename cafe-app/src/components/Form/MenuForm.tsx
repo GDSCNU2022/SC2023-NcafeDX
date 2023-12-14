@@ -40,7 +40,6 @@ const MenuForm = (props: any) => {
 
     const setList = props.parentProps;
     const onSubmit = async (data: any) => {
-        console.log(data);
         if(data.imageURL){
             const newData: MenuProps = {
                 name: data.name,
@@ -55,23 +54,17 @@ const MenuForm = (props: any) => {
                 text: data.text,
                 imageURL: data.imageURL,
             }
-        console.log(`newData: ${newData}`);
-        console.log(newData);
         // firebaseへ入力データをアップロード
         await newMenu(db, props.props, newData);
         setList((list: Array<any>) => [...list, newData]);
         reset();
-        console.log("reset imageUrl");
         } else {
-            console.log("Url is undefined!");
             reset();
         }
         
     };
 
     const gridHandlerSubmit = (url: string) => {
-        console.log("in gridHandler")
-        console.log(url);
         if(url) setValue('imageURL', url);
     }
 

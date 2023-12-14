@@ -19,7 +19,6 @@ const Redirect = () => {
 
   // Google login
   const clickLogin = () => {
-    console.log("called in Google login.");
     signInWithRedirect(_auth, _provider)
     getRedirectResult(_auth)
     .then((result) => {
@@ -35,7 +34,6 @@ const Redirect = () => {
             router.push('/');
           }
           }).catch((e) => {
-            console.log(e);
             router.push('/signin')
           })
         }
@@ -45,9 +43,6 @@ const Redirect = () => {
       const errorCode = err.code
       const errorMessage = err.message
       const email = err.email
-      console.log(errorCode)
-      console.log(errorMessage)
-      console.log(email)
       router.push('/singin');
     })
 }
