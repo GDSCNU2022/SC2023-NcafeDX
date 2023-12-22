@@ -10,6 +10,7 @@ export const getAllImages = async (setFunc: Function) => {
                 setFunc((list: any) => [...list, url])
             });
         });
+    });
     };
 
 export const deleteImagesWithURL = (url: string) => {

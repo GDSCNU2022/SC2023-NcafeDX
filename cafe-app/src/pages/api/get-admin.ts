@@ -51,6 +51,6 @@ export const listenNews = (db: any, setFunc: Function) => {
         querySnapshot.forEach((doc) => {
             setFunc(doc);
         })
-    
+    });
     return unsubscribe;
 }

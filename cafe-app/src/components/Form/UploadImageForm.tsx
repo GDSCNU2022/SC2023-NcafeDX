@@ -29,7 +29,7 @@ const UploadImageForm = (props: Props) => {
             }
         });
 
-            }
+            })}
         catch(err) {
         }
 

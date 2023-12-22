@@ -77,7 +77,7 @@ const MenuForm = (props: any) => {
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="overflow-auto border border-8">
-                <div className="grid grid-rows-4 grid-cols-1 m-4 p-2 w-fit">
+                <div className="grid grid-rows-4 grid-cols-1 m-4 p-2 w-fit border border-8">
                     <div className="inline-flex w-fit">
                     <div className="flex flex-col w-42 mx-auto py-2">
                         <label className="text-sm font-bold">メニュー名</label>
@@ -215,30 +215,30 @@ const MenuForm = (props: any) => {
                         })}
                     </div>
                     
-                    <div id="text" className="w-1/3">
-                        <div className="grid py-2">
-                            <label className="text-sm font-bold">テキスト</label>
-                            <textarea className="border" {...register('text', {required: false, disabled: false})}/>
-                            </div>
-                    </div>
+                </div>
 
-                    <div id="image-registration" className="">
-                        <div className="w-64 py-2">
-                            <label className="text-sm font-bold">登録した画像パス</label>
-                            <input {...register('imageURL',{ required: false, disabled: true})}
-                            className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-300 rounded-md shadow-sm
-                            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
-                            <ErrorMessage errors={errors} name="imageURL" />
-                            </div>
+            <div id="text" className="w-full px-8">
+                <div className="grid py-2">
+                    <label className="text-sm font-bold">テキスト</label>
+                    <textarea className="border" {...register('text', {required: false, disabled: false})}/>
                     </div>
-
-                        <div className="p-4">
-                        <button type="submit"
-                        className="py-2 mt-6 w-24 bg-blue-500 text-white rounded-md shadow-sm 
-                        hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                        focus:ring-offset-2 h-10">商品登録</button>
-                        </div>
             </div>
+
+            <div id="image-registration" className="px-8">
+                <div className="w-64 py-2">
+                    <label className="text-sm font-bold">登録した画像パス</label>
+                    <input {...register('imageURL',{ required: false, disabled: true})}
+                    className="block w-full px-4 py-2 mt-2 text-gray-700 bg-gray-400 border border-gray-300 rounded-md shadow-sm
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></input>
+                    <ErrorMessage errors={errors} name="imageURL" />
+                </div>
+            </div>
+            <div className="p-4">
+                <button type="submit"
+                className="py-2 mt-6 w-24 bg-blue-500 text-white rounded-md shadow-sm 
+                hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                focus:ring-offset-2 h-10">商品登録</button>
+                </div>
         </form>
 
 
